@@ -1,0 +1,23 @@
+# Repo Asendra: yang di-push hanya folder brands/.
+# Folder lain di Asendra (carousel-studio, video-studio, secure with aldo) tidak ikut.
+/*
+!/.gitignore
+!/brands/
+
+# Konten hasil download dari akun lain (hak cipta pemilik akun) — tidak dipublikasikan
+brands/*/04_Content_Examples/
+brands/**/Bedah_Konten_Benchmark_*/contoh/
+brands/**/Bedah_Konten_Benchmark_*/tabel/
+
+# Video & file besar
+*.[mM][pP]4
+*.[mM][oO][vV]
+*.[wW][eE][bB][mM]
+
+# File sistem / sementara
+~$*
+desktop.ini
+.DS_Store
+Thumbs.db
+.env
+.env.*
