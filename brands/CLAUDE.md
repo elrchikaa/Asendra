@@ -46,7 +46,7 @@ Semua konten akhir berbahasa Indonesia, mengikuti voice di dokumen brand.
 ## Alat yang dipakai
 - Skill `carousel-style-cloner` untuk mengubah style carousel jadi template HTML/CSS. Perpustakaan template: `C:\Users\ASUS_M3400Q\Documents\Asendra\carousel-studio` (di luar folder `brands`, buka/izinkan aksesnya kalau perlu).
 - Skill `organic-content-logger` → `organic-benchmark-builder` untuk analisis pola ide.
-- Video: Higgsfield / Kling / Veo (generate), Remotion / HyperFrames (animasi teks).
+- Video: reels dirender **HyperFrames** lewat `C:\Users\ASUS_M3400Q\Documents\Asendra\video-studio` (template + brand kit, panduan `PANDUAN_PRODUKSI_REELS.md`). Higgsfield / Kling / Veo cuma buat generate b-roll yang gak bisa direkam/dicari (ACC per item).
 - Approval: database Notion "Content Pipeline (4 brand)".
 
 ## Cara kerja

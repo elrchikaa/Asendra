@@ -15,6 +15,8 @@ AI mengerjakan dari ide sampai file jadi. Kamu cukup memberi keputusan di **3 ti
 | 4 | **4 Siap posting** | Kamu | IG / TikTok | Isi "Tanggal posting" |
 | 5 | **5 Posted** | Kamu / Claude | Notion | Link postingan di "Catatan revisi" atau "Link hasil" |
 
+**Reels (tahap 3):** template di `Documents\Asendra\video-studio\templates\<prefix>-<kode>\`, brand kit di `video-studio\brand-kits\<brand>\`. Salin template ke `07_Produksi\CP-xx_<judul>\video\`, isi CONFIG dari script yang di-ACC, `npx hyperframes check` (0 error), `npx hyperframes render --output ..\final\CP-xx_<judul>.mp4`, lihat contact sheet sebelum ACC 3. Panduan lengkap: `video-studio\PANDUAN_PRODUKSI_REELS.md`.
+
 ## Cara memberi ACC
 - Buka view **Menunggu ACC kamu**. Isinya hanya baris yang sedang menunggu keputusanmu, dari semua tahap.
 - **ACC** = lanjut ke tahap berikutnya. **Revisi** = tulis alasannya di "Catatan revisi", Claude perbaiki di tahap yang sama. **Ditolak** = berhenti, tidak diproduksi.
