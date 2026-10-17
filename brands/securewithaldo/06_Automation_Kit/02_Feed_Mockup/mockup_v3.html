@@ -1,0 +1,218 @@
+<meta charset="utf-8">
+<title>Feed v3 securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala laporan → profil IG (palet sage) berdampingan dengan rencana 12 post → slide ukuran penuh → aturan feed.
+   Token halaman (chrome) mengikuti tema; warna di dalam slide adalah warna konten brand dan sengaja tetap. */
+:root {
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif; --sans:"Figtree", "Segoe UI", system-ui, sans-serif; --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#121512; --surface:#1a1f1b; --fg:#e5ebe4; --muted:#9eaa9f; --line:#2c352e; --tag:#232a24; --accent:#a8c49f; --accent-soft:#263325; color-scheme:dark } }
+:root[data-theme="dark"] { --bg:#121512; --surface:#1a1f1b; --fg:#e5ebe4; --muted:#9eaa9f; --line:#2c352e; --tag:#232a24; --accent:#a8c49f; --accent-soft:#263325; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.9rem)} h2{font-size:1.6rem} h3{font-size:1.15rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:16px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;background:var(--tag);border-radius:4px;padding:2px 8px}
+
+/* ---------- palet konten: Hijau sage (dipilih owner 10 Okt) ---------- */
+/* bingkai margin (owner 10 Okt): sama di sisi yang berhadapan. atas = bawah 8% tinggi, kiri = kanan 10% lebar */
+.sl{--my:8%;--mx:10%}
+.p-sage{--s-paper:#E8EBE3;--s-night:#25302B;--s-ink:#232C27;--s-inkl:#ECEFE6;--s-acc:#6E8466;--s-acc-l:#AFC1A6}
+
+/* ---------- slide dasar ---------- */
+.sl{position:relative;container-type:inline-size;overflow:hidden;width:100%;font-family:var(--sans);background:var(--s-paper);color:var(--s-ink)}
+.r45{aspect-ratio:4/5} .r34{aspect-ratio:3/4} .r916{aspect-ratio:9/16}
+.sl.dark{background:radial-gradient(120% 70% at 85% 0%, color-mix(in srgb,var(--s-acc) 22%,var(--s-night)) 0%, var(--s-night) 60%);color:var(--s-inkl)}
+.sl.light{background:linear-gradient(180deg,var(--s-paper),color-mix(in srgb,var(--s-paper) 92%,var(--s-ink)))}
+/* grain (ACC 10 Okt): terang ±5 seperti kertas krem sincere (4.98) dan foto plum (4.96);
+   gelap hanya di area sorot ±15 seperti sorot sincere (15.56), hitam datar tetap bersih. Terukur lewat render. */
+.sl.light::after,.sl.dark::after{content:"";position:absolute;inset:0;background:url(grain_terang.png);pointer-events:none;z-index:1}
+.sl.dark::after{background:url(grain_gelap.png);-webkit-mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%)}
+.sl .txt,.sl .wm,.sl > svg{z-index:2}
+.sl .txt{position:absolute;display:flex;flex-direction:column;gap:3.4cqw}
+.sl .txt p{margin:0;max-width:none}
+.sl b{font-weight:600}
+.sl.dark .txt{font-weight:400}
+.sl .lab{font-family:var(--serif);font-size-adjust:none;font-style:italic;font-size:3.52cqw;color:var(--s-acc);display:flex;align-items:center;gap:2.4cqw}
+.sl.dark .lab{color:var(--s-acc-l)}
+.sl .lab::before{content:"";width:6cqw;height:1px;background:currentColor;display:block}
+.sl .wm{position:absolute;left:0;right:0;bottom:var(--my);text-align:center;font-family:var(--sans);font-size:2.04cqw;letter-spacing:.32em;opacity:.55}
+.t-cover .txt{left:14%;right:14%;top:50%;transform:translateY(-50%)}
+.t-cover .main{font-family:var(--serif);font-size-adjust:none;font-size:6.3cqw;line-height:1.12;letter-spacing:-.01em}
+.t-cover .main b{font-weight:400;font-style:italic}
+/* margin simetris (owner 10 Okt): atas = bawah, kiri = kanan */
+.t-body .txt{left:var(--mx);right:var(--mx);top:50%;transform:translateY(-50%)}
+.t-body .main{font-size:3.33cqw;line-height:1.5;display:flex;flex-direction:column;gap:3.2cqw}
+.t-note .txt{left:20%;right:20%;top:50%;transform:translateY(-50%)}
+.t-note .main{font-size:2.87cqw;line-height:1.6;display:flex;flex-direction:column;gap:3.8cqw}
+.sl .edu{position:absolute;top:var(--my);left:var(--mx);right:var(--mx);text-align:center;font-family:var(--serif);font-size-adjust:none;font-style:italic;font-size:3.06cqw;letter-spacing:.06em;opacity:.7;z-index:2}
+
+/* foto (K2 / R1) */
+.sl.photo{background:var(--s-night)}
+.sl.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sl.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.strip img.full{width:100%;height:auto;border-radius:4px;display:block}
+.sl.photo .tint{position:absolute;inset:0;background:var(--s-night);mix-blend-mode:multiply;opacity:.45}
+.sl.photo .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15) 40%,rgba(0,0,0,.4))}
+.k2 .say{position:absolute;left:var(--mx);right:var(--mx);text-align:center;font-family:var(--sans);font-size:2.96cqw;line-height:1.4;color:#F3F1EC;text-transform:lowercase;z-index:2}
+.k2 .say.a{top:var(--my);opacity:.85;font-style:italic;font-family:var(--serif);font-size-adjust:none;font-size:4.26cqw}
+.k2 .say.b{bottom:var(--my);font-size:2.96cqw}
+.k2 .who{display:inline;font-family:var(--sans);font-size:2.6cqw;letter-spacing:.2em;opacity:.6;margin-right:1.6cqw;font-style:normal;vertical-align:.3cqw}
+.k2hp .scr{position:absolute;left:31%;top:36%;width:34%;transform:rotate(-14deg);font-family:var(--serif);font-size-adjust:none;color:#F3F1EC;font-size:4.81cqw;line-height:1.25;text-align:left;z-index:2}
+.r1 .shade{background:rgba(10,14,12,.6)}
+.r1 .tint{opacity:.35}
+.r1 .txt{left:13%;right:13%;top:50%;transform:translateY(-50%);text-align:left;color:#F1F3EC;gap:4.6cqw;text-shadow:0 0.4cqw 3cqw rgba(0,0,0,.75)}
+.r1 .ttl{font-family:var(--serif);font-size-adjust:none;font-size:7.6cqw;line-height:1.08;font-weight:400;letter-spacing:-.01em}
+.r1 .bd{font-size:3.6cqw;line-height:1.5;display:flex;flex-direction:column;gap:2.8cqw}
+.r1 .end{font-family:var(--serif);font-size-adjust:none;font-size:4cqw;font-style:italic;opacity:.85}
+
+/* ikon pojok grid */
+.ico{position:absolute;top:4cqw;right:4cqw;width:8cqw;height:8cqw;z-index:3;filter:drop-shadow(0 0 2px rgba(0,0,0,.4))}
+
+/* ---------- profil IG + rencana ---------- */
+.duo{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:24px;align-items:start}
+.phone{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.phone-head{padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px}
+.ph-top{display:flex;gap:12px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:var(--serif);font-size:1.5rem;color:var(--s-inkl);background:var(--s-night);box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--line)}
+.ph-stats{display:flex;gap:14px;font-size:.78rem;color:var(--muted)} .ph-stats b{display:block;color:var(--fg);font-size:.95rem}
+.ph-name{font-weight:700;font-size:.86rem} .ph-bio{font-size:.8rem;color:var(--fg);line-height:1.4}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--surface)}
+.tile{position:relative;min-width:0;container-type:inline-size}
+.tile .no{position:absolute;left:4cqw;bottom:4cqw;z-index:3;font:500 7cqw/1 var(--mono);color:#fff;background:rgba(0,0,0,.45);padding:1.5cqw 2.5cqw;border-radius:2cqw}
+.palname{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);font-size:.85rem}
+.sw{display:flex;gap:4px} .sw i{width:16px;height:16px;border-radius:3px;border:1px solid var(--line);display:block}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)} th{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+tr:last-child td{border-bottom:0} td.num{font-family:var(--mono);white-space:nowrap}
+.edu-tag{font-family:var(--mono);font-size:.68rem;background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.totals{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
+/* ---------- detail ---------- */
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,250px);gap:12px;overflow-x:auto;padding-bottom:8px}
+.strip figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.strip .sl{border-radius:4px}
+.reels{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(190px,210px);gap:12px;overflow-x:auto;padding-bottom:8px}
+.reels figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:10px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px}
+@media (max-width:900px){ .duo{grid-template-columns:1fr} .phone{max-width:420px} }
+</style>
+
+<div class="wrap p-sage">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · HERE · mockup feed v3 · style carousel v3 (draft) · 16 Okt 2026</span>
+  <h1>Mockup feed v3</h1>
+  <p class="lede">Susunan grid tetap zigzag v6 yang sudah di-ACC (R1 7 · K1 3 · K2 2). Semua tile carousel sekarang hasil render style v3: grain 60%, dialog objek (English, Figtree), satu kalimat di foto dengan posisi dari objek, dan panorama E. Reels memakai cover footage seperti sebelumnya.</p>
+  <div class="chips"><span class="chip">R1 reels 7 · K1 3 · K2 2</span><span class="chip">grain 60%</span><span class="chip">dialog: English · Figtree tegak/miring</span><span class="chip">K1 &amp; kalimat foto: Indonesia</span><span class="chip">panorama E (gradasi ke kanan)</span><span class="chip">foto K2: Raw image</span></div>
+</header>
+
+<section>
+  <h2>Grid profil</h2>
+  <div class="duo">
+    <article class="phone">
+      <div class="phone-head"><div class="ph-top"><div class="avatar">a</div><div class="ph-stats"><span><b>12</b>postingan</span><span><b>–</b>pengikut</span><span><b>–</b>mengikuti</span></div></div>
+      <div class="ph-name">securewithaldo | healing anxious attachment</div><div class="ph-bio">bantu sesama anxious jadi lebih secure<br>belajar mencintai dengan tenang, merasa aman, dan tetap utuh</div></div>
+      <div class="grid" id="grid"></div>
+      <div class="palname"><span class="sw"><i style="background:#E8EBE3" title="#E8EBE3"></i><i style="background:#25302B" title="#25302B"></i><i style="background:#6E8466" title="#6E8466"></i><i style="background:#AFC1A6" title="#AFC1A6"></i></span><span>Hijau sage</span></div>
+    </article>
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+      <span class="k">Isi 12 post (nomor = posisi di grid)</span>
+      <div class="tbl"><table><thead><tr><th>#</th><th>Format</th><th>Pilar · topik</th><th>Judul</th><th></th></tr></thead><tbody id="plan"></tbody></table></div>
+      <div class="totals" id="totals"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Slide ukuran penuh</h2>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">R1 reels 9:16 · cover footage (tidak berubah di v3)</span><div class="reels" id="r1row"></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">Post 2 · K1 carousel edukasi "Kenapa makin aku ngejar" · Indonesia</span><div class="strip" id="s-k1"></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">Post 5 · K2 dialog objek (manusia) · CP-01 v2 · English</span><div class="strip" id="s-cp01"></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">Post 9 · K2 satu kalimat di foto · CP-02 v3 · Indonesia</span><div class="strip" id="s-cp02"></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">Post 11 · K1 panorama malam (E, gradasi ke kanan) · 3 slide nyambung</span><div class="strip" id="s-pano"></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="k">Cadangan · K2 dialog objek (hewan) · English</span><div class="strip" id="s-hewan"></div></div>
+</section>
+
+<section>
+  <h2>Yang berubah dari mockup v6</h2>
+  <div class="box"><ul class="tight">
+    <li>Tile carousel = render asli style v3, bukan gambar tiruan CSS.</li>
+    <li>Post 5 sekarang dialog objek manusia (CP-01 v2, English); post 9 satu kalimat di foto (CP-02 v3).</li>
+    <li>Post 11 panorama malam E menggantikan carousel produk, supaya kelihatan di grid; slide produk dan CTA tetap tersedia di style.</li>
+    <li>Reels (7 tile) sama dengan v6: R1 dipegang template video-studio, tidak ikut style carousel.</li>
+    <li>Grid 3:4 memotong sisi atas-bawah slide 4:5; teks penting tetap di tengah.</li>
+  </ul></div>
+</section>
+</div>
+
+<script>
+(function(){
+var P='unsplash/unsplash_';
+var IMG={cangkir:P+'1gmOE-D8vrs_dua-cangkir_grain.jpg',hp:P+'9UfOQD2aZSQ_hp-meja_grain.jpg',hujan:P+'TQpBE7XdRyU_hujan-jendela_grain.jpg',lampu:P+'PvQtCNm4teI_lampu-jalan_grain.jpg',kamar:P+'F2SrBdv9swk_kamar-lampu_grain.jpg',
+ kasur:P+'94ivzugZz8w_hp-kasur_grain.jpg',bokeh:P+'u7PJMJoDYdg_bokeh-kota_grain.jpg',jalan:P+'eYVT9fqRUFY_jalan-basah_grain.jpg',cahaya:P+'sgNc8aY6Z7E_cahaya-hp_grain.jpg'};
+var ICO={car:'<svg class="ico" viewBox="0 0 24 24"><rect x="7" y="3" width="14" height="14" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M3 7v12a2 2 0 0 0 2 2h12" fill="none" stroke="#fff" stroke-width="2"/></svg>',
+ reel:'<svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/></svg>'};
+var WM='<div class="wm">securewithaldo</div>';
+function pic(f,ratio){return '<div class="sl pic '+ratio+'"><img src="v3/'+f+'" alt=""></div>'}
+function k1(o,ratio){
+  var lab=o.lab?'<div class="lab">'+o.lab+'</div>':'';
+  var main=Array.isArray(o.t)?o.t.map(function(x){return '<p>'+x+'</p>'}).join(''):'<p>'+o.t+'</p>';
+  return '<div class="sl '+(o.tone||'light')+' t-'+(o.kind||'cover')+' '+ratio+'">'+(o.edu?'<div class="edu">catatan aldo</div>':'')+'<div class="txt">'+lab+'<div class="main">'+main+'</div></div>'+WM+'</div>';
+}
+function k2(o,ratio){return '<div class="sl photo k2 '+ratio+'"><img src="'+IMG.cangkir+'" alt="Dua cangkir kopi dari atas di meja gelap"><div class="tint"></div><div class="shade"></div><div class="say a">'+o.a+'</div><div class="say b">'+o.b+'</div></div>'}
+function k2hp(o,ratio){return '<div class="sl photo k2hp '+ratio+'"><img src="'+IMG.hp+'" alt="HP dengan layar mati di meja kayu"><div class="tint" style="opacity:.3"></div><div class="scr">'+o.t+'</div></div>'}
+function r1(o,ratio){return '<div class="sl photo r1 '+ratio+'"><img src="'+IMG[o.img]+'" alt=""><div class="tint"></div><div class="shade"></div><div class="txt"><p class="ttl">'+o.title+'</p><div class="bd">'+o.body.map(function(x){return '<p>'+x+'</p>'}).join('')+'</div><p class="end">'+o.end+'</p></div></div>'}
+
+var R={
+ avo:{img:'jalan',title:'3 hal yang dia lakuin pas butuh jarak, dan artinya buat aku',body:['1. Balesnya jadi pendek. Belum tentu bosan, bisa jadi lagi penuh.','2. Dia diam pas lagi berantem. Buat sebagian orang, diam itu cara nenangin diri, bukan hukuman.'],end:'Yang ketiga, dan apa yang aku lakuin, ada di caption.'},
+ kepala:{img:'kasur',title:'3 hal yang ada di kepalaku jam 1 pagi pas dia belum bales',body:['1. Aku salah ngomong apa?','2. Jangan jangan dia udah bosan sama aku.'],end:'Yang ketiga paling jujur. Ada di caption.'},
+ tenang:{img:'hujan',title:'3 hal yang aku lakuin pas chatnya cuma dibaca',body:['1. Aku pisahin dulu. Mana yang aku tahu, mana yang cuma aku takutin.','2. Aku kirim satu pesan. Satu aja, bukan lima.'],end:'Yang ketiga paling susah. Ada di caption.'},
+ kalimat:{img:'bokeh',title:'4 kalimat buat minta kepastian tanpa interogasi',body:['1. "Aku lagi takut. Bisa bilang kita baik baik aja?"','2. "Aku nggak butuh jawaban sekarang. Aku cuma butuh tahu kapan kita bisa ngobrol."'],end:'Dua lagi ada di caption.'},
+ pola:{img:'lampu',title:'3 hal yang dulu aku kira wajar, ternyata bikin aku makin kecil',body:['1. Dia cuma hangat pas aku mulai menjauh.','2. Tiap aku cerita sedih, ujungnya aku yang minta maaf.'],end:'Yang ketiga ada di caption.'},
+ secure:{img:'kamar',title:'2 hal yang berubah sejak aku belajar nggak langsung ngejar',body:['1. Aku masih takut. Bedanya, aku nggak langsung percaya ceritanya.','2. Aku kirim satu pesan, terus HP-nya aku taruh.'],end:'Yang paling susah ada di caption.'},
+ space:{img:'cahaya',title:'"Butuh space" ternyata nggak selalu berarti mau pergi',body:['1. Buat sebagian orang, jarak itu cara nenangin diri.','2. Aku boleh tanya berapa lama. Itu bukan nuntut, itu jelasin kebutuhan.'],end:'Yang ketiga, kapan aku perlu waspada, ada di caption.'}
+};
+var K2A='kamu kenapa sih? gitu aja dipikirin';
+var K2B=['aku bukan butuh dijelasin semuanya. aku cuma butuh tahu kita baik baik aja','aku tahu kedengarannya berlebihan. tapi rasanya nyata buat aku','aku nggak minta kamu nebak. aku coba bilang langsung: aku lagi takut','dan kalau kamu nggak bisa, aku perlu tahu juga'];
+var COVER_T2={tone:'light',kind:'cover',lab:'pas dia mulai dingin',t:'Kenapa makin aku ngejar, <b>dia makin menjauh?</b>',edu:true};
+var NOTE_T5={tone:'light',kind:'note',t:['Kalau aku harus terus jadi versi yang lebih kecil biar dia nyaman,','<b>itu bukan rumah.</b> Itu tempat aku nahan napas.']};
+var COVER_HERE={tone:'light',kind:'cover',lab:'buat jam 1 pagi',t:'Aku bikin sesuatu buat momen pas kepalamu mulai lari. <b>Namanya HERE.</b>'};
+
+// [posisi grid, format, pilar·topik, judul, edukasi, render]
+var POSTS=[
+ [1,'R1','P2 · T1 Perilaku avoidant',R.avo.title,true,function(r){return r1(R.avo,r)},'reel'],
+ [2,'K1 carousel','P2 · T2 Siklus anxious–avoidant','Kenapa makin aku ngejar, dia makin menjauh',true,function(r){return pic('l01.jpg',r)},'car'],
+ [3,'R1','P1 · T13 Isi kepala si cemas',R.kepala.title,false,function(r){return r1(R.kepala,r)},'reel'],
+ [4,'R1','P1 · T4 Menenangkan diri',R.tenang.title,true,function(r){return r1(R.tenang,r)},'reel'],
+ [5,'K2 dialog objek','P3 · T3 Komunikasi','Can I be honest? (CP-01 v2, English)',false,function(r){return pic('cp01-01-honest.jpg',r)},'car'],
+ [6,'R1','P3 · T3 Komunikasi',R.kalimat.title,true,function(r){return r1(R.kalimat,r)},'reel'],
+ [7,'K1 kartu','P4 · T5 Pasangan yang menghargai','kartu tunggal terang',false,function(r){return pic('l06.jpg',r)},''],
+ [8,'R1','P2 · T11 Manipulasi & pola',R.pola.title,true,function(r){return r1(R.pola,r)},'reel'],
+ [9,'K2 kalimat foto','P1 · T4 Menenangkan diri','Kepalaku malah makin ramai (CP-02 v3)',false,function(r){return pic('cp02-01-ramai.jpg',r)},'car'],
+ [10,'R1','P4 · T12 Proses jadi secure',R.secure.title,false,function(r){return r1(R.secure,r)},'reel'],
+ [11,'K1 panorama','P1 · T13 Isi kepala si cemas','pas nunggu kabar (panorama E)',false,function(r){return pic('l18.jpg',r)},'car'],
+ [12,'R1','P2 · T1 Perilaku avoidant',R.space.title,true,function(r){return r1(R.space,r)},'reel']
+];
+document.getElementById('grid').innerHTML=POSTS.map(function(p){return '<div class="tile">'+p[5]('r34')+(p[6]?ICO[p[6]]:'')+'<span class="no">'+p[0]+'</span></div>'}).join('');
+document.getElementById('plan').innerHTML=POSTS.map(function(p){return '<tr><td class="num">'+p[0]+'</td><td>'+p[1]+'</td><td>'+p[2]+'</td><td>'+p[3]+'</td><td>'+(p[4]?'<span class="edu-tag">edukasi</span>':'')+'</td></tr>'}).join('');
+var nR=POSTS.filter(function(p){return p[1]==='R1'}).length, nE=POSTS.filter(function(p){return p[4]}).length;
+document.getElementById('totals').innerHTML='<span class="chip">reels '+nR+'/12 ('+Math.round(nR/12*100)+'%)</span><span class="chip">edukasi '+nE+'/12</span>';
+
+document.getElementById('r1row').innerHTML=['avo','kepala','tenang','kalimat','pola','secure','space'].map(function(k){return '<figure>'+r1(R[k],'r916')+'<figcaption>R1 · '+R[k].img+'</figcaption></figure>'}).join('');
+var STR={"s-k1": ["l01", "l02", "l03", "l04", "l05", "l08", "l09"], "s-cp01": ["cp01-01-honest", "cp01-02-scared", "cp01-03-okay", "cp01-04-ask-again", "cp01-05-still-scared", "cp01-06-thanks", "cp01-07-cta-send"], "s-cp02": ["cp02-01-ramai", "cp02-02-lima-cerita", "cp02-03-bukan-bukti", "cp02-04-yang-ada", "cp02-05-masih-utuh", "cp02-06-simpan"], "s-pano": ["l18", "l19", "l20"], "s-hewan": ["l23", "l29", "l30", "l31", "l32", "l33"]};
+Object.keys(STR).forEach(function(id){document.getElementById(id).innerHTML=STR[id].map(function(f,i){return '<figure><img class="full" src="v3/'+f+'.jpg" alt="slide '+(i+1)+'" loading="lazy"><figcaption>slide '+(i+1)+'</figcaption></figure>'}).join('')});
+})();
+</script>

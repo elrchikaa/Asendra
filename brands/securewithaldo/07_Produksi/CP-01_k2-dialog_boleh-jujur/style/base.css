@@ -1,0 +1,27 @@
+/* =====================================================================
+   CAROUSEL STUDIO — ENGINE BASE
+   Sama untuk SEMUA style. Jangan taruh warna/font di sini.
+   Urutan link di HTML: base.css -> style tokens.css -> (brand-skin.css) -> style components.css
+   ===================================================================== */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --w: 1080px; --h: 1350px; }      /* style boleh override ukuran canvas */
+html, body { background: #6d6a62; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+.slide { position: relative; width: var(--w); height: var(--h); overflow: hidden; }
+
+/* ---------- MODE TAMPIL (diatur engine.js) ----------
+   tanpa parameter -> galeri (preview kecil semua slide)
+   ?s=N            -> hanya slide N ukuran penuh (dipakai export)
+   ?check=1        -> galeri + tandai elemen yang keluar canvas / masuk zona aman bawah */
+body.gallery { padding: 24px; display: grid; grid-template-columns: repeat(auto-fill, 346px); gap: 26px; justify-content: center; }
+body.gallery .slide { zoom: .32; }
+body.single { background: transparent; }
+body.single .slide:not(.on) { display: none; }
+
+.eng-label { position: absolute; z-index: 99; left: 0; top: 0; padding: 14px 20px; background: #000; color: #fff;
+  font: 700 30px/1 Consolas, monospace; opacity: .8; pointer-events: none; }
+.eng-bad   { outline: 6px solid #ff2d2d !important; outline-offset: -3px; }
+.eng-safe  { position: absolute; z-index: 98; left: 0; right: 0; bottom: 0; pointer-events: none;
+  background: repeating-linear-gradient(45deg, rgba(255,45,45,.18) 0 14px, transparent 14px 28px); }

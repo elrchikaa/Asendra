@@ -1,0 +1,176 @@
+<meta charset="utf-8">
+<title>Pilihan Font securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → tabel ukuran (sebelum/sesudah/referensi) → potongan font referensi asli → 6 kartu kombinasi (spesimen + slide + mini grid) → dock pilihan.
+   Chrome halaman ikut tema; warna slide = palet sage brand, tetap. */
+:root{--bg:#f2f4f1;--surface:#fff;--fg:#1b211d;--muted:#59645c;--line:#d9dfd8;--tag:#e8ece6;--accent:#4f6b49;--accent-soft:#e3ebdf;
+ --ui:"Figtree","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;--uiserif:"Newsreader",Georgia,serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 120px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--uiserif);font-weight:600;margin:0;line-height:1.12;text-wrap:balance} h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.6rem} h3{font-size:1.3rem}
+p{margin:0;max-width:72ch} section{display:flex;flex-direction:column;gap:14px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem} .note{font-size:.86rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px} .chip{font-family:var(--mono);font-size:.73rem;background:var(--tag);border-radius:4px;padding:2px 8px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)} table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)} th{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+tr:last-child td{border-bottom:0} td.num{font-family:var(--mono);white-space:nowrap;font-variant-numeric:tabular-nums}
+.refs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.refs figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0} .refs img{width:100%;height:150px;object-fit:cover;object-position:center;border-radius:4px;border:1px solid var(--line)}
+figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.cards{display:flex;flex-direction:column;gap:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.card.picked{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.ch{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap} .chl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pick{display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:999px;user-select:none;white-space:nowrap;align-self:flex-start}
+.pick input{width:17px;height:17px;accent-color:var(--accent)} .pick:focus-within,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.spec{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+.spec .big{font-size:2.6rem;line-height:1.1;color:var(--fg)} .spec .mid{font-size:1.2rem;line-height:1.45}
+.spec .pc{display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,.62fr) minmax(0,1.1fr);gap:10px;align-items:start}
+.row figure{margin:0;display:flex;flex-direction:column;gap:5px;min-width:0}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--surface);border:1px solid var(--line)}
+
+/* ---------- slide (palet sage) ---------- */
+.p-sage{--s-paper:#E8EBE3;--s-night:#25302B;--s-ink:#232C27;--s-inkl:#ECEFE6;--s-acc:#6E8466;--s-acc-l:#AFC1A6}
+.sl{position:relative;container-type:inline-size;overflow:hidden;width:100%;background:var(--s-paper);color:var(--s-ink);font-family:var(--f-body);font-size-adjust:.46}
+.r45{aspect-ratio:4/5} .r34{aspect-ratio:3/4} .r916{aspect-ratio:9/16}
+.sl.dark{background:radial-gradient(120% 70% at 85% 0%, color-mix(in srgb,var(--s-acc) 22%,var(--s-night)) 0%, var(--s-night) 60%);color:var(--s-inkl)}
+.sl.light{background:linear-gradient(180deg,var(--s-paper),color-mix(in srgb,var(--s-paper) 92%,var(--s-ink)))}
+.sl.light::after,.sl.dark::after{content:"";position:absolute;inset:0;background:url(aset/grain_terang.png);pointer-events:none;z-index:1}
+.sl.dark::after{background:url(aset/grain_gelap.png);-webkit-mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%)}
+.sl .txt,.sl .wm{z-index:2}
+.sl .txt{position:absolute;display:flex;flex-direction:column;gap:3cqw}
+.sl .txt p{margin:0;max-width:none}
+.sl b{font-weight:600}
+.sl .lab{font-family:var(--f-body);font-style:italic;font-size:var(--z-lab);color:var(--s-acc);display:flex;align-items:center;gap:2.2cqw}
+.sl.dark .lab{color:var(--s-acc-l)}
+.sl .lab::before{content:"";width:5cqw;height:1px;background:currentColor;display:block}
+.sl .wm{position:absolute;left:0;right:0;bottom:5cqw;text-align:center;font-family:var(--f-body);font-size:2.3cqw;letter-spacing:.32em;opacity:.55}
+.t-cover .txt{left:14%;right:14%;top:50%;transform:translateY(-50%)}
+.t-cover .main{font-family:var(--f-head);font-size:var(--z-cover);line-height:1.24;letter-spacing:var(--ls-head,0)}
+.t-cover .main b{font-weight:var(--w-headb,600)}
+.t-body .txt{left:10%;right:10%;top:50%;transform:translateY(-50%)}
+.t-body .main{font-size:var(--z-body);line-height:1.5;display:flex;flex-direction:column;gap:3.2cqw}
+.t-note .txt{left:20%;right:20%;top:50%;transform:translateY(-50%)}
+.t-note .main{font-size:var(--z-note);line-height:1.6;display:flex;flex-direction:column;gap:3.8cqw}
+.sl.photo{background:var(--s-night)} .sl.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r1 .tint{position:absolute;inset:0;background:var(--s-night);mix-blend-mode:multiply;opacity:.35} .r1 .shade{position:absolute;inset:0;background:rgba(10,14,12,.6)}
+.r1 .txt{left:13%;right:13%;top:50%;transform:translateY(-50%);text-align:center;color:#F1F3EC;gap:4.2cqw;text-shadow:0 .4cqw 3cqw rgba(0,0,0,.75)}
+.r1 .ttl{font-family:var(--f-head);font-size:var(--z-r1t);line-height:1.2;font-weight:var(--w-r1t,600);letter-spacing:var(--ls-head,0)}
+.r1 .bd{font-size:var(--z-r1b);line-height:1.5;display:flex;flex-direction:column;gap:2.8cqw}
+.r1 .end{font-size:var(--z-r1e);font-style:italic;opacity:.85}
+/* ukuran baru (cqw = % lebar slide) */
+.sz-new{--z-cover:5.4cqw;--z-body:4cqw;--z-note:3.3cqw;--z-lab:3cqw;--z-r1t:5.6cqw;--z-r1b:3.6cqw;--z-r1e:3.2cqw}
+.sz-old{--z-cover:6.6cqw;--z-body:4.9cqw;--z-note:4.3cqw;--z-lab:3.6cqw;--z-r1t:7cqw;--z-r1b:4.5cqw;--z-r1e:3.8cqw}
+/* kombinasi font */
+.f1{--f-head:"Newsreader",Georgia,serif;--f-body:"Newsreader",Georgia,serif}
+.f2{--f-head:"Literata",Georgia,serif;--f-body:"Literata",Georgia,serif}
+.f3{--f-head:"Crimson Pro",Georgia,serif;--f-body:"Crimson Pro",Georgia,serif}
+.f4{--f-head:"Instrument Serif",Georgia,serif;--f-body:"Figtree",Arial,sans-serif;--w-headb:400;--w-r1t:400;--ls-head:-.01em}
+.f5{--f-head:"Hanken Grotesk",Arial,sans-serif;--f-body:"Hanken Grotesk",Arial,sans-serif}
+.f6{--f-head:"Newsreader",Georgia,serif;--f-body:"Hanken Grotesk",Arial,sans-serif}
+.f4 .t-cover .main b{font-style:italic}
+/* Instrument Serif ramping: judul dinaikkan supaya bobot visualnya setara opsi lain */
+.f4 .t-cover .main{font-size-adjust:none;font-size:calc(var(--z-cover)*1.3);line-height:1.12}
+.f4 .r1 .ttl{font-size-adjust:none;font-size:calc(var(--z-r1t)*1.35);line-height:1.08}
+.ba{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) repeat(2,minmax(0,.62fr));gap:10px;align-items:start}
+.ba figure{margin:0;display:flex;flex-direction:column;gap:5px;min-width:0}
+@media (max-width:980px){.ba{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dock{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.dock-in{max-width:1180px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap} .dock-in>div{min-width:0;font-size:.92rem}
+.dock button{font:inherit;font-weight:700;background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:9px 16px;cursor:pointer}
+textarea{width:100%;min-height:90px;font-family:var(--mono);font-size:.8rem;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:10px}
+@media (max-width:980px){.row{grid-template-columns:repeat(2,minmax(0,1fr))} .spec{grid-template-columns:1fr} .refs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · F6 style carousel · banding font · 10 Okt 2026</span>
+  <h1>Pilihan font securewithaldo</h1>
+  <p class="lede">Ukuran teks diturunkan dan 6 kombinasi font dijejer di slide yang sama (palet sage, grain, copy dari mockup). Tiap kombinasi punya dasar dari font akun referensi. Pilih satu, lalu salin pilihannya ke chat.</p>
+  <div class="chips"><span class="chip">6 kombinasi · semua Google Fonts gratis</span><span class="chip">ukuran baru 18–25% lebih kecil</span><span class="chip">x-height disamakan supaya adil dibandingkan</span></div>
+</header>
+
+<section>
+  <h2>Ukuran: sebelum, sesudah, referensi</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Elemen</th><th>Mockup v2</th><th>Usulan baru</th><th>Referensi (tinggi baris terukur, % lebar)</th><th>Di HP lebar 390 px</th></tr></thead>
+    <tbody>
+      <tr><td>Cover K1</td><td class="num">6.6%</td><td class="num">5.4%</td><td>sincere cover 5.6</td><td class="num">±21 px</td></tr>
+      <tr><td>Isi K1 (carousel)</td><td class="num">4.9%</td><td class="num">4.0%</td><td>sincere isi 4.7 · noteovt 2.7</td><td class="num">±16 px</td></tr>
+      <tr><td>Kartu tunggal</td><td class="num">4.3%</td><td class="num">3.3%</td><td>noteovt 2.7</td><td class="num">±13 px</td></tr>
+      <tr><td>Judul R1</td><td class="num">7.0%</td><td class="num">5.6%</td><td>sincere judul CAPS 4.4 (huruf kapital terlihat lebih besar)</td><td class="num">±22 px</td></tr>
+      <tr><td>Isi R1</td><td class="num">4.5%</td><td class="num">3.6%</td><td>sincere isi 3.4</td><td class="num">±14 px</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Ukuran ditulis sebagai persen lebar slide. Kartu tunggal 3.3% masih di atas noteovt, tapi sudah di batas bawah keterbacaan di HP (W16), jadi tidak aku turunkan lagi. Isi carousel 4.0% sedikit di bawah sincere supaya slide terasa lebih lapang.</p>
+  <div class="ba p-sage f1" id="beforeafter"></div>
+</section>
+
+<section>
+  <h2>Font di akun referensi</h2>
+  <p class="note">Potongan asli dari file yang di-download. Nama font di kartu kombinasi adalah perkiraan dari bentuk huruf, bukan file font aslinya.</p>
+  <div class="refs">
+    <figure><img src="ref/sincere_kartu.jpg" alt="Potongan kartu sincere.emotion, serif gaya Times"><figcaption>sincere.emotion · kartu · serif gaya Times</figcaption></figure>
+    <figure><img src="ref/noteovt_kartu.jpg" alt="Potongan kartu noteovt, serif lembut di latar hitam"><figcaption>noteovt · kartu · serif lembut</figcaption></figure>
+    <figure><img src="ref/wycf_foto.jpg" alt="Potongan foto wordsyoucantfind dengan serif kecil"><figcaption>wordsyoucantfind · foto · serif buku</figcaption></figure>
+    <figure><img src="ref/plum_reel.jpg" alt="Potongan reels littleplumpoetry, serif display besar"><figcaption>littleplumpoetry · reels · serif display kontras tinggi</figcaption></figure>
+    <figure><img src="ref/penyambutsenja_kartu.jpg" alt="Potongan kartu penyambutsenja, sans polos"><figcaption>penyambutsenja · kartu · sans polos (Bahasa Indonesia)</figcaption></figure>
+    <figure><img src="ref/sincere_reel.jpg" alt="Potongan reels sincere.emotion, sans tebal kapital"><figcaption>sincere.emotion · reels · sans geometris tebal</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>6 kombinasi</h2>
+  <div class="cards" id="cards"></div>
+</section>
+</div>
+
+<div class="dock"><div class="dock-in"><div id="dt">Belum ada kombinasi yang dipilih.</div><button type="button" id="cp">Salin pilihan</button></div><textarea id="out" aria-label="Teks pilihan" hidden readonly></textarea></div>
+
+<script>
+(function(){
+var HUJAN='aset/unsplash_TQpBE7XdRyU_hujan-jendela_grain.jpg', WM='<div class="wm">securewithaldo</div>';
+var COVER={tone:'light',kind:'cover',lab:'pas dia mulai dingin',t:'Kenapa makin aku ngejar, <b>dia makin menjauh?</b>'};
+var BODY={tone:'dark',kind:'body',t:['Aku takut ditinggal, jadi aku cari kepastian.','Chat lagi. Tanya lagi. Minta dijelasin lagi.','Ternyata ini yang namanya <b>siklus kejar dan menjauh.</b>']};
+var NOTE={tone:'light',kind:'note',t:['Kalau aku harus terus jadi versi yang lebih kecil biar dia nyaman,','<b>itu bukan rumah.</b> Itu tempat aku nahan napas.']};
+var R1={title:'3 hal yang aku lakuin pas chatnya cuma dibaca',body:['1. Aku pisahin dulu. Mana yang aku tahu, mana yang cuma aku takutin.','2. Aku kirim satu pesan. Satu aja, bukan lima.'],end:'Yang ketiga paling susah. Ada di caption.'};
+function k1(o,r){var lab=o.lab?'<div class="lab">'+o.lab+'</div>':'';var m=Array.isArray(o.t)?o.t.map(function(x){return '<p>'+x+'</p>'}).join(''):'<p>'+o.t+'</p>';return '<div class="sl '+o.tone+' t-'+o.kind+' '+r+'"><div class="txt">'+lab+'<div class="main">'+m+'</div></div>'+WM+'</div>'}
+function r1(r){return '<div class="sl photo r1 '+r+'"><img src="'+HUJAN+'" alt=""><div class="tint"></div><div class="shade"></div><div class="txt"><p class="ttl">'+R1.title+'</p><div class="bd">'+R1.body.map(function(x){return '<p>'+x+'</p>'}).join('')+'</div><p class="end">'+R1.end+'</p></div></div>'}
+function row(){return '<figure>'+k1(COVER,'r45')+'<figcaption>K1 cover</figcaption></figure><figure>'+k1(BODY,'r45')+'<figcaption>K1 isi (gelap)</figcaption></figure><figure>'+k1(NOTE,'r45')+'<figcaption>kartu tunggal</figcaption></figure><figure>'+r1('r916')+'<figcaption>R1 9:16</figcaption></figure>'+
+ '<figure><div class="mini">'+k1(COVER,'r34')+r1('r34')+k1(NOTE,'r34')+'</div><figcaption>ukuran di grid profil</figcaption></figure>'}
+
+document.getElementById('beforeafter').innerHTML=
+ '<figure class="sz-old">'+k1(COVER,'r45')+'<figcaption>sebelum · cover</figcaption></figure><figure class="sz-new">'+k1(COVER,'r45')+'<figcaption>sesudah · cover</figcaption></figure>'+
+ '<figure class="sz-old">'+k1(NOTE,'r45')+'<figcaption>sebelum · kartu tunggal</figcaption></figure><figure class="sz-new">'+k1(NOTE,'r45')+'<figcaption>sesudah · kartu tunggal</figcaption></figure>'+
+ '<figure class="sz-old">'+r1('r916')+'<figcaption>sebelum · R1</figcaption></figure><figure class="sz-new">'+r1('r916')+'<figcaption>sesudah · R1</figcaption></figure>';
+
+var F=[
+ ['f1','Newsreader','Newsreader (judul + isi)','sincere.emotion kartu: serif gaya Times yang agak rapat. Font di mockup v2.','Paling dekat dengan kartu yang menang (median 4.45x). Terasa seperti catatan buku harian.','Bisa terasa terlalu mirip sincere kalau warnanya juga mirip; di sini dibedakan lewat palet sage.'],
+ ['f2','Literata','Literata (judul + isi)','noteovt: serif lembut, huruf agak lebar, enak dibaca kecil di latar gelap.','Paling nyaman dibaca di HP pada ukuran kecil, cocok untuk kartu tunggal dan teks panjang. Akun Indonesia yang menang (noteovt) memakai serif sejenis.','Sedikit lebih berat; di slide gelap kesannya padat.'],
+ ['f3','Crimson Pro','Crimson Pro (judul + isi)','wordsyoucantfind: serif buku klasik, kesan surat.','Paling puitis dan hangat, cocok untuk K2 dan kalimat pendek.','Huruf kecilnya kecil, jadi isi carousel panjang lebih cepat terasa sesak.'],
+ ['f4','Instrument Serif + Figtree','Instrument Serif (judul) + Figtree (isi)','littleplumpoetry reels: serif display kontras tinggi untuk judul; isi pakai sans supaya tetap terbaca.','Judul paling khas dan modern, isi paling jelas di layar kecil. Kontras dua font memisahkan hook dan isi.','Instrument Serif cuma punya satu ketebalan, jadi penekanan dibuat dengan miring, bukan bold.'],
+ ['f5','Hanken Grotesk','Hanken Grotesk (judul + isi)','penyambutsenja: sans polos hitam di latar putih, akun Indonesia 704K.','Paling netral dan lugas, terasa seperti catatan di HP. Mudah dibaca semua umur.','Kehilangan nuansa "buku harian" yang jadi ciri winner K1 (semua serif).'],
+ ['f6','Newsreader + Hanken Grotesk','Newsreader (judul) + Hanken Grotesk (isi)','Gabungan: judul serif seperti sincere, isi sans seperti penyambutsenja.','Hook tetap terasa personal, isi panjang tetap jelas. Cocok untuk carousel edukasi yang isinya lebih banyak.','Dua karakter berbeda; perlu konsisten supaya tidak terasa campur aduk.']
+];
+document.getElementById('cards').innerHTML=F.map(function(f,i){
+ return '<article class="card '+f[0]+'" id="c-'+f[0]+'"><div class="ch"><div class="chl"><span class="eyebrow">opsi '+(i+1)+(i===0?' · font mockup v2':'')+'</span><h3>'+f[2]+'</h3></div><label class="pick"><input type="radio" name="font" id="pick-'+f[0]+'" data-pick="Opsi '+(i+1)+' · '+f[2]+'"> Pilih ini</label></div>'+
+ '<div class="spec"><div class="pc"><div class="big" style="font-family:var(--f-head)">Aku masih takut.</div><div class="mid" style="font-family:var(--f-body)">Bedanya, sekarang aku nggak langsung percaya sama semua cerita yang dibuat rasa takut itu. <b>Rasa takutku bukan bukti.</b> <i>catatan aldo</i> · 23.40 · 11 kali</div></div>'+
+ '<div class="pc"><span class="k">Dasar referensi</span><p class="note">'+f[3]+'</p><span class="k">Kelebihan</span><p class="note">'+f[4]+'</p><span class="k">Catatan</span><p class="note">'+f[5]+'</p></div></div>'+
+ '<div class="row p-sage sz-new">'+row()+'</div></article>'}).join('');
+
+var b=[].slice.call(document.querySelectorAll('input[name=font]'));
+function sync(){var s=b.filter(function(x){return x.checked})[0];b.forEach(function(x){document.getElementById('c-'+x.id.slice(5)).classList.toggle('picked',x.checked)});document.getElementById('dt').textContent=s?('Dipilih: '+s.getAttribute('data-pick')):'Belum ada kombinasi yang dipilih.';try{localStorage.setItem('swa-font',s?s.id:'')}catch(e){}}
+try{var st=localStorage.getItem('swa-font');if(st&&document.getElementById(st))document.getElementById(st).checked=true}catch(e){}
+b.forEach(function(x){x.addEventListener('change',sync)});sync();
+document.getElementById('cp').addEventListener('click',function(){var s=b.filter(function(x){return x.checked})[0],t='Pilihan font securewithaldo: '+(s?s.getAttribute('data-pick'):'(belum ada)'),o=document.getElementById('out'),btn=this;
+ function fb(){o.hidden=false;o.value=t;o.focus();o.select();btn.textContent='Teks dipilih, tekan Ctrl+C'}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){btn.textContent='Tersalin';setTimeout(function(){btn.textContent='Salin pilihan'},1800)},fb)}else fb()});
+})();
+</script>

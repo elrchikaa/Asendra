@@ -1,0 +1,130 @@
+<meta charset="utf-8">
+<title>Dialog Objek securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → A dan B berdampingan per slide (tombol geser) → naskah satu percakapan → aturan posisi → pilihan. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.5rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;background:var(--tag);border-radius:4px;padding:2px 8px}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,320px);gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.strip figure{margin:0;display:flex;flex-direction:column;gap:6px;scroll-snap-align:start}
+.strip img{width:100%;height:auto;border-radius:4px;display:block}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pair figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pair img{width:100%;height:auto;border-radius:4px;display:block}
+figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.navs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.navs button{font:600 .9rem var(--sans);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:700px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+tr:last-child td{border-bottom:0}
+td.a{font-style:italic}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+code{font-family:var(--mono);font-size:.82em;background:var(--tag);border-radius:3px;padding:0 4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;align-self:flex-start}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;padding:6px 12px;font-size:.88rem;background:var(--surface)}
+.seg label+label span{border-left:1px solid var(--line)}
+.seg input:checked+span{background:var(--accent);color:var(--surface)}
+.seg input:focus-visible+span,.navs button:focus-visible,.go:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.out{font-family:var(--mono);font-size:.82rem;background:var(--tag);border-radius:6px;padding:10px 12px;white-space:pre-wrap;user-select:all}
+.go{font:600 .92rem var(--sans);background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+@media (max-width:640px){.pair{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · style carousel v2 (draft) · K2 dialog objek · revisi 2 · 14 Okt 2026</span>
+  <h1>Dialog objek: teks mengisi ruang kosong</h1>
+  <p class="lede">Revisi 2: font opsi B (pilihanmu), teks boleh di kiri, kanan, atas, atau bawah objek sesuai ruang kosong di foto, dan lebar teks maksimal 44% supaya kalimat panjang melebar dulu sebelum turun baris. Revisi 1 (A vs B) ada di bawah sebagai pembanding.</p>
+  <div class="chips"><span class="chip">topik: T8 kalimat aman · T4 menenangkan diri</span><span class="chip">7 slide · 4:5</span><span class="chip">grain 60%</span><span class="chip">font B: Figtree 32 + Instrument miring 38</span><span class="chip">cek otomatis: bersih</span><span class="chip">naskah belum ACC</span></div>
+</header>
+
+<section>
+  <h2>Revisi 2</h2>
+  <div class="strip">
+    <figure><img src="web_v3/v3-01-kepompong.jpg" alt="Slide 1, kepompong"><figcaption>1 · cemas di kiri objek · penenang di bawah, sejajar tepi kanan</figcaption></figure>
+    <figure><img src="web_v3/v3-02-ikan.jpg" alt="Slide 2, ikan"><figcaption>2 · cemas di kiri · penenang di kanan</figcaption></figure>
+    <figure><img src="web_v3/v3-03-katak.jpg" alt="Slide 3, katak"><figcaption>3 · cemas di kiri · penenang di kanan</figcaption></figure>
+    <figure><img src="web_v3/v3-04-camar.jpg" alt="Slide 4, camar"><figcaption>4 · cemas di atas · penenang di bawah</figcaption></figure>
+    <figure><img src="web_v3/v3-05-kura-kura.jpg" alt="Slide 5, kura-kura"><figcaption>5 · cemas di atas · penenang di bawah, sejajar tepi kanan</figcaption></figure>
+    <figure><img src="web_v3/v3-06-burung-hantu.jpg" alt="Slide 6, burung hantu"><figcaption>6 · cemas di atas · penenang di kanan</figcaption></figure>
+    <figure><img src="web_v3/v3-07-produk.jpg" alt="Slide 7, produk HERE"><figcaption>7 · produk + CTA</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Naskah: satu percakapan</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Foto</th><th>Kalimat cemas</th><th>Jawaban penenang</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>kepompong</td><td>Kalau aku belum jadi versi terbaikku?</td><td class="a">Nggak apa apa. Versi yang sekarang juga cukup kok.</td></tr>
+      <tr><td>2</td><td>ikan</td><td>Kalau aku masih gampang cemas?</td><td class="a">Ya udah. Cemasnya nggak bikin aku pergi.</td></tr>
+      <tr><td>3</td><td>katak</td><td>Even when I'm too much?</td><td class="a">Even then.</td></tr>
+      <tr><td>4</td><td>camar</td><td>Kalau aku nanya hal yang sama lagi?</td><td class="a">Ya aku jawab lagi. Sesering yang kamu butuh.</td></tr>
+      <tr><td>5</td><td>kura-kura</td><td>Kalau malam ini kepalaku lari ke mana mana?</td><td class="a">Aku temenin sampai kepalamu pelan lagi.</td></tr>
+      <tr><td>6</td><td>burung hantu</td><td>Janji nggak ke mana mana?</td><td class="a">Janji. Aku nggak ke mana mana.</td></tr>
+      <tr><td>7</td><td>produk</td><td colspan="2">Aku bikin HERE buat malam kayak gini. 48 video pendek yang bisa kamu buka pas kepalamu mulai lari. Komen [KEYWORD], nanti aku kirim linknya.</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="tight">
+    <li><b>Bersambung:</b> kalimat cemas dibuka "Kalau…" seperti rangkaian "what if" di contoh wordsyoucantfind. Tiap jawaban menyambung kata dari pertanyaannya (versi → versi, cemas → cemasnya, too much → even then, nanya lagi → jawab lagi, janji → janji), lalu ditutup tagline HERE.</li>
+    <li><b>Slide 3 English:</b> "terlalu banyak" diganti "too much". Market Landscape §5 mencatat ketakutan "Am I being too much?" sebagai framing pasar luar negeri dan bilang audiens Indonesia jarang mengucapkannya dalam bahasa Indonesia, jadi bentuk English-nya pas.</li>
+    <li>"Nggak apa apa" ditulis tanpa tanda hubung, mengikuti Voice &amp; Copy Guide ("pelan pelan", "baik baik aja").</li>
+  </ul>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Aturan posisi teks (revisi 2)</h2>
+    <ul class="tight">
+      <li>Jarak teks ke tepi objek selalu 34 px, ke arah mana pun.</li>
+      <li>Empat posisi: kiri, kanan, atas, bawah. Dipilih yang mengisi ruang kosong terbesar di foto supaya slide seimbang (owl dan kepompong biru sekarang di sisi yang tadinya kosong).</li>
+      <li>Di samping objek: teks sejajar tengah objek dan rata ke arah objek. Di atas/bawah: teks ditengahkan ke objek, atau sejajar tepi objek kalau objeknya dekat tepi slide.</li>
+      <li>Lebar teks mengikuti isi, maksimal 44% kanvas (sebelumnya kotak tetap 30%). Semua teks miring −3°, tetap di dalam bingkai 108 px.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Pembanding: revisi 1 (A vs B)</h2>
+  <div class="navs"><button type="button" id="prev">Sebelumnya</button><span class="eyebrow" id="pos"></span><button type="button" id="next">Berikutnya</button></div>
+  <div class="pair">
+    <figure><img id="imgA" src="web_v2/A-01-kepompong.jpg" alt="Revisi 1 opsi A"><figcaption>A · Figtree tegak + Figtree miring 32 px</figcaption></figure>
+    <figure><img id="imgB" src="web_v2/B-01-kepompong.jpg" alt="Revisi 1 opsi B"><figcaption>B · Figtree 32 px + Instrument Serif miring 38 px (dipilih)</figcaption></figure>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+var N=['01-kepompong','02-ikan','03-katak','04-camar','05-kura-kura','06-burung-hantu','07-produk'],i=0;
+function show(){
+  document.getElementById('imgA').src='web_v2/A-'+N[i]+'.jpg';
+  document.getElementById('imgB').src='web_v2/B-'+N[i]+'.jpg';
+  document.getElementById('pos').textContent='slide '+(i+1)+' dari '+N.length;
+}
+document.getElementById('prev').addEventListener('click',function(){i=(i+N.length-1)%N.length;show()});
+document.getElementById('next').addEventListener('click',function(){i=(i+1)%N.length;show()});
+show();
+})();
+</script>

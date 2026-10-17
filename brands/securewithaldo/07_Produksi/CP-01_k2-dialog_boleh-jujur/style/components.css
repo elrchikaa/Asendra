@@ -1,0 +1,183 @@
+/* =====================================================================
+   STYLE securewithaldo — KOMPONEN
+   Semua warna turunan token (tokens.css). Bingkai 108 px di semua sisi.
+   Perataan: K1 rata kiri, K2 rata tengah (keputusan owner: margin ≠ perataan).
+   ===================================================================== */
+
+.slide { background: var(--bg); color: var(--fg); font-family: var(--font-text); }
+
+/* ---------- GRAIN: di bawah teks, di atas latar/foto ---------- */
+.t-terang::after, .t-gelap::after, .t-foto::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: var(--grain); background-size: var(--grain-size); opacity: var(--grain-strength, 1);
+}
+.t-gelap::after {
+  -webkit-mask-image: radial-gradient(90% 55% at 85% 0%, #000 0%, rgba(0,0,0,.35) 60%, transparent 100%);
+          mask-image: radial-gradient(90% 55% at 85% 0%, #000 0%, rgba(0,0,0,.35) 60%, transparent 100%);
+}
+.slide > .isi, .slide > .frame, .slide > .edu, .slide > .wm, .slide > .say, .slide > .obj, .slide > .kalimat, .slide > .tanya, .slide > .jawab { z-index: 2; }
+
+/* ---------- ELEMEN TETAP ---------- */
+/* label momen: kapan kalimat ini kejadian (ala judul video HERE) */
+.lab { display: flex; align-items: center; gap: 24px; font-family: var(--font-accent); font-style: italic;
+  font-size: var(--fs-lab); line-height: 1.2; color: var(--lab); }
+.lab::before { content: ""; width: 64px; height: 1px; background: currentColor; flex: none; }
+/* penanda carousel edukasi: duduk di garis bingkai atas, rata tengah */
+.edu { position: absolute; top: var(--frame-y); left: var(--frame-x); right: var(--frame-x); text-align: center;
+  font-family: var(--font-accent); font-style: italic; font-size: var(--fs-edu); line-height: 1; opacity: .7; }
+/* wordmark: duduk di garis bingkai bawah */
+.wm { position: absolute; left: 0; right: 0; bottom: var(--frame-y); text-align: center; font-family: var(--font-text);
+  font-size: var(--fs-wm); line-height: 1; letter-spacing: .32em; opacity: .55; }
+
+/* blok isi: di tengah vertikal, kiri = kanan */
+.isi { position: absolute; left: var(--frame-x); right: var(--frame-x); top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 32px; }
+.isi p { margin: 0; }
+.judul, .poin-judul, .kutip, .say, .kalimat, .obj { text-wrap: balance; }
+.teks p { text-wrap: pretty; }
+b, strong { font-weight: 600; }
+
+/* ---------- K1 ---------- */
+/* cover: kolom lebih sempit (14% kiri = kanan) supaya judul pecah 2–4 baris */
+.k1-cover .isi { left: 151px; right: 151px; gap: 34px; }
+.judul { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-cover); line-height: 1.12; letter-spacing: -.01em; }
+.judul em { font-style: italic; }
+.teks { display: flex; flex-direction: column; gap: 34px; font-size: var(--fs-body); line-height: 1.5; }
+/* kartu tunggal (noteovt): kolom sempit 20% kiri = kanan, spasi lega */
+.k1-kartu .isi { left: 216px; right: 216px; }
+.k1-kartu .teks { font-size: var(--fs-note); line-height: 1.6; gap: 41px; }
+/* poin bernomor */
+.nomor { font-family: var(--font-accent); font-style: italic; font-size: var(--fs-lab); line-height: 1; color: var(--lab); }
+.poin-judul { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-poin); line-height: 1.15; letter-spacing: -.01em; }
+/* naskah kalimat (bilang ini) */
+.kutip { font-family: var(--font-display); font-style: italic; font-size: var(--fs-poin); line-height: 1.2; letter-spacing: -.01em; }
+.konteks { font-size: var(--fs-body); line-height: 1.5; opacity: .85; }
+/* produk: isi atas, mockup tengah, ajakan bawah, semua di dalam bingkai */
+.frame { position: absolute; inset: var(--frame-y) var(--frame-x); display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+.frame .teks { gap: 28px; }
+.produk { flex: 1 1 auto; min-height: 0; display: grid; place-items: center; }
+.hp { height: 100%; max-height: 560px; aspect-ratio: 9 / 18; border-radius: 40px; background: var(--role-dark); display: grid; place-content: center; text-align: center; gap: 10px;
+  box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--role-dark) 70%, transparent); }
+.hp .nama { font-family: var(--font-display); font-size: 84px; line-height: 1; color: var(--role-light-2); }
+.hp .tag { font-family: var(--font-accent); font-style: italic; font-size: 26px; color: var(--role-accent-on-dark); }
+.produk .p-frame { height: 100%; max-height: 560px; aspect-ratio: 9 / 18; border-radius: 40px; }
+.ajak { font-size: var(--fs-body); line-height: 1.4; }
+/* v2 (owner 14 Okt): ajakan komen di slide produk rata tengah dan lebih besar; kalimat susulan kecil di bawahnya */
+.k1-produk .ajak { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.ajak-aksi { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -.01em; }
+.ajak-sub { font-size: var(--fs-body); line-height: 1.4; opacity: .75; }
+
+/* ---------- v2 · SLIDE CTA (owner 14 Okt: semua opsi disimpan). Satu slide = satu aksi ---------- */
+/* keyword di-highlight (playbook CTA §3): huruf tegak, blok warna tipis */
+.kw { font-style: normal; font-weight: inherit; padding: 0 .14em; border-radius: 8px; background: color-mix(in srgb, var(--lab) 26%, transparent); }
+.cta .isi { gap: 40px; }
+.cta-lead { font-size: var(--fs-body); line-height: 1.5; opacity: .85; text-wrap: pretty; }
+.cta-aksi { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 88px; line-height: 1.05; letter-spacing: -.01em; }
+.cta-aksi em { font-style: italic; }
+.cta-sub { font-size: var(--fs-body); line-height: 1.45; opacity: .75; }
+.handle { font-family: var(--font-text); font-weight: 600; letter-spacing: .01em; }
+/* link di bio: teks kiri + mockup kanan, panah naik ke arah profil */
+.cta-duo { position: absolute; inset: var(--frame-y) var(--frame-x); display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: center; }
+.cta-duo .hp { height: 600px; max-height: none; }
+.cta-duo .kiri-isi { display: flex; flex-direction: column; gap: 36px; }
+.naik { width: 56px; height: 56px; color: var(--lab); }
+.naik path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* follow: baris profil sederhana, tanpa logo platform */
+.profil { display: flex; align-items: center; gap: 28px; }
+.ava { width: 120px; height: 120px; border-radius: 50%; flex: none; display: grid; place-items: center; font-family: var(--font-display); font-size: 64px; background: var(--role-light); color: var(--role-dark); }
+.profil .nm { display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-body); }
+.profil .nm span { font-size: var(--fs-note); opacity: .7; }
+.tombol { align-self: flex-start; font-family: var(--font-text); font-weight: 600; font-size: 34px; padding: 18px 44px; border-radius: 999px; background: var(--role-light); color: var(--role-dark); }
+/* foto + komen KATA: kalimat + ajakan di tengah foto (owner: jangan terlalu di atas) */
+.k2-cta .kalimat { display: flex; flex-direction: column; gap: 22px; }
+.k2-cta .ajak-kecil { font-family: var(--font-text); font-size: var(--fs-k2-b); line-height: 1.4; }
+
+/* ---------- K2: foto penuh ---------- */
+.t-foto > .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--fx, 50%) var(--fy, 50%); z-index: 0; }
+.t-foto > .tint { position: absolute; inset: 0; z-index: 0; background: var(--role-dark-2); mix-blend-mode: multiply; opacity: var(--tint, .45); }
+.t-foto > .shade { position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, #000 35%, transparent), color-mix(in srgb, #000 15%, transparent) 40%, color-mix(in srgb, #000 40%, transparent)); }
+/* dialog dua objek: kalimat "dia" di garis bingkai atas (serif miring), "aku" di garis bingkai bawah (sans). Tanpa label. */
+.say { position: absolute; left: var(--frame-x); right: var(--frame-x); text-align: center; text-transform: lowercase; color: var(--fg); }
+.say.a { top: var(--frame-y); font-family: var(--font-accent); font-style: italic; font-size: var(--fs-k2-a); line-height: 1.25; opacity: .88; }
+.say.b { bottom: var(--frame-y); font-family: var(--font-text); font-size: var(--fs-k2-b); line-height: 1.4; }
+/* teks di objek foto (layar HP, isi cangkir): posisi diatur per slide */
+.obj { position: absolute; left: var(--x, 31%); top: var(--y, 36%); width: var(--wd, 34%); transform: rotate(var(--rot, 0deg));
+  font-family: var(--font-display); font-size: var(--fs-obj); line-height: 1.25; text-transform: lowercase; color: var(--fg); }
+/* satu kalimat kecil di ruang kosong foto (wycf), rata tengah, di dalam bingkai */
+.kalimat { position: absolute; left: var(--frame-x); right: var(--frame-x); text-align: center;
+  font-family: var(--font-display); font-size: var(--fs-k2-a); line-height: 1.25; color: var(--fg);
+  text-shadow: 0 2px 18px color-mix(in srgb, #000 55%, transparent); }
+.kalimat.atas { top: var(--frame-y); } .kalimat.bawah { bottom: var(--frame-y); }
+/* v2 · dialog objek berpasangan (pola wordsyoucantfind): satu foto per slide berisi sepasang objek.
+   Kalimat cemas (.tanya, Figtree) duduk di samping objek 1, jawaban penenang (.jawab, Instrument miring) di samping objek 2.
+   ATURAN POSISI (owner 14 Okt: jarak teks ↔ objek konsisten, layout seimbang):
+   - Jarak teks ke tepi objek selalu --pair-gap, ke arah mana pun.
+   - Empat posisi, pilih yang mengisi ruang kosong terbesar di foto (biar seimbang, bukan selalu atas/bawah):
+     .kiri / .kanan : di samping objek, tengah vertikal = tengah objek (--cy), --ox = tepi kiri / kanan objek. Teks rata ke arah objek.
+     .bawah / .atas : --oy = tepi bawah / atas objek, tengah teks = tengah objek (--cx).
+       + .rata-kanan / .rata-kiri kalau objek dekat tepi slide: tepi teks sejajar tepi objek (--ox), bukan ditengahkan.
+   - Lebar teks mengikuti isi, maksimal --pair-wd (kalimat panjang melebar dulu, baru turun baris). Tetap di dalam bingkai 108 px.
+   - Kemiringan sama untuk semua teks: --pair-rot. Teks tidak boleh menyentuh objek mana pun.
+   Huruf kalimat biasa (bukan lowercase). */
+.tanya, .jawab { margin: 0; position: absolute; width: max-content; max-width: var(--pair-wd);
+  color: var(--fg); text-wrap: balance; text-shadow: 0 2px 16px color-mix(in srgb, #000 60%, transparent); }
+.tanya.bawah, .jawab.bawah { top: calc(var(--oy) + var(--pair-gap)); }
+.tanya.atas, .jawab.atas { bottom: calc(100% - var(--oy) + var(--pair-gap)); }
+.tanya:is(.bawah, .atas), .jawab:is(.bawah, .atas) { left: var(--cx); text-align: center; transform: translateX(-50%) rotate(var(--pair-rot)); }
+.tanya:is(.bawah, .atas).rata-kanan, .jawab:is(.bawah, .atas).rata-kanan { left: auto; right: calc(100% - var(--ox)); text-align: right; transform: rotate(var(--pair-rot)); }
+.tanya:is(.bawah, .atas).rata-kiri, .jawab:is(.bawah, .atas).rata-kiri { left: var(--ox); text-align: left; transform: rotate(var(--pair-rot)); }
+.tanya.kiri, .jawab.kiri { right: calc(100% - var(--ox) + var(--pair-gap)); top: var(--cy); text-align: right;
+  max-width: min(var(--pair-wd), calc(var(--ox) - var(--pair-gap) - var(--frame-x))); transform: translateY(-50%) rotate(var(--pair-rot)); }
+.tanya.kanan, .jawab.kanan { left: calc(var(--ox) + var(--pair-gap)); top: var(--cy); text-align: left;
+  max-width: min(var(--pair-wd), calc(100% - var(--ox) - var(--pair-gap) - var(--frame-x))); transform: translateY(-50%) rotate(var(--pair-rot)); }
+.tanya { font-family: var(--font-text); font-size: var(--fs-pair-q); line-height: 1.35; }
+.jawab { font-family: var(--font-pair-a); font-style: italic; font-size: var(--fs-pair-a); line-height: 1.3; }
+.kalimat.tengah { top: 50%; transform: translateY(-50%); }
+.kalimat em { font-style: italic; }
+
+/* =====================================================================
+   FORMAT TAMBAHAN (10 Okt): comparison, before-after teks (terbukti)
+   + kelompok B uji: chat, dulu-kira, pegangan, panorama, spread
+   ===================================================================== */
+.redup { opacity: .5; }
+.pisah { height: 1px; background: currentColor; opacity: .25; width: 100%; }
+/* comparison & before-after: dua blok bertumpuk, label momen + kalimat */
+.dua { display: flex; flex-direction: column; gap: 44px; }
+.blok { display: flex; flex-direction: column; gap: 18px; }
+.pernyataan { font-family: var(--font-display); font-size: var(--fs-poin); line-height: 1.18; letter-spacing: -.01em; }
+.pernyataan em { font-style: italic; }
+.blok .teks { gap: 0; }
+/* myth-fact versi pengakuan: anggapan lama dicoret tipis */
+.coret { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: color-mix(in srgb, currentColor 60%, transparent); }
+
+/* chat dibuat ulang (identitas brand sendiri, tanpa logo platform) */
+.chat { display: flex; flex-direction: column; gap: 18px; }
+.bub { max-width: 78%; padding: 22px 30px; border-radius: 30px; font-size: var(--fs-body); line-height: 1.35; }
+.bub.dia { align-self: flex-start; background: var(--bubble); color: var(--ink); border-bottom-left-radius: 8px; }
+.bub.aku { align-self: flex-end; background: var(--role-dark); color: var(--role-light-2); border-bottom-right-radius: 8px; }
+.meta { font-size: var(--fs-wm); letter-spacing: .08em; opacity: .55; }
+.meta.kanan { align-self: flex-end; }
+
+/* pegangan (checklist 1 slide, maks 3 item, tanpa centang supaya tidak terasa PR) */
+.pegangan { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 30px; }
+.pegangan li { display: flex; gap: 26px; align-items: baseline; font-size: var(--fs-body); line-height: 1.45; }
+.pegangan li::before { content: ""; flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--lab); transform: translateY(-4px); }
+.catat { font-family: var(--font-accent); font-style: italic; font-size: var(--fs-lab); line-height: 1.2; color: var(--lab); }
+
+/* panorama & spread: engine memaksa anak langsung slide pano jadi relative,
+   jadi isi slide dibungkus .pano-isi (selebar slide) supaya bingkai 108 px tetap berlaku */
+.pano-isi { width: 100%; height: 100%; }
+.pano-isi > .isi, .pano-isi > .edu, .pano-isi > .wm { position: absolute; }
+.pano-isi > .isi.atas { top: var(--frame-y); transform: none; }
+.pano-isi > .isi.bawah { top: auto; bottom: calc(var(--frame-y) + 60px); transform: none; }
+.waktu { font-family: var(--font-accent); font-style: italic; font-size: var(--fs-poin); line-height: 1; color: var(--lab); text-align: center; }
+.titik { width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--lab); }
+.benang path { fill: none; stroke: var(--lab); stroke-width: 3; stroke-linecap: round; }
+/* spread siklus: warna diagram ikut tema */
+.t-gelap { --diag: var(--role-light-2); --diag-accent: var(--role-accent-on-dark); }
+.t-terang { --diag: var(--ink); --diag-accent: var(--role-accent); }
+.p-dbox { font-family: var(--font-accent); font-style: italic; font-weight: 400; letter-spacing: 0; background: transparent; }
+.p-hub { border-color: var(--role-dark); }
+.p-fan-item { font-size: var(--fs-note) !important; line-height: 1.4; text-shadow: none; }
+.p-fan-item b { font-family: var(--font-accent); font-style: italic; font-weight: 400; font-size: 1.35em; letter-spacing: 0; text-transform: none; margin-bottom: 6px; }

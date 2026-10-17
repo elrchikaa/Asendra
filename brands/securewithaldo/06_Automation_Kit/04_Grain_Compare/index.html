@@ -1,0 +1,126 @@
+<meta charset="utf-8">
+<title>Grain securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → tabel angka grain → tombol tampilan (ukuran HP / zoom 1:1) → grid baris = jenis slide, kolom = level grain → pilihan. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.5rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:14px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:620px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;align-self:flex-start}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;padding:6px 12px;font-size:.88rem;background:var(--surface)}
+.seg label+label span{border-left:1px solid var(--line)}
+.seg input:checked+span{background:var(--accent);color:var(--surface)}
+.seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:-4px}
+.board{overflow-x:auto}
+.grid{display:grid;grid-template-columns:110px repeat(4,minmax(200px,1fr));gap:10px;min-width:930px}
+.hd{font-family:var(--mono);font-size:.74rem;color:var(--muted);display:flex;flex-direction:column;gap:2px;padding-bottom:4px}
+.hd b{font-family:var(--serif);font-weight:400;font-size:1.25rem;color:var(--fg)}
+.rowlab{font-size:.85rem;color:var(--muted);padding-top:6px}
+.cell{position:relative;border-radius:4px;overflow:hidden;background:var(--tag)}
+.cell img{display:block;width:100%;height:auto}
+.zoom{display:none;width:100%;aspect-ratio:1;background-repeat:no-repeat;background-size:1080px 1350px}
+.mode-zoom .cell img{display:none} .mode-zoom .zoom{display:block}
+.cell.pick{outline:2px solid var(--accent);outline-offset:2px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.picks{display:flex;flex-wrap:wrap;gap:10px}
+.picks label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;cursor:pointer;font-size:.92rem}
+.picks input{accent-color:var(--accent)}
+.out{font-family:var(--mono);font-size:.82rem;background:var(--tag);border-radius:6px;padding:10px 12px;white-space:pre-wrap;user-select:all}
+button{font:600 .92rem var(--sans);background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ok{font-size:.85rem;color:var(--accent)}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · style carousel · perbandingan grain · 14 Okt 2026</span>
+  <h1>Seberapa kuat grain-nya</h1>
+  <p class="lede">Empat slide dari style v1 dirender ulang di empat level grain. Isi dan warna sama, yang beda cuma kekuatan lapisan grain. Grain di sorot gelap selalu paling kuat, dan hitam datar tetap bersih di semua level.</p>
+</header>
+
+<section>
+  <h2>Angka terukur</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Level</th><th>Kekuatan</th><th>Kertas terang</th><th>Sorot gelap</th><th>Foto K2</th><th>Acuan</th></tr></thead>
+    <tbody>
+      <tr><td>Sekarang (v1)</td><td class="n">100%</td><td class="n">±5,0</td><td class="n">±15,1</td><td class="n">±4,6</td><td>Disamakan dengan kertas dan sorot @sincere.emotion (±5 dan ±15,6)</td></tr>
+      <tr><td>Sedang</td><td class="n">60%</td><td class="n">±2,9</td><td class="n">±10,9</td><td class="n">±2,7</td><td>–</td></tr>
+      <tr><td>Halus</td><td class="n">35%</td><td class="n">±1,7</td><td class="n">±6,4</td><td class="n">±1,6</td><td>Foto Raw image sendiri sudah ±1,3–2,5</td></tr>
+      <tr><td>Tanpa</td><td class="n">0%</td><td class="n">±0,4</td><td class="n">±0,5</td><td class="n">±0,7</td><td>–</td></tr>
+    </tbody>
+  </table></div>
+  <p class="lede">Angka = simpangan noise di area datar render 1080 px. Di HP gambar diperkecil kira-kira 3 kali, jadi grain terlihat lebih halus daripada di mode zoom.</p>
+</section>
+
+<section>
+  <h2>Bandingkan</h2>
+  <div class="seg" role="radiogroup" aria-label="Tampilan">
+    <label><input type="radio" name="mode" id="mode-hp" value="hp" checked><span>Ukuran slide</span></label>
+    <label><input type="radio" name="mode" id="mode-zoom" value="zoom"><span>Zoom 1:1 (lihat butir grain)</span></label>
+  </div>
+  <div class="board"><div class="grid" id="grid"></div></div>
+</section>
+
+<section>
+  <h2>Pilihanmu</h2>
+  <div class="box">
+    <div class="picks" id="picks"></div>
+    <div class="out" id="out"></div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button type="button" id="salin">Salin pilihan</button><span class="ok" id="okmsg" hidden></span></div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+var L=[['g100','Sekarang','100%'],['g60','Sedang','60%'],['g35','Halus','35%'],['g0','Tanpa','0%']];
+var S=[['01-k1-cover','Cover terang',[108,560]],['02-k1-isi-gelap','Isi gelap (sorot)',[700,40]],['03-k1-kartu-gelap','Kartu gelap',[620,60]],['04-k2-dialog','Foto K2',[390,520]]];
+var st={mode:'hp',pick:'g60'};
+try{var s=JSON.parse(localStorage.getItem('swa-grain')||'{}');if(s.pick)st.pick=s.pick;if(s.mode)st.mode=s.mode}catch(e){}
+var h='<div></div>'+L.map(function(l){return '<div class="hd"><b>'+l[1]+'</b>'+l[2]+'</div>'}).join('');
+S.forEach(function(s){
+  h+='<div class="rowlab">'+s[1]+'</div>';
+  L.forEach(function(l){var u='web/'+l[0]+'-'+s[0]+'.jpg';
+    h+='<div class="cell" data-l="'+l[0]+'"><img src="'+u+'" alt="'+s[1]+', grain '+l[1]+'" loading="lazy"><div class="zoom" style="background-image:url('+u+');background-position:-'+s[2][0]+'px -'+s[2][1]+'px" role="img" aria-label="Zoom '+s[1]+', grain '+l[1]+'"></div></div>'});
+});
+document.getElementById('grid').innerHTML=h;
+document.getElementById('picks').innerHTML=L.map(function(l){return '<label><input type="radio" name="pick" id="pick-'+l[0]+'" value="'+l[0]+'"> '+l[1]+' ('+l[2]+')</label>'}).join('');
+function render(){
+  document.getElementById('grid').classList.toggle('mode-zoom',st.mode==='zoom');
+  document.getElementById('mode-'+st.mode).checked=true;
+  document.getElementById('pick-'+st.pick).checked=true;
+  [].forEach.call(document.querySelectorAll('.cell'),function(c){c.classList.toggle('pick',c.getAttribute('data-l')===st.pick)});
+  var l=L.filter(function(x){return x[0]===st.pick})[0];
+  document.getElementById('out').textContent='Grain securewithaldo: '+l[1]+' ('+l[2]+')';
+  try{localStorage.setItem('swa-grain',JSON.stringify(st))}catch(e){}
+}
+document.addEventListener('change',function(e){if(e.target.name==='mode')st.mode=e.target.value;else if(e.target.name==='pick')st.pick=e.target.value;else return;render()});
+document.getElementById('salin').addEventListener('click',function(){
+  var t=document.getElementById('out').textContent,ok=document.getElementById('okmsg');
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('out'));var s=getSelection();s.removeAllRanges();s.addRange(r);ok.textContent='Teks sudah diblok, tekan Ctrl+C.';ok.hidden=false}
+  try{navigator.clipboard.writeText(t).then(function(){ok.textContent='Tersalin. Tempel di chat.';ok.hidden=false},sel)}catch(e){sel()}
+});
+render();
+})();
+</script>

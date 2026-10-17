@@ -1,0 +1,318 @@
+<meta charset="utf-8">
+<title>Opsi Grid securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → kontrol global (cover reels, posting lanjut) → 4 kartu opsi berisi grid profil → pilihan + salin.
+   Token halaman mengikuti tema; warna di dalam slide adalah warna konten brand (sage) dan sengaja tetap. */
+:root {
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif; --sans:"Figtree", "Segoe UI", system-ui, sans-serif; --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#121512; --surface:#1a1f1b; --fg:#e5ebe4; --muted:#9eaa9f; --line:#2c352e; --tag:#232a24; --accent:#a8c49f; --accent-soft:#263325; color-scheme:dark } }
+:root[data-theme="dark"] { --bg:#121512; --surface:#1a1f1b; --fg:#e5ebe4; --muted:#9eaa9f; --line:#2c352e; --tag:#232a24; --accent:#a8c49f; --accent-soft:#263325; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.9rem)} h2{font-size:1.6rem} h3{font-size:1.45rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:16px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;background:var(--tag);border-radius:4px;padding:2px 8px}
+.chip.edu{background:var(--accent-soft);color:var(--accent)}
+
+/* ---------- slide konten (sama dengan mockup v6) ---------- */
+.p-sage{--s-paper:#E8EBE3;--s-night:#25302B;--s-ink:#232C27;--s-inkl:#ECEFE6;--s-acc:#6E8466;--s-acc-l:#AFC1A6}
+.sl{--my:8%;--mx:10%;position:relative;container-type:inline-size;overflow:hidden;width:100%;font-family:var(--sans);background:var(--s-paper);color:var(--s-ink)}
+.r34{aspect-ratio:3/4}
+.sl.dark{background:radial-gradient(120% 70% at 85% 0%, color-mix(in srgb,var(--s-acc) 22%,var(--s-night)) 0%, var(--s-night) 60%);color:var(--s-inkl)}
+.sl.light{background:linear-gradient(180deg,var(--s-paper),color-mix(in srgb,var(--s-paper) 92%,var(--s-ink)))}
+.sl.light::after,.sl.dark::after{content:"";position:absolute;inset:0;background:url(grain_terang.png);pointer-events:none;z-index:1}
+.sl.dark::after{background:url(grain_gelap.png);-webkit-mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:radial-gradient(90% 55% at 85% 0%,#000 0%,rgba(0,0,0,.35) 60%,transparent 100%)}
+.sl .txt,.sl .wm{z-index:2}
+.sl .txt{position:absolute;display:flex;flex-direction:column;gap:3.4cqw}
+.sl .txt p{margin:0;max-width:none}
+.sl b{font-weight:600}
+.sl .lab{font-family:var(--serif);font-style:italic;font-size:3.52cqw;color:var(--s-acc);display:flex;align-items:center;gap:2.4cqw}
+.sl.dark .lab{color:var(--s-acc-l)}
+.sl .lab::before{content:"";width:6cqw;height:1px;background:currentColor;display:block}
+.sl .wm{position:absolute;left:0;right:0;bottom:var(--my);text-align:center;font-size:2.04cqw;letter-spacing:.32em;opacity:.55}
+.t-cover .txt{left:14%;right:14%;top:50%;transform:translateY(-50%)}
+.t-cover .main{font-family:var(--serif);font-size:6.3cqw;line-height:1.12;letter-spacing:-.01em}
+.t-cover .main b{font-weight:400;font-style:italic}
+.t-note .txt{left:20%;right:20%;top:50%;transform:translateY(-50%)}
+.t-note .main{font-size:2.87cqw;line-height:1.6;display:flex;flex-direction:column;gap:3.8cqw}
+.sl .edu{position:absolute;top:var(--my);left:var(--mx);right:var(--mx);text-align:center;font-family:var(--serif);font-style:italic;font-size:3.06cqw;letter-spacing:.06em;opacity:.7;z-index:2}
+.sl.photo{background:var(--s-night)}
+.sl.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sl.photo .tint{position:absolute;inset:0;background:var(--s-night);mix-blend-mode:multiply;opacity:.45}
+.sl.photo .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15) 40%,rgba(0,0,0,.4))}
+.k2 .say{position:absolute;left:var(--mx);right:var(--mx);text-align:center;color:#F3F1EC;text-transform:lowercase;z-index:2;line-height:1.4}
+.k2 .say.a{top:var(--my);opacity:.85;font-style:italic;font-family:var(--serif);font-size:4.26cqw}
+.k2 .say.b{bottom:var(--my);font-size:2.96cqw}
+.k2hp .scr{position:absolute;left:31%;top:36%;width:34%;transform:rotate(-14deg);font-family:var(--serif);color:#F3F1EC;font-size:4.81cqw;line-height:1.25;z-index:2}
+/* K2 terang (KANDIDAT, pola littleplumpoetry): foto terang tanpa penggelapan, teks di dalam cangkir */
+.k2t img{object-position:56% 50%}
+.k2t .in{position:absolute;top:50%;transform:translateY(-50%);text-align:center;text-transform:lowercase;line-height:1.3;z-index:2}
+.k2t .in.a{left:7%;width:33%;font-family:var(--serif);font-style:italic;font-size:4.26cqw;color:#3B2E25}
+.k2t .in.b{left:55%;width:30%;font-size:2.96cqw;color:#F3F1EC}
+.r1 .shade{background:rgba(10,14,12,.6)}
+.r1 .tint{opacity:.35}
+.r1 .txt{left:13%;right:13%;top:50%;transform:translateY(-50%);color:#F1F3EC;text-shadow:0 0.4cqw 3cqw rgba(0,0,0,.75)}
+.r1 .ttl{font-family:var(--serif);font-size:7.6cqw;line-height:1.08;letter-spacing:-.01em}
+/* cover reels kartu malam: judul saja, rata kiri (aturan teks reels) */
+.rc .txt{left:13%;right:13%;top:50%;transform:translateY(-50%)}
+.rc .main{font-family:var(--serif);font-size:7.2cqw;line-height:1.1;letter-spacing:-.01em}
+/* post hipotetis dari slider posting lanjut */
+.baru .txt{left:0;right:0;top:50%;transform:translateY(-50%);align-items:center;font-family:var(--mono);font-size:6cqw;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.baru::before{content:"";position:absolute;inset:4cqw;border:1px dashed currentColor;opacity:.45;z-index:2}
+.ico{position:absolute;top:4cqw;right:4cqw;width:8cqw;height:8cqw;z-index:3;filter:drop-shadow(0 0 2px rgba(0,0,0,.4))}
+
+/* ---------- kontrol ---------- */
+.controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ctl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;padding:6px 12px;font-size:.88rem;background:var(--surface)}
+.seg label+label span{border-left:1px solid var(--line)}
+.seg input:checked+span{background:var(--accent);color:var(--surface)}
+.seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:-4px}
+.hint{font-size:.85rem;color:var(--muted);max-width:60ch}
+
+/* ---------- kartu opsi ---------- */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr));gap:20px}
+.opt{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:18px;align-items:start}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.tile{position:relative;min-width:0;container-type:inline-size}
+.tile .no{position:absolute;left:4cqw;bottom:4cqw;z-index:3;font:500 9cqw/1 var(--mono);color:#fff;background:rgba(0,0,0,.45);padding:1.5cqw 2.5cqw;border-radius:2cqw}
+.info{display:flex;flex-direction:column;gap:10px;min-width:0}
+.info .tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.info dl{margin:0;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.info dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.info dd{margin:0}
+.pick{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:.92rem;margin-top:2px}
+.pick input{accent-color:var(--accent);width:18px;height:18px}
+@media (max-width:620px){ .opt{grid-template-columns:1fr} .opt .grid{max-width:340px} }
+
+/* ---------- pilihan ---------- */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px}
+textarea{width:100%;min-height:84px;font:inherit;font-size:.92rem;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;resize:vertical}
+textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.out{font-family:var(--mono);font-size:.82rem;background:var(--tag);border-radius:6px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;user-select:all}
+button{font:600 .92rem var(--sans);background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ok{font-size:.85rem;color:var(--accent)}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px;font-size:.92rem}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)} th{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+tr:last-child td{border-bottom:0} td:first-child{color:var(--muted);white-space:nowrap}
+</style>
+
+<div class="wrap p-sage">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · F4 posts-system · opsi susunan grid · v2 · 12 Okt 2026</span>
+  <h1>Opsi susunan grid feed</h1>
+  <p class="lede">Isi 12 post sama dengan mockup v6 (judul, topik, edukasi 6 dari 12, reels 7). Yang diubah cuma posisi di grid. Di A dan C satu post ganti jenis; di A2 foto K2 cangkir diganti foto terang. Kunci kerapian di sini adalah letak post terang: footage reels dan foto K2 gelap menyatu, jadi kartu terang (dan foto terang di A2) yang membentuk pola.</p>
+  <div class="chips"><span class="chip">reels 7/12 di semua opsi</span><span class="chip edu">edukasi 6/12 di semua opsi</span><span class="chip">grid profil 3:4</span><span class="chip">mockup v6 tidak diubah</span></div>
+</header>
+
+<div class="controls">
+  <div class="ctl"><span class="k">Cover reels</span>
+    <div class="seg" role="radiogroup" aria-label="Cover reels">
+      <label><input type="radio" name="cover" id="cover-foto" value="foto" checked><span>Foto footage</span></label>
+      <label><input type="radio" name="cover" id="cover-kartu" value="kartu"><span>Kartu malam</span></label>
+    </div></div>
+  <div class="ctl"><span class="k">Posting lanjut</span>
+    <div class="seg" role="radiogroup" aria-label="Jumlah post baru">
+      <label><input type="radio" name="lanjut" id="lanjut-0" value="0" checked><span>0</span></label>
+      <label><input type="radio" name="lanjut" id="lanjut-1" value="1"><span>+1</span></label>
+      <label><input type="radio" name="lanjut" id="lanjut-2" value="2"><span>+2</span></label>
+      <label><input type="radio" name="lanjut" id="lanjut-3" value="3"><span>+3</span></label>
+    </div></div>
+  <p class="hint">Posting lanjut menambah post baru di kiri atas mengikuti siklus tiap opsi (kotak garis putus). Dari sini kelihatan pola mana yang tetap rapi setelah grid bergeser.</p>
+</div>
+
+<section>
+  <h2>A dan A2</h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>A · Kolom tengah</th><th>A2 · Kolom tengah K1 + K2 terang</th></tr></thead>
+    <tbody>
+      <tr><td>Campuran per 12 post</td><td>R1 7 · K1 4 · K2 1</td><td>R1 7 · K1 3 · K2 2 (sama dengan ACC)</td></tr>
+      <tr><td>Kolom tengah</td><td>4 kartu teks terang</td><td>3 kartu teks + 1 foto terang, bergantian</td></tr>
+      <tr><td>Kolom samping</td><td>7 reels + K2 cangkir gelap</td><td>7 reels + K2 HP gelap (posisi bebas, jangan 2 K2 berurutan)</td></tr>
+      <tr><td>Isi 12 post</td><td>K2 HP diubah jadi kartu tunggal</td><td>Sama persis dengan v6; cuma foto K2 cangkir diganti foto terang</td></tr>
+      <tr><td>Yang perlu disiapkan</td><td>Tidak ada (layout sudah ada di style v1)</td><td>Foto terang asli + layout K2 terang di style v2</td></tr>
+      <tr><td>Dasar</td><td>PENALARAN (susunan grid)</td><td>PENALARAN (susunan grid) + KANDIDAT: 5 dari 8 K2 winner @littleplumpoetry cover-nya abu terang (DaIua3plc7u, Da-2LAxFepr, DcjZhFrFXL5, DZfjYYDlW8a, Dak819_z4Zz), 1 akun</td></tr>
+      <tr><td>Kalau mau K2 lebih banyak</td><td>Reels turun di bawah 60%</td><td>Kolom tengah jadi K1 2 + K2 terang 2: K2 3, reels tetap 7</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="opts" id="opts"></div>
+</section>
+
+<section>
+  <h2>Pilihanmu</h2>
+  <div class="box">
+    <label class="k" for="catatan">Catatan (opsional)</label>
+    <textarea id="catatan" placeholder="Misal: pakai opsi A, tapi K2 cangkir tetap ada"></textarea>
+    <div class="out" id="out"></div>
+    <div class="row"><button type="button" id="salin">Salin pilihan</button><span class="ok" id="okmsg" hidden>Tersalin. Tempel di chat.</span></div>
+  </div>
+  <div class="box">
+    <span class="k">Catatan</span>
+    <ul class="tight">
+      <li><b>Dasar:</b> susunan grid di semua opsi adalah PENALARAN desain. Belum ada data benchmark soal susunan grid profil, jadi belum bisa disebut terbukti.</li>
+      <li><b>Cover reels:</b> "Foto footage" mengikuti R1 yang terbukti di benchmark. "Kartu malam" adalah cover custom yang diunggah terpisah; lebih rapi di grid, tapi belum ada bukti di benchmark.</li>
+      <li><b>Siklus:</b> kartu terang tiap post ke-3 selalu membentuk kolom lurus, tiap post ke-4 selalu membentuk garis miring. Pola tanpa siklus pendek (v6 dan bingkai) cuma utuh di hari tertentu.</li>
+      <li><b>K2 terang:</b> foto cangkir terang di A2 placeholder Unsplash (engin akyurt). Teks "dia" (serif miring) di cangkir kiri, "aku" (sans) di kopi gelap kanan, mengikuti pola teks di objek.</li>
+      <li>Foto masih placeholder Unsplash; keyword CTA masih <code>[KEYWORD]</code>.</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+var P='unsplash/unsplash_';
+var IMG={cangkir:P+'1gmOE-D8vrs_dua-cangkir_grain.jpg',hp:P+'9UfOQD2aZSQ_hp-meja_grain.jpg',hujan:P+'TQpBE7XdRyU_hujan-jendela_grain.jpg',lampu:P+'PvQtCNm4teI_lampu-jalan_grain.jpg',kamar:P+'F2SrBdv9swk_kamar-lampu_grain.jpg',
+ kasur:P+'94ivzugZz8w_hp-kasur_grain.jpg',bokeh:P+'u7PJMJoDYdg_bokeh-kota_grain.jpg',jalan:P+'eYVT9fqRUFY_jalan-basah_grain.jpg',cahaya:P+'sgNc8aY6Z7E_cahaya-hp_grain.jpg',terang:P+'A7kC-B6YFO4_mug-bayangan_grain.jpg'};
+var ICO={car:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="14" height="14" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M3 7v12a2 2 0 0 0 2 2h12" fill="none" stroke="#fff" stroke-width="2"/></svg>',
+ reel:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/></svg>'};
+var WM='<div class="wm">securewithaldo</div>';
+function k1(o){
+  var lab=o.lab?'<div class="lab">'+o.lab+'</div>':'';
+  var main=Array.isArray(o.t)?o.t.map(function(x){return '<p>'+x+'</p>'}).join(''):'<p>'+o.t+'</p>';
+  return '<div class="sl '+o.tone+' t-'+o.kind+' r34">'+(o.edu?'<div class="edu">catatan aldo</div>':'')+'<div class="txt">'+lab+'<div class="main">'+main+'</div></div>'+WM+'</div>';
+}
+function r1(o,cover){
+  if(cover==='kartu') return '<div class="sl dark rc r34"><div class="txt"><div class="main"><p>'+o.title+'</p></div></div>'+WM+'</div>';
+  return '<div class="sl photo r1 r34"><img src="'+IMG[o.img]+'" alt=""><div class="tint"></div><div class="shade"></div><div class="txt"><p class="ttl">'+o.title+'</p></div></div>';
+}
+var R={
+ avo:{img:'jalan',title:'3 hal yang dia lakuin pas butuh jarak, dan artinya buat aku',edu:1},
+ kepala:{img:'kasur',title:'3 hal yang ada di kepalaku jam 1 pagi pas dia belum bales'},
+ tenang:{img:'hujan',title:'3 hal yang aku lakuin pas chatnya cuma dibaca',edu:1},
+ kalimat:{img:'bokeh',title:'4 kalimat buat minta kepastian tanpa interogasi',edu:1},
+ pola:{img:'lampu',title:'3 hal yang dulu aku kira wajar, ternyata bikin aku makin kecil',edu:1},
+ secure:{img:'kamar',title:'2 hal yang berubah sejak aku belajar nggak langsung ngejar'},
+ space:{img:'cahaya',title:'"Butuh space" ternyata nggak selalu berarti mau pergi',edu:1}
+};
+// tiap post: render(cover) + nada (terang/gelap) + jenis
+var POST={
+ t2:{f:'K1',light:1,edu:1,ico:'car',r:function(){return k1({tone:'light',kind:'cover',lab:'pas dia mulai dingin',t:'Kenapa makin aku ngejar, <b>dia makin menjauh?</b>',edu:true})}},
+ t5:{f:'K1',light:1,ico:'',r:function(){return k1({tone:'light',kind:'note',t:['Kalau aku harus terus jadi versi yang lebih kecil biar dia nyaman,','<b>itu bukan rumah.</b> Itu tempat aku nahan napas.']})}},
+ here:{f:'K1',light:1,ico:'car',r:function(){return k1({tone:'light',kind:'cover',lab:'buat jam 1 pagi',t:'Aku bikin sesuatu buat momen pas kepalamu mulai lari. <b>Namanya HERE.</b>'})}},
+ hpK:{f:'K1',light:1,ico:'',r:function(){return k1({tone:'light',kind:'note',t:['belum ada balasan.','<b>dan aku masih utuh.</b>']})}},
+ cangkir:{f:'K2',ico:'car',r:function(){return '<div class="sl photo k2 r34"><img src="'+IMG.cangkir+'" alt="Dua cangkir kopi dari atas"><div class="tint"></div><div class="shade"></div><div class="say a">kamu kenapa sih? gitu aja dipikirin</div><div class="say b">aku bukan butuh dijelasin semuanya. aku cuma butuh tahu kita baik baik aja</div></div>'}},
+ cangkirT:{f:'K2',light:1,ico:'car',r:function(){return '<div class="sl photo k2t r34"><img src="'+IMG.terang+'" alt="Dua cangkir kopi dari atas di meja terang"><div class="in a">kamu kenapa sih? gitu aja dipikirin</div><div class="in b">aku cuma butuh tahu kita baik baik aja</div></div>'}},
+ hp:{f:'K2',ico:'',r:function(){return '<div class="sl photo k2hp r34"><img src="'+IMG.hp+'" alt="HP di meja kayu"><div class="tint" style="opacity:.3"></div><div class="scr">belum ada balasan.<br><br>dan aku masih utuh.</div></div>'}}
+};
+Object.keys(R).forEach(function(k){var o=R[k];POST[k]={f:'R1',edu:o.edu,ico:'reel',r:function(c){return r1(o,c)}}});
+
+var OPTS=[
+ {id:'v6',tag:'Pembanding',name:'Zigzag (mockup v6 sekarang)',period:12,
+  order:['avo','t2','kepala','tenang','cangkir','kalimat','t5','pola','hp','secure','here','space'],
+  pola:'Kartu terang di 2, 7, 11. K2 di 5 dan 9. Jeda terang tersebar acak.',
+  plus:'Sudah di-ACC, campuran format sesuai rencana.',
+  minus:'Tidak punya siklus pendek. Tiap post baru, bentuknya berubah dan susah dijaga.'},
+ {id:'A2',tag:'Rekomendasi baru',name:'A2 · Kolom tengah K1 + K2 terang',period:3,
+  order:['avo','t2','kepala','tenang','cangkirT','kalimat','hp','t5','pola','secure','here','space'],
+  pola:'Sama dengan A: post terang tiap ke-3 jadi kolom lurus. Bedanya kolom tengah diisi K1 dan K2 foto terang bergantian; K2 gelap (HP) bebas di kolom samping.',
+  plus:'Campuran kembali ke yang di-ACC (K1 3 · K2 2), isi 12 post sama persis dengan v6. Kolom tengah tidak monoton karena selang kartu dan foto.',
+  minus:'Butuh foto terang dan layout K2 terang baru di style (masuk v2). K2 terang baru KANDIDAT: polanya dari 1 akun (@littleplumpoetry).',
+  ganti:'K2 cangkir pakai foto terang di kolom tengah; K2 HP tetap gelap di samping'},
+ {id:'A',tag:'Pilihan sebelumnya',name:'A · Kolom tengah',period:3,
+  order:['avo','t2','kepala','tenang','t5','kalimat','cangkir','hpK','pola','secure','here','space'],
+  pola:'Kartu terang tiap post ke-3, jadi selalu satu kolom lurus. Siklus posting: kartu, reels, reels, ulang.',
+  plus:'Paling teratur dan paling gampang dijaga. Kolomnya bergeser tiap posting tapi tetap lurus (coba +1, +2).',
+  minus:'K2 HP diganti kartu tunggal terang (teks sama), jadi K1 4 · K2 1. Jadwal kaku: tiap post ke-3 wajib kartu.',
+  ganti:'K2 HP → K1 kartu tunggal'},
+ {id:'B',tag:'Campuran tetap',name:'B · Tangga diagonal',period:4,
+  order:['t2','avo','kepala','tenang','t5','kalimat','cangkir','pola','here','secure','hp','space'],
+  pola:'Kartu terang tiap post ke-4, jadi garis miring yang terus menurun. Siklus: kartu, lalu 3 reels/K2.',
+  plus:'Campuran format sama persis dengan yang di-ACC (K1 3 · K2 2). Tetap teratur, lebih santai dari kolom.',
+  minus:'Ada baris yang gelap penuh (baris 4 di sini). Kartu terang lebih jarang, grid terasa lebih gelap.'},
+ {id:'C',tag:'Simetris',name:'C · Bingkai sudut',period:12,
+  order:['t2','avo','t5','kepala','cangkir','tenang','kalimat','pola','secure','hpK','space','here'],
+  pola:'Kartu terang di 4 sudut, K2 cangkir di tengah. Paling simetris kalau 12 post dilihat sekaligus.',
+  plus:'Kesan paling tertata di hari batch 12 post lengkap.',
+  minus:'Tidak punya siklus pendek: satu post baru langsung merusak bingkainya. K1 4 · K2 1 (K2 HP jadi kartu tunggal).',
+  ganti:'K2 HP → K1 kartu tunggal'}
+];
+OPTS=['A2','A','v6','B','C'].map(function(id){return OPTS.filter(function(o){return o.id===id})[0]});
+// nada per urutan waktu: t=0 post tertua (posisi 12). Pola terang diulang dengan periode opsi.
+OPTS.forEach(function(o){
+  o.lightT={};
+  o.order.forEach(function(k,i){if(POST[k].light){o.lightT[(12-(i+1))%o.period]=1}});
+});
+function mix(o){var c={R1:0,K1:0,K2:0},e=0;o.order.forEach(function(k){c[POST[k].f]++;if(POST[k].edu)e++});return {c:c,e:e}}
+
+function grid(o,cover,n){
+  var h='';
+  for(var p=1;p<=12;p++){
+    var t=11+n-(p-1);
+    if(t>=12){
+      var L=o.lightT[t%o.period];
+      h+='<div class="tile"><div class="sl '+(L?'light':'dark')+' baru r34"><div class="txt"><p>'+(L?'kartu':'reels')+' baru</p></div></div><span class="no">'+p+'</span></div>';
+    } else {
+      var k=o.order[12-t-1], q=POST[k];
+      h+='<div class="tile">'+q.r(cover)+(q.ico?ICO[q.ico]:'')+'<span class="no">'+p+'</span></div>';
+    }
+  }
+  return h;
+}
+
+var state={opsi:'A2',cover:'foto',lanjut:0,catatan:''};
+try{var s=JSON.parse(localStorage.getItem('swa-opsi-grid')||'{}');for(var x in s){if(x in state)state[x]=s[x]}}catch(e){}
+function save(){try{localStorage.setItem('swa-opsi-grid',JSON.stringify(state))}catch(e){}}
+
+function build(){
+  document.getElementById('opts').innerHTML=OPTS.map(function(o){
+    var m=mix(o);
+    return '<article class="opt" id="opt-'+o.id+'"><div class="grid" data-g="'+o.id+'"></div><div class="info">'+
+      '<span class="tag">'+o.tag+'</span><h3>'+o.name+'</h3>'+
+      '<div class="chips"><span class="chip">R1 '+m.c.R1+' · K1 '+m.c.K1+' · K2 '+m.c.K2+'</span><span class="chip edu">edukasi '+m.e+'/12</span><span class="chip">siklus '+(o.period===12?'tidak ada':o.period+' post')+'</span></div>'+
+      '<dl><div><dt>Pola</dt><dd>'+o.pola+'</dd></div><div><dt>Kelebihan</dt><dd>'+o.plus+'</dd></div><div><dt>Kekurangan</dt><dd>'+o.minus+'</dd></div></dl>'+
+      '<label class="pick"><input type="radio" name="opsi" id="pilih-'+o.id+'" value="'+o.id+'"> Pilih opsi ini</label></div></article>';
+  }).join('');
+}
+function render(){
+  OPTS.forEach(function(o){
+    document.querySelector('[data-g="'+o.id+'"]').innerHTML=grid(o,state.cover,state.lanjut);
+    document.getElementById('opt-'+o.id).classList.toggle('sel',state.opsi===o.id);
+    document.getElementById('pilih-'+o.id).checked=state.opsi===o.id;
+  });
+  document.getElementById('cover-'+state.cover).checked=true;
+  document.getElementById('lanjut-'+state.lanjut).checked=true;
+  var o=OPTS.filter(function(x){return x.id===state.opsi})[0], m=mix(o);
+  document.getElementById('out').textContent='Opsi grid feed securewithaldo: '+o.name+' (R1 '+m.c.R1+' · K1 '+m.c.K1+' · K2 '+m.c.K2+(o.ganti?'; '+o.ganti:'')+')\nCover reels: '+(state.cover==='foto'?'foto footage':'kartu malam')+(state.catatan.trim()?'\nCatatan: '+state.catatan.trim():'');
+  save();
+}
+build();
+document.getElementById('catatan').value=state.catatan;
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.name==='opsi')state.opsi=t.value;
+  else if(t.name==='cover')state.cover=t.value;
+  else if(t.name==='lanjut')state.lanjut=+t.value;
+  else return;
+  render();
+});
+document.getElementById('catatan').addEventListener('input',function(e){state.catatan=e.target.value;render()});
+document.getElementById('salin').addEventListener('click',function(){
+  var txt=document.getElementById('out').textContent, ok=document.getElementById('okmsg');
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('out'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  try{navigator.clipboard.writeText(txt).then(function(){ok.textContent='Tersalin. Tempel di chat.';ok.hidden=false},function(){sel();ok.textContent='Teks sudah diblok, tekan Ctrl+C.';ok.hidden=false})}catch(e){sel();ok.textContent='Teks sudah diblok, tekan Ctrl+C.';ok.hidden=false}
+});
+render();
+})();
+</script>

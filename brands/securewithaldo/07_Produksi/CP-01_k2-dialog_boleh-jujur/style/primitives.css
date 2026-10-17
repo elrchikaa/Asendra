@@ -1,0 +1,200 @@
+/* =====================================================================
+   CAROUSEL STUDIO — PRIMITIVES  (v1.1)
+   Kerangka layout & media yang BELUM ADA di kebanyakan style:
+   gambar sebagai konten, teks di atas gambar, split, grid galeri, kolase,
+   mockup (HP, browser, screenshot), kartu testimoni, rating, panorama.
+
+   - Semua kelas berawalan p-  -> tidak bentrok dengan komponen style.
+   - Hanya pakai token kontrak (--role-*, --font-*) + variabel lokal p-*.
+     Jadi otomatis ikut warna/font style mana pun (dan brand-skin).
+   - Urutan link: base.css -> primitives.css -> tokens.css -> (brand-skin.css) -> components.css
+     (komponen style boleh menimpa tampilan primitive).
+   ===================================================================== */
+
+/* ---------- GAMBAR DASAR ----------
+   <img class="p-img" src="assets/x.jpg" style="--fx:50%; --fy:30%">   (--fx/--fy = titik fokus crop) */
+.p-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--fx, 50%) var(--fy, 50%); }
+.p-img.contain { object-fit: contain; background: var(--p-media-bg, color-mix(in srgb, var(--role-dark) 8%, transparent)); }
+.p-missing { position: relative; min-height: 120px; padding: 24px; font: 700 30px/1.3 Consolas, monospace; color: var(--role-dark); background:
+  repeating-linear-gradient(45deg, color-mix(in srgb, var(--role-muted) 35%, transparent) 0 18px, color-mix(in srgb, var(--role-muted) 18%, transparent) 18px 36px) !important; }
+
+/* ---------- BINGKAI MEDIA (gambar di dalam layout) ----------
+   <figure class="p-frame" style="--ar:4/5; --r:24px"><img class="p-img" src="..."><figcaption>...</figcaption></figure> */
+.p-frame { position: relative; margin: 0; overflow: hidden; border-radius: var(--r, 0); aspect-ratio: var(--ar, auto);
+  background: color-mix(in srgb, var(--role-muted) 25%, transparent); }
+.p-frame > .p-img { position: absolute; inset: 0; }
+.p-frame.flow > .p-img { position: static; height: auto; }          /* tinggi ikut gambar */
+.p-caption { font-family: var(--font-text); font-size: var(--p-cap-size, 26px); line-height: 1.35; margin-top: 16px; opacity: .8; }
+.p-frame > figcaption.overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 26px; margin: 0;
+  color: var(--role-light); background: linear-gradient(transparent, color-mix(in srgb, var(--role-dark) 75%, transparent)); }
+
+/* ---------- FULL-BLEED + TEKS DI ATAS GAMBAR ----------
+   <section class="slide p-bleed-slide"> <img class="p-bleed p-img" src="..."> <div class="p-scrim bottom"></div> ...teks... </section>
+   Teks di atas gambar WAJIB pakai salah satu: .p-scrim / .p-textbox / .p-shadow  (keterbacaan) */
+.p-bleed { position: absolute !important; inset: 0; z-index: 0 !important; width: 100%; height: 100%; }
+.p-bleed-slide > :not(.p-bleed):not(.p-scrim):not(.p-pano-layer) { position: relative; z-index: 2; }
+.p-scrim { position: absolute !important; inset: 0; z-index: 1 !important; pointer-events: none;
+  --sc: var(--p-scrim-color, var(--role-dark)); --k: var(--p-scrim, 72%); }
+.p-scrim.bottom { background: linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--sc) var(--k), transparent) 100%); }
+.p-scrim.top    { background: linear-gradient(0deg,   transparent 35%, color-mix(in srgb, var(--sc) var(--k), transparent) 100%); }
+.p-scrim.both   { background: linear-gradient(180deg, color-mix(in srgb, var(--sc) calc(var(--k) * .8), transparent) 0%, transparent 35%, transparent 55%, color-mix(in srgb, var(--sc) var(--k), transparent) 100%); }
+.p-scrim.left   { background: linear-gradient(90deg,  color-mix(in srgb, var(--sc) var(--k), transparent) 0%, transparent 70%); }
+.p-scrim.full   { background: color-mix(in srgb, var(--sc) calc(var(--k) * .7), transparent); }
+.p-scrim.light  { --sc: var(--p-scrim-color, var(--role-light)); }
+.p-textbox { display: inline-block; padding: 18px 26px; border-radius: var(--p-box-r, 10px);
+  background: var(--p-box-bg, var(--role-light)); color: var(--p-box-fg, var(--role-dark)); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.p-highlight { padding: .04em .18em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  background: var(--p-hl-bg, var(--role-accent)); color: var(--p-hl-fg, var(--role-light)); }
+.p-shadow { text-shadow: 0 2px 18px color-mix(in srgb, var(--role-dark) 70%, transparent), 0 1px 3px color-mix(in srgb, var(--role-dark) 60%, transparent); }
+.p-on-image { color: var(--role-light); }
+/* posisi blok teks di slide full-bleed */
+.p-pos { position: absolute !important; left: var(--pad-x, 80px); right: var(--pad-x, 80px); z-index: 2; }
+.p-pos.top { top: calc(var(--pad-top, 80px) + 60px); } .p-pos.bottom { bottom: calc(var(--pad-bottom, 80px) + 70px); }
+.p-pos.center { top: 50%; transform: translateY(-50%); } .p-pos.center.mid { text-align: center; }
+
+/* ---------- SPLIT (gambar + teks) ----------
+   <div class="p-split" style="--ratio:1fr 1fr"> <div>...</div> <div>...</div> </div>     .v = atas/bawah */
+.p-split { display: grid; grid-template-columns: var(--ratio, 1fr 1fr); gap: var(--gap, 32px); flex: 1 1 auto; min-height: 0; }
+.p-split.v { grid-template-columns: 1fr; grid-template-rows: var(--ratio, 1fr 1fr); }
+.p-split > * { min-width: 0; min-height: 0; }
+.p-split.edge { margin: 0 calc(var(--pad-x, 80px) * -1); }            /* tembus margin kiri-kanan */
+
+/* ---------- GRID GALERI & KOLASE ----------
+   <div class="p-grid" style="--cols:2; --rows:2"> <figure class="p-frame">...</figure> ... </div> */
+.p-grid { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); grid-template-rows: repeat(var(--rows, 2), 1fr);
+  gap: var(--gap, 18px); flex: 1 1 auto; min-height: 0; }
+.p-grid > .p-frame { aspect-ratio: auto; height: 100%; }
+.p-grid .span-2 { grid-column: span 2; } .p-grid .row-2 { grid-row: span 2; }
+.p-collage { position: relative; flex: 1 1 auto; min-height: 0; }
+.p-collage > .p-frame { position: absolute; box-shadow: 0 30px 60px -25px color-mix(in srgb, var(--role-dark) 55%, transparent); }
+.p-polaroid { padding: 18px 18px 64px; background: var(--p-pol-bg, #fff); border-radius: 6px; }
+.p-polaroid > .p-img { position: static; height: auto; aspect-ratio: var(--ar, 1/1); }
+.p-polaroid figcaption { position: absolute; left: 18px; right: 18px; bottom: 16px; font-family: var(--font-accent); font-size: 30px; color: var(--role-dark); text-align: center; }
+
+/* ---------- BEFORE / AFTER ----------
+   <div class="p-ba"> <figure class="p-frame"><img ...><span class="p-tag">Before</span></figure> <figure ...>After</figure> </div> */
+.p-ba { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap, 14px); flex: 1 1 auto; min-height: 0; }
+.p-ba.v { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+.p-ba > .p-frame { height: 100%; aspect-ratio: auto; }
+.p-tag { position: absolute; z-index: 3; top: 20px; left: 20px; padding: 10px 20px; border-radius: 999px;
+  font-family: var(--font-text); font-weight: 700; font-size: 22px; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--p-tag-bg, var(--role-light)); color: var(--p-tag-fg, var(--role-dark)); }
+.p-tag.accent { background: var(--role-accent); color: var(--role-light); }
+.p-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; transform: translateX(-50%); background: var(--role-light); z-index: 3; }
+
+/* ---------- MOCKUP ----------
+   HP:      <div class="p-phone"><img class="p-img" src="screenshot.png"></div>
+   Browser: <div class="p-browser"><i></i><i></i><i></i><img class="p-img" src="..."></div>
+   Shot:    <figure class="p-shot"><img class="p-img" src="screenshot.png"></figure>   (screenshot ber-bingkai + bayangan) */
+.p-phone { position: relative; width: var(--pw, 420px); aspect-ratio: 9/19.5; border-radius: 64px; padding: 16px;
+  background: var(--p-phone-body, #111); box-shadow: 0 40px 80px -30px color-mix(in srgb, var(--role-dark) 70%, transparent); }
+.p-phone > .p-img { border-radius: 50px; }
+.p-phone::before { content: ""; position: absolute; z-index: 2; top: 30px; left: 50%; width: 110px; height: 30px; transform: translateX(-50%); border-radius: 20px; background: var(--p-phone-body, #111); }
+.p-browser { position: relative; border-radius: 22px; overflow: hidden; padding-top: 52px; background: var(--p-browser-bar, color-mix(in srgb, var(--role-dark) 10%, var(--role-light)));
+  box-shadow: 0 30px 70px -30px color-mix(in srgb, var(--role-dark) 60%, transparent); }
+.p-browser > i { position: absolute; top: 20px; width: 14px; height: 14px; border-radius: 50%; background: color-mix(in srgb, var(--role-dark) 30%, transparent); }
+.p-browser > i:nth-child(1) { left: 22px; } .p-browser > i:nth-child(2) { left: 46px; } .p-browser > i:nth-child(3) { left: 70px; }
+.p-browser > .p-img { height: auto; }
+.p-shot { margin: 0; border-radius: 22px; overflow: hidden; border: 2px solid color-mix(in srgb, var(--role-dark) 12%, transparent);
+  box-shadow: 0 30px 60px -28px color-mix(in srgb, var(--role-dark) 55%, transparent); background: #fff; }
+.p-shot > .p-img { height: auto; }
+
+/* ---------- TESTIMONI / REVIEW ----------
+   <div class="p-review"> <div class="p-stars" style="--score:4.5"></div> <blockquote>...</blockquote>
+     <div class="p-person"><img class="p-avatar p-img" src="..."><div><b>Nama</b><small>Kota · produk</small></div></div> </div> */
+.p-review { display: flex; flex-direction: column; gap: 28px; padding: var(--p-card-pad, 52px); border-radius: var(--p-card-r, 28px);
+  background: var(--p-card-bg, var(--role-light)); color: var(--p-card-fg, var(--role-dark)); }
+.p-review blockquote { margin: 0; font-family: var(--font-display); font-size: var(--p-quote-size, 50px); line-height: 1.2; }
+.p-stars { --size: 44px; width: calc(var(--size) * 5); height: var(--size);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 1.8l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.9l-6.4 3.5 1.4-7.1-5.3-5 7.2-.9z'/></svg>") 0 0 / var(--size) var(--size) repeat-x;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 1.8l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.9l-6.4 3.5 1.4-7.1-5.3-5 7.2-.9z'/></svg>") 0 0 / var(--size) var(--size) repeat-x;
+  background: linear-gradient(90deg, var(--p-star, var(--role-accent)) calc(var(--score, 5) / 5 * 100%), color-mix(in srgb, var(--role-muted) 45%, transparent) 0); }
+.p-person { display: flex; align-items: center; gap: 22px; font-family: var(--font-text); font-size: 30px; line-height: 1.3; }
+.p-person small { display: block; font-size: 24px; opacity: .7; }
+.p-avatar { width: 92px !important; height: 92px !important; border-radius: 50%; flex: none; }
+.p-bubble { max-width: 82%; padding: 24px 32px; border-radius: 30px; font-family: var(--font-text); font-size: 32px; line-height: 1.35;
+  background: color-mix(in srgb, var(--role-dark) 8%, var(--role-light)); color: var(--role-dark); }
+.p-bubble.me { align-self: flex-end; background: var(--role-accent); color: var(--role-light); }
+
+/* ---------- LANGKAH / NOMOR / PROGRES ---------- */
+.p-num { font-family: var(--font-display); font-weight: 800; font-size: var(--p-num-size, 160px); line-height: .85; color: var(--role-accent); }
+.p-progress { display: flex; gap: 10px; } .p-progress > i { flex: 1; height: 8px; border-radius: 8px; background: color-mix(in srgb, currentColor 22%, transparent); }
+.p-progress > i.on { background: var(--role-accent); }
+.p-check { list-style: none; display: flex; flex-direction: column; gap: 22px; padding: 0; }
+.p-check li { display: flex; gap: 22px; align-items: flex-start; font-size: 36px; line-height: 1.35; }
+.p-check li::before { content: "✓"; flex: none; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+  font-weight: 800; font-size: 32px; background: var(--role-accent); color: var(--role-light); }
+.p-check li.no::before { content: "✕"; background: color-mix(in srgb, var(--role-muted) 70%, transparent); }
+
+/* ---------- PANORAMA / SEAMLESS ----------
+   Lihat engine.js. Konten .p-pano-src digambar selebar N slide; tiap .p-pano-part menampilkan potongannya.
+   Di dalam .p-pano-src pakai posisi absolut dalam px (0 .. N*1080). */
+.p-pano-src { display: none !important; }
+.p-pano-layer { position: absolute !important; top: 0; height: 100%; z-index: 0 !important;
+  width: calc(var(--w) * var(--pano-n)); left: calc(var(--w) * var(--pano-i) * -1); }
+.p-pano-layer > * { position: absolute; }
+.p-pano-part > :not(.p-pano-layer):not(.eng-label) { position: relative; z-index: 2; }
+
+/* =====================================================================
+   v1.2 — KOMPOSIT: objek (PNG transparan, mis. hasil AI) ditempel ke foto/panorama
+   supaya terasa SATU adegan, bukan dua gambar terpisah. Lihat WORKFLOW §5.8.
+   Semua kelas ini posisinya diatur inline (left/top/width/height px), biasanya di dalam .p-pano-src
+   atau di slide .p-bleed-slide. Urutan tumpuk yang benar (bawah -> atas):
+     latar -> .p-glow-pool / .p-lit (cahaya di tanah) -> .p-cast (bayangan) -> .p-obj (objek)
+     -> .p-ground (tambalan rumput/tanah menutup kaki/dasar) -> .p-mist (kabut) -> .p-halo (cahaya sumber)
+   Kesalahan yang pernah terjadi: lapisan tanah/cahaya di ATAS objek -> kaki objek hilang.
+   ===================================================================== */
+/* grading objek ke cahaya adegan. Atur lewat variabel, default = adegan malam dingin */
+.p-obj { filter: brightness(var(--obj-b, .78)) saturate(var(--obj-s, .7)) contrast(var(--obj-c, 1.04))
+         hue-rotate(var(--obj-h, 0deg)) sepia(var(--obj-sepia, 0))
+         drop-shadow(0 14px 18px color-mix(in srgb, var(--role-dark) 45%, transparent)); }
+.p-obj.day   { --obj-b: 1; --obj-s: .95; --obj-c: 1; }
+.p-obj.warm  { --obj-sepia: .25; --obj-h: -8deg; }
+.p-obj.cool  { --obj-sepia: .45; --obj-h: 188deg; --obj-s: .55; --obj-b: .55; --obj-c: 1.12; }  /* benda warna hangat dipaksa ke malam biru */
+.p-obj.solid { opacity: 1 !important; }   /* objek AI kadang semi-transparan dari generator: perbaiki alpha di file, jangan pakai opacity < 1 */
+/* bayangan jatuh = salinan objek yang sama, dihitamkan + dimiringkan. Pakai <img> yang sama dengan .p-cast */
+.p-cast { filter: brightness(0) blur(var(--cast-blur, 5px)); opacity: var(--cast-o, .42);
+          transform-origin: 50% 100%; transform: skewX(var(--cast-skew, 50deg)) scaleY(var(--cast-len, -.3)); }
+.p-cast.flat { transform: translate(16px, 18px) scaleY(.9); --cast-blur: 7px; }
+/* tambalan latar: potongan gambar latar yang SAMA ditaruh di atas dasar objek (kaki "masuk" rumput/tanah).
+   style: background-image:url(assets/pano.jpg); background-size:<lebar latar>px <tinggi>px;
+          background-position:-<left>px -<top>px  (sama dengan posisi elemen ini di latar) */
+.p-ground { background-repeat: no-repeat;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 62%, #000 38%, transparent 100%);
+          mask-image: radial-gradient(ellipse 50% 50% at 50% 62%, #000 38%, transparent 100%); }
+/* tanah/rumput yang diterangi sumber cahaya (lentera, api, layar): potongan latar yang sama, dicerahkan & dihangatkan */
+.p-lit { background-repeat: no-repeat;
+  filter: brightness(var(--lit-b, 2.3)) sepia(.55) saturate(1.5) hue-rotate(-8deg) contrast(1.05);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 46% 42%, #000 0%, rgba(0,0,0,.6) 38%, transparent 78%);
+          mask-image: radial-gradient(ellipse 50% 50% at 46% 42%, #000 0%, rgba(0,0,0,.6) 38%, transparent 78%); }
+.p-glow-pool { border-radius: 50%; mix-blend-mode: screen; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--glow, #FFA54B) 55%, transparent) 0%, color-mix(in srgb, var(--glow, #FFA54B) 20%, transparent) 55%, transparent 100%); }
+.p-halo { border-radius: 50%; mix-blend-mode: screen; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--glow, #FFCD82) 75%, transparent) 0%, color-mix(in srgb, var(--glow, #FF963C) 28%, transparent) 32%, transparent 70%); }
+.p-mist { border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--mist, #96A5C3) 32%, transparent), transparent); }
+.p-dirt { border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--role-dark) 70%, transparent), transparent); }
+/* garis angin / gerak tipis (SVG path di dalamnya) */
+.p-wind { overflow: visible; filter: blur(.6px); pointer-events: none; }
+.p-wind path { fill: none; stroke: var(--wind, rgba(215,226,255,.2)); stroke-width: 2.5; stroke-linecap: round; }
+
+/* =====================================================================
+   v1.2 — DIAGRAM MENEMBUS SAMBUNGAN (pola spread-diagram, lihat formats/spread-diagram.md)
+   Slide kiri: .p-dbox (label) -> garis SVG .p-diag menembus tepi -> slide kanan: .p-hub (titik pusat)
+   -> cabang .p-diag .fan berujung .end -> .p-fan-item (teks utuh, tidak pernah terbelah).
+   Warna mengikuti --diag (default teks terang di foto gelap). Taruh di dalam .p-pano-src.
+   ===================================================================== */
+.p-diag { overflow: visible; pointer-events: none; }
+.p-diag path { fill: none; stroke: var(--diag, color-mix(in srgb, var(--role-light-2, #fff) 92%, transparent)); stroke-width: 3; stroke-linecap: round; }
+.p-diag .fan { stroke-width: 2.5; }
+.p-diag .end { fill: var(--diag, var(--role-light-2, #fff)); stroke: none; }
+.p-dbox { display: grid; place-items: center; text-align: center; border: 3px solid var(--diag, var(--role-light-2, #fff));
+  border-radius: var(--dbox-r, 24px); padding: 0 28px; background: color-mix(in srgb, var(--role-dark-2) 55%, transparent);
+  color: var(--diag, var(--role-light-2, #fff)); font-family: var(--font-display); font-weight: 900; letter-spacing: -.04em; }
+.p-hub { width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--diag-accent, var(--role-accent-on-dark));
+  border: 4px solid var(--role-dark);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--diag-accent, var(--role-accent-on-dark)) 35%, transparent), 0 0 26px color-mix(in srgb, var(--diag-accent, var(--role-accent-on-dark)) 70%, transparent); }
+.p-fan-item { text-align: left; color: var(--diag, var(--role-light-2, #fff)); font-family: var(--font-text);
+  text-shadow: 0 2px 18px color-mix(in srgb, var(--role-dark) 65%, transparent); }
+.p-fan-item b { display: block; font-weight: 900; font-size: .7em; letter-spacing: .08em; text-transform: uppercase; color: var(--diag-accent, var(--role-accent-on-dark)); margin-bottom: 10px; }

@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<title>CTA securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → kartu opsi CTA (gambar + aksi, kapan dipakai, bukti) → tanpa CTA → pilihan multi + salin. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf; --warn:#8a6a1f; --warn-soft:#f3ecd9;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;--warn:#e0c27a;--warn-soft:#332c1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;--warn:#e0c27a;--warn-soft:#332c1a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.5rem} h3{font-size:1.3rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:14px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;background:var(--tag);border-radius:4px;padding:2px 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card img{width:100%;height:auto;border-radius:4px;display:block}
+.card dl{margin:0;display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.card dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0}
+.st{font-family:var(--mono);font-size:.68rem;border-radius:3px;padding:1px 6px;white-space:nowrap}
+.st.t{background:var(--accent-soft);color:var(--accent)} .st.c{background:var(--warn-soft);color:var(--warn)} .st.n{background:var(--tag);color:var(--muted)}
+.pick{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.92rem;cursor:pointer}
+.pick input{accent-color:var(--accent);width:18px;height:18px}
+.card.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+code{font-family:var(--mono);font-size:.82em;background:var(--tag);border-radius:3px;padding:0 4px}
+textarea{width:100%;min-height:80px;font:inherit;font-size:.92rem;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;resize:vertical}
+.out{font-family:var(--mono);font-size:.82rem;background:var(--tag);border-radius:6px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;user-select:all}
+.go{font:600 .92rem var(--sans);background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+.go:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · style carousel v2 (draft) · opsi slide CTA · revisi 1 · 14 Okt 2026</span>
+  <h1>Satu slide terakhir, satu aksi</h1>
+  <p class="lede">Delapan opsi slide CTA untuk akhir carousel. Tiap slide cuma minta satu hal (Voice &amp; Copy Guide §4.3). Bukti diambil dari slide akhir 57 winner benchmark. Revisi 1: semua opsi disimpan (pilihanmu). Opsi 1 ajakan komen dipindah ke tengah dan diperbesar; opsi 8 teks diturunkan ke ruang kosong di atas objek. Semua sudah masuk draft style v2 (layout 09, 24 sampai 28).</p>
+  <div class="chips"><span class="chip">grain 60%</span><span class="chip">[KEYWORD] = daftar resmi belum ada</span><span class="chip">mockup HP = placeholder</span><span class="chip">cek otomatis: bersih</span></div>
+</header>
+
+<section>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Opsi 9 · Tanpa slide CTA</h2>
+    <p>Carousel berhenti di slide isi terakhir; ajakan cuma di caption. Ini pola paling umum di winner benchmark: littleplumpoetry 5, noteovt 3, sincere.emotion 3, sulichii 3 konten (14 konten, 4 akun) <span class="st t">TERBUKTI</span>. Cocok untuk carousel dialog objek dan kartu tunggal yang tujuannya dibagikan, bukan jualan.</p>
+    <label class="pick"><input type="checkbox" value="9 Tanpa slide CTA (ajakan di caption)" id="pick-9"> Pilih</label>
+  </div>
+</section>
+
+<section>
+  <h2>Pilihanmu</h2>
+  <div class="box">
+    <label class="k" for="catatan">Catatan (opsional)</label>
+    <textarea id="catatan" placeholder="Misal: opsi 2 pakai latar terang juga"></textarea>
+    <div class="out" id="out"></div>
+    <button type="button" class="go" id="salin">Salin pilihan</button><span class="eyebrow" id="okmsg" hidden></span>
+  </div>
+  <div class="box">
+    <span class="k">Catatan</span>
+    <ul class="tight">
+      <li>Aturan slide CTA standar Asendra tidak dipakai untuk securewithaldo (keputusanmu 12 Okt). Playbook CTA tetap jadi acuan umum: satu aksi, keyword di-highlight dan diulang di caption, rasanya undangan bukan jualan.</li>
+      <li>Keyword dan link belum ada. Semua contoh pakai <code>[KEYWORD]</code>; slide jual butuh daftar keyword resmi sebelum produksi.</li>
+      <li>Opsi 2 mengikuti playbook (slide CTA polos tanpa gambar, beda drastis dari slide sebelumnya). Opsi 1 dan 3 mengikuti benchmark (foto/mockup produk di slide akhir).</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+var O=[
+ ['01-komen-produk','1 · Komen KATA + produk','Komen keyword, dapat link HERE lewat DM','Jualan HERE (sales). Penutup carousel edukasi K1.','alexaubreypoetry 6 + sincere.emotion 2: 8 konten, 2 akun','t','layout v1 k1-produk'],
+ ['02-komen-polos','2 · Komen KATA, latar polos','Komen keyword','Jualan atau lead, kalau mau slide CTA terasa beda dari isi (playbook).','Pola komen terbukti (8 konten, 2 akun); latar polos dari playbook, belum ada di benchmark brand ini','t','baru'],
+ ['03-link-bio','3 · Link di bio + produk','Klik link di bio','Jualan sementara selama keyword belum ada (playbook §7).','sincere.emotion 3 + sulichii 1: 4 konten, 2 akun','t','baru'],
+ ['04-follow','4 · Follow','Follow akun','Konten yang ramai dibagikan (dialog objek, kartu tunggal), buat narik orang baru.','Belum ada data: tidak ada winner benchmark yang pakai ajakan follow','n','baru (uji)'],
+ ['05-tanya-komen','5 · Pertanyaan komentar','Tulis jawaban di komentar','Engagement. Penutup kartu tunggal dan carousel pengakuan.','T9 noteovt + menurutpsikologi: 4 konten, 2 akun (sampai 67,8x)','t','layout v1 k1-kartu-gelap'],
+ ['06-simpan','6 · Simpan','Simpan postingan','Carousel naskah kalimat dan langkah praktis (T3, T4) yang dipakai lagi nanti.','Belum ada data: tidak ada winner benchmark dengan ajakan simpan','n','layout v1 k1-penutup'],
+ ['07-kirim','7 · Kirim ke seseorang','Kirim/bagikan ke orang lain','Kalimat penenang (T8, T4) yang pas dikirim ke teman atau pasangan.','"Kirim ke pasangan" crackliffe 30,8x + inezkristanti (mekaniknya saja): 2 konten, 2 akun','c','baru'],
+ ['08-foto-komen','8 · Foto + komen KATA','Komen keyword','Penutup carousel dialog objek, supaya slide terakhir tetap foto dan nyambung dengan percakapannya.','wordsyoucantfind tutup dengan foto produk di 8 konten (1 akun), ajakan di caption','c','baru']
+];
+var ST={t:'TERBUKTI',c:'KANDIDAT',n:'BELUM ADA DATA'};
+var sel={};
+try{sel=JSON.parse(localStorage.getItem('swa-cta')||'{}')}catch(e){}
+document.getElementById('grid').innerHTML=O.map(function(o,i){
+  return '<article class="card" id="card-'+i+'"><img src="web/cta-'+o[0]+'.jpg" alt="Slide CTA '+o[1]+'" loading="lazy"><h3>'+o[1]+'</h3>'+
+  '<dl><div><dt>Aksi</dt><dd>'+o[2]+'</dd></div><div><dt>Dipakai kalau</dt><dd>'+o[3]+'</dd></div><div><dt>Bukti</dt><dd>'+o[4]+' <span class="st '+o[5]+'">'+ST[o[5]]+'</span></dd></div><div><dt>Layout</dt><dd>'+o[6]+'</dd></div></dl>'+
+  '<label class="pick"><input type="checkbox" value="'+o[1]+'" id="pick-'+(i+1)+'"> Pilih</label></article>';
+}).join('');
+var boxes=[].slice.call(document.querySelectorAll('.pick input'));
+boxes.forEach(function(b){if(sel[b.id])b.checked=true});
+var cat=document.getElementById('catatan');
+try{cat.value=localStorage.getItem('swa-cta-cat')||''}catch(e){}
+function render(){
+  var picked=[];sel={};
+  boxes.forEach(function(b){var c=b.closest('.card');if(c)c.classList.toggle('sel',b.checked);if(b.checked){picked.push(b.value);sel[b.id]=1}});
+  document.getElementById('out').textContent='CTA securewithaldo: '+(picked.length?picked.join(' · '):'(belum ada yang dipilih)')+(cat.value.trim()?'\nCatatan: '+cat.value.trim():'');
+  try{localStorage.setItem('swa-cta',JSON.stringify(sel));localStorage.setItem('swa-cta-cat',cat.value)}catch(e){}
+}
+document.addEventListener('change',function(e){if(e.target.matches('.pick input'))render()});
+cat.addEventListener('input',render);
+document.getElementById('salin').addEventListener('click',function(){
+  var t=document.getElementById('out').textContent,ok=document.getElementById('okmsg');
+  function s(){var r=document.createRange();r.selectNodeContents(document.getElementById('out'));var g=getSelection();g.removeAllRanges();g.addRange(r);ok.textContent='Teks sudah diblok, tekan Ctrl+C.';ok.hidden=false}
+  try{navigator.clipboard.writeText(t).then(function(){ok.textContent='Tersalin. Tempel di chat.';ok.hidden=false},s)}catch(e){s()}
+});
+render();
+})();
+</script>

@@ -1,0 +1,4 @@
+style    : securewithaldo
+version  : v2
+source   : C:\Users\ASUS_M3400Q\Documents\Asendra\carousel-studio\styles\securewithaldo\v2
+copied   : 2026-10-14 21:16

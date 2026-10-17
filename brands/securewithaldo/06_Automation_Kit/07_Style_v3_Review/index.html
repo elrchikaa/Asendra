@@ -1,0 +1,91 @@
+<meta charset="utf-8">
+<title>Style v3 securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → per perubahan: v2 (sebelum) dan v3 (sesudah) berdampingan → deret dialog lengkap → yang tidak berubah. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.5rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted)}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:760px}
+.ba.wide{max-width:none}
+figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+figure img{width:100%;height:auto;border-radius:4px;display:block}
+figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,300px);gap:12px;overflow-x:auto;padding-bottom:8px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+@media (max-width:640px){.ba{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · style carousel v3 (draft) · belum di-approve · 15 Okt 2026</span>
+  <h1>Apa yang berubah di v3</h1>
+  <p class="lede">Hanya layout yang kamu catat yang berubah. Kiri v2 (sekarang di branch), kanan v3 (draft). Judul dan subjudul tetap Instrument Serif; Figtree miring dan English hanya untuk konten tipe dialog.</p>
+</header>
+
+<section>
+  <h2>10 · Dialog dua objek</h2>
+  <p>Sekarang memakai aturan yang sama dengan dialog berpasangan (23) dan CP-01: satu aturan untuk hewan, benda, dan manusia. Burungnya berdampingan dan langit kosong ada di atas, jadi dua kalimat di atas burung, rata tengah, dengan celah di tengah. Figtree tegak/miring, English.</p>
+  <div class="ba"><figure><img src="web/v2-10.jpg" alt="Layout 10 v2"><figcaption>v2</figcaption></figure><figure><img src="web/v3-10.jpg" alt="Layout 10 v3"><figcaption>v3</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>12 · Satu kalimat di foto</h2>
+  <p>Kalimat turun dari bingkai atas ke langit di atas bangunan, dekat subjeknya. Posisinya diatur per foto.</p>
+  <div class="ba"><figure><img src="web/v2-12.jpg" alt="Layout 12 v2"><figcaption>v2</figcaption></figure><figure><img src="web/v3-12.jpg" alt="Layout 12 v3"><figcaption>v3</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>18–20 · Panorama malam</h2>
+  <p>Teks tiap slide sekarang duduk tepat di atas titik garis waktunya, rata tengah segaris dengan titik. Berlaku untuk semua panorama tipe ini.</p>
+  <div class="ba wide"><figure><img src="web/v2-pano.jpg" alt="Panorama v2"><figcaption>v2</figcaption></figure><figure><img src="web/v3-pano.jpg" alt="Panorama v3"><figcaption>v3</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>23 dan 29–33 · Dialog objek berpasangan, utuh</h2>
+  <p>Font Figtree (cemas tegak, jawaban miring, ukuran sama) dan English. Preview sekarang memuat satu percakapan lengkap, bukan cuma slide pertama.</p>
+  <div class="strip">
+    <figure><img src="web/v3-23.jpg" alt="Dialog 1"><figcaption>23</figcaption></figure>
+    <figure><img src="web/v3-29.jpg" alt="Dialog 2"><figcaption>29</figcaption></figure>
+    <figure><img src="web/v3-30.jpg" alt="Dialog 3"><figcaption>30</figcaption></figure>
+    <figure><img src="web/v3-31.jpg" alt="Dialog 4"><figcaption>31</figcaption></figure>
+    <figure><img src="web/v3-32.jpg" alt="Dialog 5"><figcaption>32</figcaption></figure>
+    <figure><img src="web/v3-33.jpg" alt="Dialog 6"><figcaption>33</figcaption></figure>
+  </div>
+  <div class="ba"><figure><img src="web/v2-23.jpg" alt="Layout 23 v2"><figcaption>23 di v2 (Instrument miring, Indonesia)</figcaption></figure><figure><img src="web/v3-23.jpg" alt="Layout 23 v3"><figcaption>23 di v3</figcaption></figure></div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Satu aturan dialog</h2>
+    <ul class="tight">
+      <li>Analisis foto dulu: letak tiap objek dan ruang kosong terbesar di sekitarnya.</li>
+      <li>Objek berdampingan: dua kalimat di sisi yang sama (biasanya atas), rata tengah ke objeknya, lebar kolom dihitung dari jarak dua objek supaya ada celah.</li>
+      <li>Objek terpisah atau diagonal: tiap kalimat di sisi paling kosong dari objeknya.</li>
+      <li>Jarak ke objek selalu 34 px, dan yang bicara duluan selalu dibaca duluan.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h2>Yang tidak berubah</h2>
+    <ul class="tight">
+      <li>Layout lain (kartu K1, CTA 09 dan 24–28, kelompok uji lain) sama dengan v2.</li>
+      <li>Heading dan subheading tetap Instrument Serif, isi tetap Figtree. Konten edukasi dan tipe lain tetap Bahasa Indonesia.</li>
+      <li>Grain tetap 60%. Cek otomatis: 33 layout bersih.</li>
+    </ul>
+  </div>
+</section>
+</div>

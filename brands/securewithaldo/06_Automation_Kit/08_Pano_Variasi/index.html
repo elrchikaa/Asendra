@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+<title>Panorama dan Kalimat securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala → layout 12 sebelum/sesudah + cara hitung → 5 variasi panorama (3 slide berjejer) → pilihan + salin. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.5rem} h3{font-size:1.2rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted)}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:640px}
+figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+figure img{width:100%;height:auto;border-radius:4px;display:block}
+figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.var{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.var.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pick{display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer}
+.pick input{accent-color:var(--accent);width:18px;height:18px}
+code{font-family:var(--mono);font-size:.82em;background:var(--tag);border-radius:3px;padding:0 4px}
+.out{font-family:var(--mono);font-size:.82rem;background:var(--tag);border-radius:6px;padding:10px 12px;user-select:all}
+.go{font:600 .92rem var(--sans);background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+.go:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:640px){.ba{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · style carousel v3 (draft) · 15 Okt 2026</span>
+  <h1>Satu kalimat di foto, dan variasi panorama</h1>
+</header>
+
+<section>
+  <h2>12 · Satu kalimat di foto</h2>
+  <p>Teks sekarang di tengah area paling kosong foto. Area itu dihitung, bukan ditebak: alat <code>06_Automation_Kit/tools/ruang_kosong.py</code> mengukur detail tiap pita horizontal dan mencari area kosong terbesar. Di foto ini hasilnya langit 8% sampai 38% tinggi, jadi kalimat ditaruh di tengahnya (23%).</p>
+  <div class="ba"><figure><img src="web/k12-v2.jpg" alt="Layout 12 v2"><figcaption>v2: menempel bingkai atas</figcaption></figure><figure><img src="web/k12-v3.jpg" alt="Layout 12 v3"><figcaption>v3: tengah area kosong</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>Panorama malam: E dengan 4 arah gradasi</h2>
+  <p class="lede">Pilihanmu E (garis waktu dan teks di tengah + gradasi). Gradasinya sekarang lebih tebal (sampai 55% sage, sebelumnya 30%) dan ada 4 arah. Tiga slide berjejer seperti saat digeser.</p>
+  <div id="vars" style="display:flex;flex-direction:column;gap:16px"></div>
+  <div class="out" id="out"></div>
+  <button type="button" class="go" id="salin">Salin pilihan</button><span class="eyebrow" id="okmsg" hidden></span>
+</section>
+</div>
+
+<script>
+(function(){
+var V=[
+ ['E1_kiri-ke-kanan','E1 · Gelap ke kanan','Malam makin larut dari 21.00 ke 01.12: slide pertama terang, slide terakhir paling gelap.'],
+ ['E2_kanan-ke-kiri','E2 · Gelap ke kiri','Kebalikan E1: mulai gelap, makin terang ke slide terakhir (pagi datang).'],
+ ['E3_atas-ke-bawah','E3 · Gelap ke bawah','Terang di atas, gelap di bawah. Mengisi ruang kosong di bawah garis waktu.'],
+ ['E4_bawah-ke-atas','E4 · Gelap ke atas','Gelap di atas seperti langit malam, terang di bawah. Mengisi ruang kosong di atas teks.']
+];
+var pick='E1_kiri-ke-kanan';
+try{var q=localStorage.getItem('swa-pano-e');if(q&&V.some(function(v){return v[0]===q}))pick=q}catch(e){}
+document.getElementById('vars').innerHTML=V.map(function(v){return '<article class="var" id="v-'+v[0]+'"><h3>'+v[1]+'</h3><p>'+v[2]+'</p><figure><img src="web/'+v[0]+'.jpg" alt="Panorama '+v[1]+'" loading="lazy"></figure><label class="pick"><input type="radio" name="pano" value="'+v[0]+'" id="p-'+v[0]+'"> Pilih</label></article>'}).join('');
+function render(){V.forEach(function(v){document.getElementById('v-'+v[0]).classList.toggle('sel',v[0]===pick);document.getElementById('p-'+v[0]).checked=v[0]===pick});
+ var v=V.filter(function(x){return x[0]===pick})[0];document.getElementById('out').textContent='Panorama securewithaldo: '+v[1];try{localStorage.setItem('swa-pano-e',pick)}catch(e){}}
+document.addEventListener('change',function(e){if(e.target.name==='pano'){pick=e.target.value;render()}});
+document.getElementById('salin').addEventListener('click',function(){var t=document.getElementById('out').textContent,ok=document.getElementById('okmsg');
+ function s(){var r=document.createRange();r.selectNodeContents(document.getElementById('out'));var g=getSelection();g.removeAllRanges();g.addRange(r);ok.textContent='Teks sudah diblok, tekan Ctrl+C.';ok.hidden=false}
+ try{navigator.clipboard.writeText(t).then(function(){ok.textContent='Tersalin. Tempel di chat.';ok.hidden=false},s)}catch(e){s()}});
+render();
+})();
+</script>

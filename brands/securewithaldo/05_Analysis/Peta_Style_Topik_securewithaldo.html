@@ -1,0 +1,145 @@
+<meta charset="utf-8">
+<title>Peta Style Topik securewithaldo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala + angka porsi → aturan style ↔ topik (4 kartu style) → tabel porsi per topik dikelompokkan per pilar → bahasa & perubahan. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --fg:#1b211d; --muted:#59645c; --line:#d9dfd8; --tag:#e8ece6; --accent:#4f6b49; --accent-soft:#e3ebdf; --warn:#8a6a1f; --warn-soft:#f3ecd9;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Figtree","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;--warn:#e0c27a;--warn-soft:#332c1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--surface:#1a1f1b;--fg:#e5ebe4;--muted:#9eaa9f;--line:#2c352e;--tag:#232a24;--accent:#a8c49f;--accent-soft:#263325;--warn:#e0c27a;--warn-soft:#332c1a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,2.8rem)} h2{font-size:1.6rem}
+p{margin:0;max-width:72ch}
+section{display:flex;flex-direction:column;gap:14px}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.04rem}
+.stats{display:flex;flex-wrap:wrap;gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:120px}
+.stat b{font-family:var(--serif);font-size:1.7rem;font-weight:400;line-height:1;font-variant-numeric:tabular-nums}
+.stat.warn{border-color:var(--warn)} .stat.warn b{color:var(--warn)}
+.note{background:var(--warn-soft);color:var(--fg);border-radius:8px;padding:10px 14px;max-width:none}
+.stat span{font-size:.8rem;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{margin:0;font-family:var(--serif);font-weight:400;font-size:1.35rem}
+.card dl{margin:0;display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.card dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0}
+.st{font-family:var(--mono);font-size:.68rem;border-radius:3px;padding:1px 6px;white-space:nowrap;align-self:flex-start}
+.st.t{background:var(--accent-soft);color:var(--accent)} .st.c{background:var(--warn-soft);color:var(--warn)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:860px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tag)}
+td.n{font-family:var(--mono);text-align:center;font-variant-numeric:tabular-nums}
+tr.pil td{background:var(--tag);font-weight:600}
+tr.tot td{font-weight:700;border-bottom:0}
+.lang{font-family:var(--mono);font-size:.72rem}
+.lang.en{color:var(--warn)}
+code{font-family:var(--mono);font-size:.82em;background:var(--tag);border-radius:3px;padding:0 4px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">securewithaldo · F4 posts-system · peta style ↔ topik · v2 · 14 Okt 2026 · revisi owner masuk</span>
+  <h1>Style mana untuk topik apa</h1>
+  <p class="lede">Semua 15 topik dipakai, porsi pilar tetap usulan (P2 35% · P1 25% · P3 20% · P4 20%). Tiap topik sekarang punya style yang ditentukan oleh isinya, dengan bukti dari winner benchmark. Porsi dihitung per 40 post.</p>
+  <div class="stats">
+    <div class="stat warn"><b>21</b><span>R1 reels · 52,5% (target 60%)</span></div>
+    <div class="stat"><b>12</b><span>K1 kartu teks · 30%</span></div>
+    <div class="stat"><b>7</b><span>K2 foto · 17,5%</span></div>
+    <div class="stat"><b>25</b><span>edukasi · 62%</span></div>
+  </div>
+</header>
+
+<section>
+  <h2>Aturan style ↔ topik</h2>
+  <div class="cards">
+    <article class="card"><span class="k">R1</span><h3>Reels judul berangka</h3>
+      <dl><div><dt>Untuk</dt><dd>Edukasi list dan langkah: membaca dia, siklus, kalimat ganti, batas, isi kepala, proses.</dd></div>
+      <div><dt>Bukan untuk</dt><dd>Kalimat penenang tunggal.</dd></div>
+      <div><dt>Bukti</dt><dd>R1 × topik edukasi list: 10 konten, 1 akun (sincere). Hook angka: 13 konten, 4 akun.</dd></div></dl>
+      <span class="st c">pasangan: KANDIDAT</span></article>
+    <article class="card"><span class="k">K1a</span><h3>Kartu edukasi bertahap</h3>
+      <dl><div><dt>Untuk</dt><dd>Pola dan komunikasi yang butuh beberapa langkah: cover, isi, poin, naskah kalimat.</dd></div>
+      <div><dt>Bukan untuk</dt><dd>Galau dan rindu.</dd></div>
+      <div><dt>Bukti</dt><dd>T1, T3, T11, T13: 9 konten, 2 akun (sincere 8, noteovt 1).</dd></div></dl>
+      <span class="st t">pasangan: TERBUKTI</span></article>
+    <article class="card"><span class="k">K1b</span><h3>Kartu tunggal</h3>
+      <dl><div><dt>Untuk</dt><dd>Pasangan yang menghargai, rindu dan merelakan, kamu cukup, pertanyaan reflektif.</dd></div>
+      <div><dt>Bukan untuk</dt><dd>Edukasi panjang.</dd></div>
+      <div><dt>Bukti</dt><dd>T5, T6, T9, T11: 4 konten IG, 1 akun (noteovt), plus TikTok noteovt T6.</dd></div></dl>
+      <span class="st c">pasangan: KANDIDAT</span></article>
+    <article class="card"><span class="k">K2</span><h3>Foto + kalimat, dialog objek</h3>
+      <dl><div><dt>Untuk</dt><dd>Penenang: kalimat yang ingin didengar si cemas, menenangkan diri, pesan malam ini. Objek 1 bertanya cemas, objek 2 menjawab tenang. Plus 1 dialog kalimat ganti di T3 (keputusan owner).</dd></div>
+      <div><dt>Bukan untuk</dt><dd>Edukasi pola.</dd></div>
+      <div><dt>Bukti</dt><dd>T8: 15 konten, 2 akun (wordsyoucantfind 7, littleplumpoetry 8). Contoh tipe dialog objek: wordsyoucantfind DcmFwHLGNDE, ±6,2x.</dd></div></dl>
+      <span class="st t">pasangan: TERBUKTI</span></article>
+  </div>
+  <p class="lede">T9 pertanyaan pancingan komentar dipakai sebagai mekanik penutup (kartu gelap atau caption) di ±1 dari 4 post, tidak makan porsi.</p>
+</section>
+
+<section>
+  <h2>Porsi per topik</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Topik</th><th>Status</th><th>Post /40</th><th>R1</th><th>K1</th><th>K2</th><th>Layout</th><th>Bahasa</th><th>Edukasi</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="lede">Cara bagi [PENALARAN]: topik terbukti dengan akun terbanyak dapat porsi lebih besar; topik inti HERE (T13, T4) tetap 3 walau buktinya tipis; topik kandidat 1–2 post sebagai uji; T6 dibatasi 2 karena rambu brand. Revisi owner 14 Okt: T13 jadi R1 1 · K1 2, T3 jadi R1 3 · K1 2 · K2 1.</p>
+  <p class="note">Akibat revisi, reels jadi 21 dari 40 (52,5%), di bawah keputusan reels 60% (10 Okt). Per 12 post ≈ R1 6,3 · K1 3,6 · K2 2,1. Belum diputuskan: terima 52,5%, atau pindah 3 slot K1 ke R1 di topik lain.</p>
+</section>
+
+<section>
+  <h2>Bahasa</h2>
+  <p><b>Semua konten dan topik, termasuk dialog objek, ditulis dalam Bahasa Indonesia.</b> Kalau versi Indonesia terasa cringe, boleh pakai English; tiap konten English ditandai di naskah beserta alasannya. (Keputusan owner 14 Okt.)</p>
+</section>
+
+<section>
+  <h2>Yang berubah</h2>
+  <ul class="tight">
+    <li>Contoh K2 "dialog dua cangkir" untuk T2 di Bedah Topik dicabut. K2 untuk topik penenang, plus 1 dialog kalimat ganti di T3.</li>
+    <li>T8 dan T15 masuk P1, T14 masuk P2, T6 dan T9 sekarang ikut dipakai.</li>
+    <li>Dialog objek butuh layout baru di style v2: teks di samping tiap objek, miring mengikuti objek, foto berganti tiap slide. Foto dari <code>Raw image/Creature pair</code> (24 foto).</li>
+  </ul>
+</section>
+</div>
+
+<script>
+(function(){
+var D=[
+ ['P2 · Membaca dia & pola kita · 35%',14],
+ ['T2 Siklus anxious–avoidant','T',5,4,1,0,'K1: <code>k1-cover</code> + <code>k1-isi</code> + <code>uji-spread</code> siklus','ID',1],
+ ['T1 Membaca perilaku avoidant','T',5,4,1,0,'K1: <code>k1-banding</code> "dia bilang X, artinya Y"','ID',1],
+ ['T11 Manipulasi & pola menyakitkan','T',3,1,2,0,'<code>k1-cover</code> + <code>k1-poin</code> · <code>k1-kartu-gelap</code>','ID',1],
+ ['T14 Love language per attachment','C',1,1,0,0,'R1','ID',1],
+ ['P1 · Pas kepala lagi lari · 25%',10],
+ ['T13 Isi kepala si cemas','C',3,1,2,0,'R1 · K1: <code>k1-kartu-terang</code> · <code>uji-pano</code> jam 21.00 → 01.12','ID',0],
+ ['T4 Menenangkan diri saat cemas','T',3,1,0,2,'K2 dialog objek (layout baru v2)','ID',1],
+ ['T8 Kalimat aman / tempat paling aman','T',3,0,0,3,'K2 dialog objek · <code>k2-objek</code> · <code>k2-kalimat</code>','ID',0],
+ ['T15 Bulan lahirmu, pesanmu','C',1,0,0,1,'K2 seri, 1 foto per bulan','ID',0],
+ ['P3 · Bilang apa, ngapain · 20%',8],
+ ['T3 Komunikasi & kalimat ganti','T',6,3,2,1,'<code>k1-naskah</code> · <code>k1-banding</code> · K2 <code>k2-dialog</code> (yang dia bilang / yang aku butuh)','ID',1],
+ ['T10 Boundaries & no contact','C',2,2,0,0,'R1','ID',1],
+ ['P4 · Tetap utuh · 20%',8],
+ ['T5 Pasangan yang menghargai','T',3,2,1,0,'<code>k1-kartu-terang</code>','ID',0],
+ ['T6 Rindu, asing, merelakan','T',2,0,2,0,'<code>k1-kartu-gelap</code> (kartu malam serif)','ID',0],
+ ['T7 Kamu cukup','T',2,1,1,0,'<code>k1-kartu-terang</code> · <code>uji-pegangan</code>','ID',0],
+ ['T12 Proses jadi secure','C',1,1,0,0,'R1 (alternatif <code>k1-dulu-sekarang</code>)','ID',0]
+];
+var h='',T=[0,0,0,0,0];
+D.forEach(function(r){
+  if(r.length===2){h+='<tr class="pil"><td colspan="2">'+r[0]+'</td><td class="n">'+r[1]+'</td><td colspan="6"></td></tr>';return}
+  T[0]+=r[2];T[1]+=r[3];T[2]+=r[4];T[3]+=r[5];T[4]+=r[8]?r[2]:0;
+  h+='<tr><td>'+r[0]+'</td><td><span class="st '+(r[1]==='T'?'t">TERBUKTI':'c">KANDIDAT')+'</span></td><td class="n">'+r[2]+'</td><td class="n">'+(r[3]||'–')+'</td><td class="n">'+(r[4]||'–')+'</td><td class="n">'+(r[5]||'–')+'</td><td>'+r[6]+'</td><td class="lang'+(/EN/.test(r[7])?' en':'')+'">'+r[7]+'</td><td>'+(r[8]?'ya':'–')+'</td></tr>';
+});
+h+='<tr class="tot"><td colspan="2">Total</td><td class="n">'+T[0]+'</td><td class="n">'+T[1]+'</td><td class="n">'+T[2]+'</td><td class="n">'+T[3]+'</td><td></td><td></td><td>'+T[4]+'</td></tr>';
+document.getElementById('rows').innerHTML=h;
+})();
+</script>
