@@ -2,7 +2,7 @@
 
 Dokumen ini untuk melanjutkan pekerjaan di sesi/AI lain (mis. Codex). Baca seluruhnya sebelum mengubah apa pun.
 
-> **Panduan desain terbaru:** baca `brands/auraneuro/desain.md` (v1.0, 17 Oktober 2026) untuk keputusan yang sudah dikonsolidasikan. Jalur penerapan terpisah di `desain-carousel-studio.md` dan `desain-video-studio.md`. Bagian riwayat di handoff ini dapat memuat keputusan yang telah diganti.
+> **Panduan desain terbaru (v1.1, 18 Oktober 2026):** aturan induk dan panduan carousel berada di repo `ascendmafia/carousel-studio`, folder `brand-guides/auraneuro/`. Panduan reels berada di repo `ascendmafia/video-studio`, file `brand-kits/auraneuro/desain-video-studio.md`. Salinan lama di root brand dipindahkan atas permintaan owner agar tidak ganda. Riwayat di bawah dapat menyebut lokasi lama.
 
 ## 1. Konteks singkat
 - Project: automation konten Instagram 4 brand. Aturan umum ada di `brands\CLAUDE.md` (wajib dibaca).
@@ -238,3 +238,7 @@ Cara melihat mockup: jalankan server lokal di folder `Mockup_Feed_auraneuro` (mi
 - Dibuat3berkas baru di root brand: desain.md (aturan lengkap,491baris sekitar6500kata), desain-carousel-studio.md (jalur carousel), desain-video-studio.md (jalur reels). Dokumen induk membedakan final, acuan implementasi, kondisional, rekomendasi, dan pengecualian. Konten utamanya mandiri untuk dipindahkan ke model/perangkat lain; font/aset tetap perlu dibawa untuk reproduksi identik. Tidak mengklaim template studio atau MP4 produksi selesai.
 - Pemeriksaan dokumen: keputusan wajib, tautan panduan studio, satuan dan sumber ukuran diperiksa; tidak ada berkas user ditimpa. Tidak ada commit Asendra.
 - Owner menjawab 'oke' setelah pratinjau CTA1534 dan penjelasan safe-zone. Status penolakan publikasi sebelumnya sudah terselesaikan lewat persetujuan ini. Publikasi v34 sekarang SUKSES: Sites versi8, commit db594ecd69dff9f69b7d2fd4a2a30f7777ee2917, version_id appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_ff0870ffeb288191a0e8e9ee3a79ad9b, deployment appgdep_6ad39e2e512481919f203c1fc2a98042. Sudah dilihat di browser publik. URL tetap https://auraneuro-feed-mockup.reybuss.chatgpt.site . Hanya repositori Sites di-commit/push; dokumen desain lokal tidak diunggah ke situs.
+
+## Pemisahan repo panduan — 18 Oktober 2026
+- Owner meminta pull main lalu commit/push kedua repo ascendmafia. Aturan induk desain.md + panduan carousel dipindah ke carousel-studio/brand-guides/auraneuro/; panduan video ke video-studio/brand-kits/auraneuro/. Tiga file lama di brands/auraneuro dihapus dari lokasi aktif, bukan diduplikasi. Rujukan lintas repo dan cara memindahkan konteks AI diperbarui. Identitas/desain tidak berubah.
+- Main carousel-studio digabung; satu konflik STYLES.md diselesaikan dengan mempertahankan entri securewithaldo v3 dan asendra v1. Main video-studio digabung tanpa konflik. Style approved dan engine tidak diubah oleh pekerjaan pemindahan panduan.
