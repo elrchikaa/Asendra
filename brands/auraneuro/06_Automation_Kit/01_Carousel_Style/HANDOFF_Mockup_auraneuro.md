@@ -1,0 +1,240 @@
+# Handoff: Mockup feed carousel auraneuro (per 16 Okt 2026)
+
+Dokumen ini untuk melanjutkan pekerjaan di sesi/AI lain (mis. Codex). Baca seluruhnya sebelum mengubah apa pun.
+
+> **Panduan desain terbaru:** baca `brands/auraneuro/desain.md` (v1.0, 17 Oktober 2026) untuk keputusan yang sudah dikonsolidasikan. Jalur penerapan terpisah di `desain-carousel-studio.md` dan `desain-video-studio.md`. Bagian riwayat di handoff ini dapat memuat keputusan yang telah diganti.
+
+## 1. Konteks singkat
+- Project: automation konten Instagram 4 brand. Aturan umum ada di `brands\CLAUDE.md` (wajib dibaca).
+- Brand: **auraneuro**, psikologi persuasi & "aura" yang etis, untuk karyawan & pebisnis Indonesia. Semua teks konten berbahasa Indonesia.
+- Acuan gaya utama: akun **kallawaymarketing**. Contohnya ada di `auraneuro\04_Content_Examples\kallawaymarketing\` (hanya dibaca, jangan diubah/dipindah).
+- Tahap sekarang: mematangkan **mockup feed** (tampilan grid IG + cover + slide) sampai owner memilih style. Setelah itu baru dibuat template carousel resmi lewat skill `carousel-style-cloner` (perpustakaan di `Documents\Asendra\carousel-studio`).
+
+## 2. File utama
+| File | Isi |
+|---|---|
+| `06_Automation_Kit\01_Carousel_Style\Mockup_Feed_auraneuro\index.html` | Mockup (v34). Satu file HTML + CSS + JS. Semua tampilan dirender JS dari data `POSTS`. |
+| `Mockup_Feed_auraneuro\img\` | Gambar figur (glow/ink), tekstur grain (`grain_dk`, `grain_lt`, `grain_hd`, `grain_rd`), marmer (`marble_*.webp`), `ref_kallaway_judul.jpg` |
+| `Mockup_Feed_auraneuro\fonts\` | Font lokal termasuk Arimo variabel 400–700 (`Arimo.ttf`, lisensi `Arimo-OFL.txt` dari Google Fonts), Instrument Serif, serta font pembanding lama. Semua lisensi bebas komersial. |
+| `05_Analysis\Analisis_Tone_Kallaway_auraneuro.md` | Hasil ukur visual kallaway (latar, grain, cahaya, teks) |
+| `05_Analysis\Style_Analysis_auraneuro.md`, `Style_Log_auraneuro.csv` | Analisis style benchmark (keluarga style K1, K3, R1 yang dipilih owner) |
+| `06_Automation_Kit\01_Carousel_Style\Ide_Dunia_Visual_auraneuro.md` | Daftar "dunia visual" (Marmer Klasik, Atlas Tubuh, Peta Langit, Berkas Rahasia, Wayang & Blencong, Panggung & Tali) |
+| `06_Automation_Kit\aset_mockup\KREDIT.md` | Sumber gambar (domain publik / CC0) |
+| `Documents\Asendra\_operating-system\standards\aturan-layout-safe-zone.md` | Aturan layout: kanvas 1080×1440, **kanan 120px kosong**, line-height 1.0–1.15, jarak antar kelompok ≥ 2× jarak baris |
+
+Cara melihat mockup: jalankan server lokal di folder `Mockup_Feed_auraneuro` (mis. `python -m http.server 8765`) lalu buka `http://localhost:8765`. Versi online (Claude Artifact, hanya bisa diupdate dari Claude): https://claude.ai/artifact/LUMkqoRvJC8V5dsF3jeoFC
+
+## 3. Keputusan owner yang sudah final (jangan dilanggar)
+**Warna & komposisi**
+- Palet hanya hitam + merah (#C80A0A). Komposisi feed: hitam 50%, merah 25%, terang 25%.
+- Penegasan owner 17 Okt 2026: **50% hitam / 25% merah / 25% putih (terang)** tetap berlaku saat cover diagram dan reels teks masuk grid. Pada 12 postingan wajib 6 hitam, 3 merah, 3 putih/terang; bukan hanya proporsi carousel figur.
+- **Pengecualian baru owner, 16 Okt 2026:** warna kontras (misalnya hijau) boleh dipakai khusus variasi slide perbandingan before/after atau benar/salah. Bukan perubahan palet utama atau komposisi feed.
+- **Arahan tambahan owner, 17 Okt 2026:** eksplorasi pemakaian warna lain secara terbatas pada diagram/teks, seperti hijau, kuning, oranye di screenshot Kallaway. Tidak mengganti palet utama. Pemilihan warna v28 masih usulan; satu warna tambahan per frame dan memiliki fungsi pembeda, bukan sekadar dekorasi.
+- Tidak ada nama/logo akun di carousel.
+- Tidak ada teks tanpa konteks (label dekoratif, "Galeri No.", "@handle 03/10").
+
+**Grain**
+- Diam, tidak dianimasikan.
+- Halus seperti film, bukan "semut TV". Selalu di belakang teks.
+- Seluruh latar diberi grain super tipis. Satu area (sisi/pojok/keempat ujung) lebih tebal, lalu memudar.
+- Grain merah: butir halus yang rapat, gradasinya jauh. Kekasarannya sudah dikurangi 50% di merah dan hitam.
+
+**Figur/gambar**
+- Selalu putih (tidak jadi siluet hitam) dan menempel dekat di bawah judul.
+- Glow di belakang figur mengikuti kontur, bukan lingkaran asal.
+- Peta Langit: lingkaran besar menembus bawah frame. Garis cincin tidak boleh menyentuh judul. Kalau digeser ke satu sisi, petanya diperbesar supaya sisi lain tetap terisi.
+
+**Gradasi bawah**
+- Hanya variasi di sebagian cover, tidak dipaksa di slide 2+.
+
+**Judul cover (sistem kallaway, sudah diukur)**
+- **Klarifikasi owner, 16 Okt 2026:** ukuran font cover serta jarak antarkata dan antarbaris masih terbuka untuk revisi. Angka ukuran/jarak di bawah adalah acuan v22 saat ini, bukan angka final yang dikunci. Ubah hanya sesuai arahan revisi owner; keputusan final lainnya tetap berlaku.
+- Baris pembuka: sans tebal KAPITAL. Lalu frasa kata kunci: serif italic KAPITAL merah (di latar merah: hitam) dengan glow. Opsional baris sans penutup.
+- **Font final owner, 16 Okt 2026: heading sans memakai Arimo Bold (700); body memakai Arimo reguler (400), dengan bold (700) sesuai konteks. Serif tetap Instrument Serif Italic.** Pilihan A–H sudah diganti satu pilihan Arimo; pilihan font lama di browser tidak dipakai lagi.
+- **Reels #2 teks penuh, koreksi owner 17 Okt 2026:** judul dan CTA “Cek caption!” rata tengah; paragraf rata kanan–kiri (justify), baris terakhir rata kiri. Terapkan pada semua opsi dan potongan grid. Keputusan ini mengganti susunan seluruh blok rata kiri di v28.
+- Tiap baris serif dipaskan sendiri ke ±70% lebar kanvas (baris pendek jadi lebih besar, seperti "IDEA" vs "MACHINE"). Frasa >11 huruf dipecah jadi 2 baris seimbang.
+- Ukuran ikut panjang hook (jumlah huruf seluruh judul):
+
+| Panjang hook | Sans | Serif maks |
+|---|---|---|
+| ≤34 huruf | 63px | 280px |
+| 35–50 | 56px | 205px |
+| 51–66 | 50px | 150px |
+| >66 | 45px | 120px |
+
+- Jarak (v22, revisi terakhir owner: sebelumnya tidak konsisten dan terlalu rapat):
+  - judul mulai ±108px dari atas;
+  - **semua jarak antar baris judul sama: 3% lebar kanvas (±32px)**, yaitu sans→serif, antar baris serif, serif→sans bawah, dan antar baris sans yang terbungkus;
+  - judul→gambar ±52px.
+  - Jarak diukur dari batas huruf kapital (CSS `text-box: trim-both cap alphabetic` pada `.hs` dan `.hkl`), jadi tetap sama walau ukuran serif tiap baris beda. Sudah diverifikasi lewat pengukuran di browser: semua jarak = 3.0% di cover besar maupun grid feed.
+- Kutipan bertanda petik harus utuh dalam satu font dan tidak terpotong baris.
+- Kata penutup 1 kata digabung ke frasa serif (jangan ada satu kata sendirian di baris).
+- Glow huruf italic harus jelas terlihat (sudah dinaikkan beberapa kali), tapi inti huruf tetap tajam.
+
+**Tambahan owner dari tujuh screenshot Kallaway (16 Okt 2026)**
+- Cover boleh memakai sans sebagai fokus utama, sesuai konteks hook; jangan selalu memaksa serif menjadi elemen terbesar. Buat contoh variasinya.
+- Serif seluruhnya lowercase hanya boleh digunakan sebagai body, dipadukan dengan sans. Bukan untuk headline atau subheading.
+- Serif sebagai headline selain cover, bila membentuk satu frasa, memakai huruf kapital di awal **setiap kata** (Title Case). Berlaku juga untuk subheading serif, termasuk langkah-langkah.
+- Cover/hook boleh memiliki body pendukung sesuai konteks. Hindari mengulang isi hook; buat contoh variasinya.
+- Boleh ada kotak kecil berisi frasa pada cover; ukurannya mengikuti frasa, bukan panel besar atau judul dekoratif tanpa konteks.
+- Slide before/after atau benar/salah boleh memakai warna pembanding kontras seperti hijau (lihat pengecualian palet di atas).
+- **Motion cover: hapus hanya kilauan cahaya di semua variasi animasi.** Motion selain kilauan harus tetap ada: cap jatuh, peta berputar, wayang/topeng bergoyang, dorong pelan, dan motion lain yang sudah ada. Jangan menghapus seluruh motion atau seluruh pencahayaan karena instruksi ini.
+
+**Penerapan v25 (16 Okt 2026, contoh desain masih menunggu tinjauan owner)**
+- Dua bagian baru di mockup: "Variasi cover sesuai hook" dan "Variasi teks dan perbandingan slide isi". Masing-masing berisi tiga contoh. Variasi tambahan ini belum mengganti susunan feed utama.
+- Tiga contoh cover: sans dominan; judul serif kapital dengan body pendukung; serta kotak kecil yang mengikuti panjang frasa. Pecahan baris sans ditulis manual dan dipaskan bila terlalu lebar. Jarak antarbaris sans contoh baru tetap 3cqw (±32.4px); posisi atas dan jarak ke figur mengikuti cover sebelumnya. Ukuran/jarak tetap bisa direvisi.
+- Tiga contoh slide isi: body Arimo dengan frasa serif lowercase; langkah bernomor dengan subheading serif Title Case; dan perbandingan dua respons dengan label merah/hijau. Hijau contoh memakai `#76DD91`, khusus pembeda pada perbandingan, belum menjadi warna brand baru.
+- Aturan Title Case diterapkan juga pada frasa serif di headline storytelling, listicle, marmer, diagram, dan kata kunci CTA. Body lowercase tetap hanya pada contoh body yang ditandai khusus; sistem judul cover utama tetap kapital.
+- Ukuran contoh: heading slide isi 6.8cqw (±73px), body 4.45cqw (±48px); subheading langkah 6.2cqw (±67px). Cover sans dominan maksimum 9.4cqw (±102px), dipaskan ke area judul; sans kotak maksimum 7.7cqw (±83px), label kotak 3.8cqw (±41px) dengan padding 1.5×2.2cqw (±16×24px). Semua masih skala eksperimen mockup, bukan angka final produksi.
+- Efek kilau menyapu `.sheen` dihapus dari markup dan keyframes-nya dihapus. Motion lain dipertahankan: `stampDrop`, `thud`, `splat`, `spin`, `flicker`, `sway`, `sweep` (lampu panggung), `swing`, `push`, `scan`. Kilau menyapu berbeda dari lampu panggung bergerak atau anatomi berdenyut; jangan ikut menghapus keduanya tanpa arahan baru.
+- Validasi: server lokal yang sudah aktif di `http://localhost:8765/` menampilkan v25. Enam contoh baru serta kedua baris motion sudah dilihat lewat screenshot; contoh cover/slide isi diukur aman dari batas kanan, body tidak meluap, label hijau termuat, dan gerakan peta/wayang/dorong berubah antarwaktu. Belum diuji di HP asli, seluruh kombinasi dunia visual, atau ekspor video/final.
+
+**Variasi lain yang disetujui sebagai opsi**
+- Marmer (merah, hitam-urat putih, hitam-urat merah, putih, merah tua), uratnya samar.
+- Grid kertas di latar terang dibuat samar.
+- Owner meminta variasi diagram sebagai elemen penjelas di slide 2 dan seterusnya. **Diagram v23 ditolak seluruhnya:** bentuk dan ukuran tidak proporsional, terlalu penuh. Jangan jadikan v23 acuan atau perlakukan sebagai pilihan yang disetujui.
+- Arahan owner: pahami bentuk dan penggunaan diagram dari slide 2+ Kallaway di `04_Content_Examples/kallawaymarketing/`. Diagram harus dipilih sesuai hubungan/urutan yang perlu dijelaskan, bukan kotak-kotak besar berisi paragraf yang memenuhi slide. Proporsi v24 masih usulan dan menunggu tinjauan owner.
+
+**Perbaikan v23 berdasarkan screenshot owner (16 Okt 2026)**
+- "Dia dipilih." dan "Dengan sengaja." tidak boleh bertabrakan. Penyebab lama: `line-height:0` pada teks miring. Sekarang line-height teks miring 1.12; dua baris slide ini memakai blok terpisah dengan jarak 2cqw (±21.6px pada kanvas 1080).
+- Pembuka cover "ORANG PALING BAIK DI KANTOR" dipasang satu baris, ukurannya dipaskan ke lebar area judul. Tidak lagi terpotong otomatis menjadi dua baris seimbang. Pembuka contoh hook yang sangat panjang dipecah manual per makna; jarak antarbaris sans tetap 3cqw (±32.4px).
+- Ukuran sans pada tabel adalah batas awal sebelum penyesuaian lebar tiap baris; ukuran font dan jarak tetap bisa direvisi owner.
+- Diagram v23 (riwayat, **ditolak**): heading ±80px, body ±48px, panel besar. Sudah diganti pada v24.
+
+**Revisi diagram v24 (16 Okt 2026, belum ACC owner)**
+- Ditinjau 128 JPG slide isi Kallaway lewat lembar pratinjau, lalu empat acuan dibuka ukuran penuh. Ini pengamatan visual, bukan kesimpulan performa.
+- Acuan spesifik: `kallawaymarketing_Dc489B2DnPa_3.jpg` (dua lingkaran bergabung jadi satu), `kallawaymarketing_DdITdacjqoD_3.jpg` (cabang), `kallawaymarketing_Dd5D8unDqaC_5.jpg` (siklus lingkaran), `kallawaymarketing_DdkwAYXjonm_4.jpg` (panah sebab–respons tanpa kotak).
+- Pemahaman: judul memberi konteks; gambar menunjukkan hubungan, cabang, siklus, atau sebab–respons dengan label pendek; kalimat di bawah menerangkan maknanya. Bentuk mengikuti materi, diagram tidak wajib di setiap slide. Referensi lain juga memakai perbandingan, matriks, tangga, dan irisan sesuai kebutuhan.
+- Empat contoh v24 mengganti diagram lama seluruhnya: hubungan Waktu + Prioritas → Sepakat; cabang Tugas Baru; siklus Jelaskan → Dengar → Sepakati; dan alur Tugas Masuk → Tenggat Bentrok → Tanya Prioritas. Isi hanya contoh untuk menilai tampilan.
+- Gambar SVG ±64% lebar ×31.5% tinggi slide (±691×454px di kanvas 1080×1440). Batas keseluruhan teks x 8%–88.8%; judul mulai y17% (±245px), gambar mulai y≈35% (±504px), kalimat penjelas mulai y≈72.5% (±1044px). Ada ruang kosong atas, bawah, dan antarbagian.
+- Heading Arimo Bold 6.4cqw (±69px), body Arimo 4.45cqw (±48px), label SVG Arimo ±37.5px, kata kunci lingkaran Instrument Serif Italic ±43.4px. Heading mengikuti eksperimen skala mockup, masih di bawah minimum standar umum 96px; ukuran belum final.
+- Sudah dilihat visual di server lokal `http://localhost:8765/`; keempat diagram diukur aman dari area 120px kanan, label muat dalam lingkaran. Belum diuji pada HP asli atau diekspor final. Cover dan bagian mockup lain tidak diubah pada v24.
+
+## 4. Yang masih terbuka
+**Arahan owner dan penerapan v30 (17 Okt 2026, pilihan visual belum ACC final)**
+- Varian reels #2 A–C **jangan dihapus**. Owner menilai bidang bawah terlalu kosong di feed dan meminta format tambahan. Figur C boleh dipakai, tetapi pusatnya harus sesuai potongan feed; v30 menempatkan pusat gambar tepat x50% / y50% dari frame 9:16 (pusat crop 3:4 juga y960px), mengganti penempatan atas sebelumnya.
+- Dua reels referensi sudah dibuka lewat browser: `https://www.instagram.com/reel/DdJVMbuN0Id/` dan `https://www.instagram.com/reel/DdOoD6aNQfS/`, akun **thebrainlabco**. Pertama memakai figur kecil dan garis bidang pandang untuk perhatian; kedua memakai lingkaran/figur dan objek untuk batas toleransi. Yang diambil adalah ilustrasi yang menjelaskan topik dan pembagian ruang judul–visual–uraian. Bukan mengambil palet krem, font, watermark, atau klaim neurosains sebagai fakta auraneuro.
+- Tiga varian tambahan D–F memakai naskah utuh dari tiga postingan auraneuro yang telah diperiksa: D brand/penolakan = antrean dan pintu tertutup setelah paragraf; E Apple/identitas = kartu identitas dan kelompok di antara judul dan paragraf; F produk gratis = hadiah menuju transaksi di bawah paragraf. Ilustrasi SVG asli, bukan gambar akun referensi yang diunduh. Teks tetap Arimo + Instrument Serif/glow, body justify, judul dan CTA tengah.
+- Panel baru `Visual reels #2 teks penuh`: `Paragraf klasik` / `Dengan ilustrasi topik`. Nilai baru `r4visual` default `illustrated`, hanya berlaku saat pilihan teks penuh dipakai; versi klasik tetap dapat dipilih dan seluruh A–C tetap di galeri. Galeri D–F terpisah. Grid campuran memakai pilihan visual yang sama agar bisa dibandingkan. Tetap 3 cover diagram / 12, dua reels #1, dan rasio latar 6/3/3.
+- Untuk pengunjung baru, default reels #2 kini `full` + `illustrated` agar versi yang sedang ditinjau terlihat di feed. Pilihan yang sudah tersimpan tetap dihormati. Panel “Salin pilihan” dan ringkasan bawah juga menyertakan visual reels #2.
+- Tangga B: jarak pusat label “Tanya”–“tenggat” serta “Sepakati”–“urutan” dikurangi 56→45 unit SVG (ukuran 40/32 dipertahankan). Oranye coklat `#A64714` ditolak; diganti **`#FF6B24`**, lebih hidup. Angka 02 memakai tinta gelap di atas oranye untuk menjaga keterbacaan; angka pada hitam tetap putih.
+- Angka 01–03 harus terpusat secara optik dalam kotak 125 unit tingginya. V30 memakai ukuran bentuk huruf Arimo Bold aktual dari canvas (`actualBoundingBoxAscent/Descent`), bukan hanya titik y atau tinggi kotak font. Fitting diulang setelah font termuat dan saat resize.
+- Siklus D: kurva perkiraan sebelumnya ditolak karena tidak segaris dengan lingkaran. V30 menggunakan busur lingkaran berjari-jari **205**, pusat **350,304**, dengan ujung panah mengikuti arah garis singgung pada sudut akhir. Busur: −72→−34°, 20→75°, 145→195°. Tidak lagi memakai kurva kuadratik yang menyimpang dari lingkaran.
+- Validasi lokal v30: server `http://localhost:8765/` aktif, dua pasang diagram, varian klasik A–C, baru D–F, serta grid campuran sudah dilihat lewat screenshot. Pergantian klasik/ilustrasi diuji: galeri lama tetap 3 dan galeri baru tetap 3; tiga slot reels #2 kembali memakai ilustrasi saat opsi diaktifkan. Pusat figur C terukur y960px. Semua kotak judul, paragraf, ilustrasi, dan CTA baru berada di x35–960 / y240–1470; CTA berakhir sekitar y1450. SVG ilustrasi mengisi ruang yang dialokasikan (bukan melampaui tinggi wadah); overlap hadiah/CTA yang sempat terlihat saat QA sudah diperbaiki sebelum publikasi. Kedua grid tetap 6 hitam / 3 merah / 3 terang, 3 diagram, 5 reels. Tidak ada gambar rusak pada pilihan yang diperiksa; JavaScript valid. Belum tes HP asli atau render MP4/durasi/animasi. Analisis referensi baru: `05_Analysis/Analisis_Referensi_Ilustrasi_Reels2_auraneuro_v1.md`.
+- V30 sudah terbit ke `https://auraneuro-feed-mockup.reybuss.chatgpt.site`, Site versi **4**, ID `appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_1eed6d197cf08191826b16f132b11954`; deployment `appgdep_6ad38ce33f3081918818669d665827b1` berstatus `succeeded`. Commit repositori Sites `9c8d46811cd5822be6cea264fda5cd9aecae9aa9`; arsip `sites/auraneuro-feed-mockup-v30.tar.gz`. Repositori Asendra tidak di-commit. Halaman publik sudah direload: label v30, galeri lama 3, baru 3, palet 6/3/3, tidak ada gambar rusak; tiga ilustrasi publik sudah dilihat. Screenshot sesi: `diagram-v30-ab.png`, `diagram-v30-cd.png`, `reels-classic-v30.png`, `reels-illustrated-v30.png`, `feed-v30.png`, dan `auraneuro-v30-public-illustrations.png` di folder visualizations sesi.
+
+**Koreksi owner v29 (17 Okt 2026)**
+- Paragraf reels #2 harus rata kanan–kiri (justify), seperti postingan asli akun; baris terakhir tetap rata kiri agar jarak antarkata tidak dipaksa. **Judul dan CTA “Cek caption!” rata tengah**, selaras dengan carousel. Ini pengecualian sumbu atas arahan langsung owner; jangan kembali ke seluruh blok rata kiri. Rekomendasi visual v28 dan analisis v1 yang menyebut seluruh blok rata kiri sudah digantikan keputusan ini.
+- Owner menegaskan komposisi feed **50% hitam, 25% merah, 25% putih/terang**. Pada 12 postingan berarti tepat 6/3/3. Porsi diagram tetap 3/12; dua reels #1 tidak boleh hilang.
+- Diagram A: bentuk keputusan diperbesar dari diagonal 300×196 menjadi 400×264 unit SVG; dua label diperkecil 44→38. Garis cabang diputus di area label “Ya”/“Tidak” (jeda y338–410, label y374), sehingga tidak melewati huruf. Kotak keputusan tetap dipakai, bukan menghapus garis keseluruhan.
+- Diagram B: baris “Tanya”/“tenggat” dan “Sepakati”/“urutan” diberi jarak pusat 56 unit, ukuran 40/32; label kecil tidak menempel ke kata di atas maupun bidang tangga di bawah.
+- Diagram C: label dalam kotak 38 unit; “Menumpuk” dipindah ke dalam batang merah pertama, bukan menjadi label bawah yang berdekatan dengan kalimat penjelas. Batang terakhir selesai y520 unit, tidak lagi ada label y572. Jarak ke penjelas bawah lebih lapang.
+- Diagram D: label kotak 38 unit; kotak samping 290×96 dan kotak atas 300×96, dipusatkan pada label. Cek padding berdasarkan batas teks aktual, bukan hanya batas SVG.
+- Pemeriksaan tambahan D menemukan ujung kotak font “Batas” sedikit melewati awal garis putus-putus. Label dinaikkan y289→269 dan garis dimulai y334, memberi jarak sekitar 34 unit dari batas bawah teks; tidak dibiarkan berpotongan walau tidak ditandai owner.
+- Tujuh komentar browser menjadi satu revisi. Pemeriksaan v28 hanya memeriksa batas area aman, sehingga melewatkan tabrakan di dalam diagram; pemeriksaan v29 harus mencakup batas huruf terhadap bentuk, jarak antarlabel, garis yang melewati label, padding kotak, serta screenshot semua empat diagram dan tiga reels.
+- Validasi lokal v29 di `http://localhost:8765/`: screenshot A/B, C/D, dan tiga reels sudah dilihat. Pada empat SVG tidak ada kotak batas teks yang saling beririsan. Delapan label bertanda `data-in-box` memiliki ruang minimum sekitar 21–26 unit SVG dari tepi kotaknya; batas sudut teks dalam belah ketupat masih di dalam bentuk (nilai persamaan tepi maksimal 0.763, batas 1). Jalur “Ya/Tidak” diputus dengan ruang sekitar 16 unit dari batas teks, bukan sekadar memindah label ke atas garis. Semua opsi reels terukur judul tengah / body justify / baris terakhir kiri / CTA tengah, tetap di safe zone. Kedua grid tepat 6 hitam / 3 merah / 3 terang, 3 diagram, dan 5 reels (2 reels #1 + 3 reels #2). Belum diuji di HP asli atau render MP4; desain masih menunggu tinjauan owner.
+- V29 sudah dipublikasikan dan dibuka ulang di `https://auraneuro-feed-mockup.reybuss.chatgpt.site`: Site versi **3**, ID `appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_4a909cdb7bbc8191a280e550e20a128b`; deployment `appgdep_6ad367d1491c8191826e26607e2f113d`, status `succeeded`. Commit repositori Sites `53f1dfad21cc65dc4c6e0e47c3d30c2828f5f190`; arsip `sites/auraneuro-feed-mockup-v29.tar.gz`. Versi publik terkonfirmasi v29, perataan benar dan rasio 6/3/3; diagram A/B serta tiga reels publik sudah dilihat melalui screenshot. Screenshot lokal `diagram-v29-ab.png`, `diagram-v29-cd.png`, `reels-v29.png`; screenshot publik `auraneuro-v29-public-diagrams.png` dan `auraneuro-v29-public-reels.png`, di folder visualizations sesi. Repositori Asendra tidak di-commit.
+
+**Arahan dan penerapan v28 (17 Okt 2026, desain belum ACC final)**
+- Owner mengirim empat screenshot feed Kallaway: diagram yang pada acuan berasal dari reels ingin diadaptasi menjadi visual utama **cover carousel**. Minta variasi penggunaan warna tambahan secara hemat dan penyelarasan visual reels #2 teks penuh dengan carousel.
+- Koreksi lanjutan: cover diagram sekitar 30% dan tidak lebih dominan daripada jenis lain. Grid 12 postingan memakai **3 diagram (25%, di bawah 30%)**, empat carousel figur, **dua reels #1**, dan tiga reels #2. Opsi diagram D tidak masuk grid, hanya di galeri pilihan terpisah. Grid depan dan uji feed memakai urutan sama. Rasio latar preset default tetap 6 gelap / 3 merah / 3 terang.
+- Koreksi lanjutan reels #2: model konten/teks mengikuti akun Instagram auraneuro saat ini. Akun `@auraneuroo` sudah dibuka langsung; frame dan halaman tiga reels diperiksa: `DX-zkzgSxM5` (Brand “bermusuhan”), `DX8xIL7yW_4` (Apple/identitas), `DX8O0R-yeuu` (produk gratis). Pola: **judul + satu paragraf penjelasan utuh + “Cek caption!”**, teks muncul bersama di atas latar kosmik. Jangan kembali ke contoh sementara dua kalimat pendek, daftar langkah, atau CTA berbeda lalu menganggapnya model akun saat ini.
+- Galeri reels #2: A paragraf terbuka rata kiri (rekomendasi), B paragraf di panel tipis, C figur patung samar + satu frasa kuning. Ketiga opsi memakai teks brand yang sama agar bisa dibandingkan. Feed memakai tiga topik asli berbeda. Tipografi memakai Arimo Bold + Instrument Serif Italic kapital/glow; konten tidak perlu dipotong menjadi fragmen hanya demi meniru cover carousel. Latar video dan durasi belum diproduksi; mockup ini frame visual.
+- Empat cover diagram: A cabang keputusan (kuning `#F0D66A`), B tangga respons di latar terang (oranye `#A64714`), C dua jalur (hijau `#76DD91`), D siklus putih di merah. Area visual x10–86%, y35–78% kanvas; judul x8–88%, mulai y7.5%. Kata kunci serif maksimal 14cqw (±151px), tetap fitting per baris; sans 6.2cqw (±67px). Label SVG 44 unit (sekitar 52px setelah skala), label kecil 34 unit (sekitar 40px); footer 3.7cqw (±40px). Angka untuk tinjauan, belum ukuran final produksi.
+- Reels #2: area konten x8–88%, y18.1–75.5% dari 1080×1920 (±348–1450px), body 3.9cqw (±42px), CTA 3.6cqw (±39px), jarak kelompok 4cqw (±43px). Kata kunci serif maksimum 13cqw (±140px), sans 6.4cqw sebelum fitting. Judul, paragraf, dan CTA rata kiri; grain diam, glow judul tetap ada. Opsi C hanya figur samar, tidak menghapus teks.
+- Analisis lengkap: `brands/auraneuro/05_Analysis/Analisis_Feed_Diagram_dan_Reels_auraneuro_v1.md`. Sumber empat screenshot dari owner + tiga halaman reels auraneuro. Temuan visual tidak diklaim sebagai pola performa terbukti.
+- Validasi lokal v28: server asli `http://localhost:8765/` aktif dan direload. Empat diagram, tiga alternatif paragraf, serta grid campuran sudah dilihat melalui screenshot. Kedua grid terukur 12 postingan / 3 diagram / 5 reels (3 teks + 2 reels #1), warna default 6 gelap / 3 merah / 3 terang. Pergantian opsi reels cover→teks penuh bekerja (jumlah teks penuh di grid 0→3). Seluruh kotak judul/paragraf/CTA reels masuk x35–960 dan y240–1470 pada kanvas 1080×1920; CTA terjauh sekitar y1231px. Teks cover diagram tidak melanggar batas x50–960. Glow judul aktif, tidak ada gambar rusak pada pilihan bawaan, JavaScript valid. Belum diuji HP asli, semua kombinasi panel, atau render MP4/durasi baca. Desain dan warna tambahan masih menunggu tinjauan owner.
+- V28 sudah dipublikasikan ke URL Sites yang sama: `https://auraneuro-feed-mockup.reybuss.chatgpt.site`. Saved version **2**, ID `appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_95e675d544308191beb4470dec3cfb97`; deployment `appgdep_6ad3630b5d6081919bf2f2448d8e9abc` berstatus `succeeded`. Commit salinan Sites `2e2270c811aef8e338102f5eddb80cfcce27f2ef`; arsip `sites/auraneuro-feed-mockup-v28.tar.gz`. Repositori Asendra tidak di-commit. Halaman publik sudah dibuka ulang, label v28, 3 diagram, 5 reels, dan tidak ada gambar rusak terkonfirmasi; tiga opsi reels juga dilihat melalui screenshot `auraneuro-v28-public-reels.png` di folder visualizations sesi.
+
+**Persiapan publikasi Sites (17 Okt 2026)**
+- Owner meminta mockup updated memakai Sites agar bisa dipublikasikan dan dibagikan di Discord/sosial. Ini mengizinkan persiapan publikasi; desain v27 tetap dipertahankan.
+- Salinan publikasi: `sites/auraneuro-feed-mockup/dist/` (68 berkas, sekitar 12.8 MB). Manifest: `sites/auraneuro-feed-mockup/.openai/hosting.json`.
+- Site sudah diterbitkan, akses **public** (siapa pun yang memiliki tautan): `https://auraneuro-feed-mockup.reybuss.chatgpt.site`. Project ID `appgprj_6ad349fd1c288191ac89d5217d68384f`. Jangan membuat Site baru saat melanjutkan; pakai ID ini.
+- Publikasi pertama berhasil 17 Okt 2026: Site versi 1, ID `appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_9972472b9b5881918b92520578f58597`, deployment `appgdep_6ad34d743c508191bf2b218e8b3fbbf9`, status `succeeded`. Commit salinan Sites `2a362d94653da4bc3bad674e1493012982429b30` sudah di-push. Tidak ada commit di repositori Asendra.
+- Pemeriksaan URL publik: halaman, panel pilihan, grid profil, dan tiga cover sudah dilihat lewat screenshot; 79 elemen gambar pada pilihan bawaan termuat tanpa gambar rusak. Screenshot `auraneuro-sites-public.png` di folder visualizations sesi. Belum dites dari HP asli atau semua kombinasi pilihan. Perubahan lokal berikutnya tidak otomatis tampil di URL publik; salinan `dist` perlu diperbarui lalu commit/push dan publikasi versi Sites berikutnya.
+- Catatan Windows untuk melanjutkan: source helper membutuhkan `C:/Program Files/Git/bin` dan folder runtime Node pada PATH; set `TAR_OPTIONS=--force-local` agar tar menerima path `C:/...`. Credential tetap lewat stdin, jangan simpan token. Arsip publikasi di `sites/auraneuro-feed-mockup-publish.tar.gz`, di luar repositori Sites.
+- Owner mengizinkan commit dan push salinan khusus Sites pada 17 Okt 2026 ("yaudah commit aja"), sekaligus menegaskan boleh mengajukan commit/push melalui persetujuan alat. Izin ini untuk publikasi mockup melalui repositori Sites yang terpisah; repositori Asendra tidak di-commit. Sites mewajibkan commit/push sebelum menyimpan versi dan publikasi.
+- Satu referensi gambar lama yang rusak diperbaiki pada mockup asli dan salinan Sites: fungsi `img()` memakai `B_mugshot.webp` yang memang tersedia, bukan varian `_glow`/`_ink` yang tidak ada. Tidak mengubah desain lainnya.
+- Salinan diperiksa melalui browser pada `http://127.0.0.1:8766/`: panel dan tiga contoh slide isi dilihat lewat screenshot; 79 elemen gambar pada pilihan bawaan tidak ada yang rusak. Belum mengecek semua kombinasi pilihan, HP asli, atau URL publik. Screenshot `sites-ready-v27.png` disimpan di folder visualizations sesi.
+
+**Koreksi owner dan aturan kerja v27 (17 Okt 2026)**
+- Body ±36px di v26 dinilai terlalu kecil; mengecilkan bukan berarti membuat body menjadi kecil sekali. Ukuran harus dinilai bersama headline/subheading, bukan dari ruang kosong frame.
+- **Patokan baru contoh slide isi:** body 3.9cqw (±42px), heading sans 7.2cqw (±78px), subheading serif 5.6cqw (±60px). Heading serif yang dipasangkan dengan sans tetap dikoreksi secara optik melalui rasio font 1.2. Ketiga contoh memakai token ukuran sama (`--body-reading`, `--heading-reading`, `--subheading-reading`), bukan angka per slide. Ini patokan kerja untuk tinjauan, belum ACC final owner.
+- Untuk mockup baru, mulai dari body ±42px pada contoh skala ini; jangan otomatis turun ke 36px atau naik ke 48px. Pertahankan perbedaan peran: body < subheading < headline. Bila teks kepanjangan, pecah per makna atau tambah slide; jangan mengecilkan seluruh teks supaya muat. Body cover/label kecil tetap peran tersendiri (±33px), bukan patokan body isi. Standar umum lintas brand 48px tidak diubah; patokan 42px ini khusus eksperimen auraneuro sesuai koreksi owner.
+- Numerik langkah harus bold dan berpendar. Kalau dalam satu frame ada 1–4 nomor, perbesar dua tingkat dari v26: ±73 → ±86 → ±99px. V27 memakai Arimo Bold 700, glow, dan penguatan tepi tipis. Nomor disejajarkan secara vertikal dengan kelompok subheading + body seperti referensi Kallaway `DdSq4qnDuMn_4.jpg`, bukan mengambang di atas. Kolom nomor ±130px dan jarak ke teks ±32px. Jika >4, gunakan ukuran numerik dasar ±80px; jangan memaksakan angka besar hingga isi sesak. Penentuan kelas `few-steps` otomatis dari jumlah langkah.
+- **Komposisi perbandingan:** kelompok judul dan kartu berada di tengah area aman. Teks di dalam kartu tetap rata kiri (pengecualian sumbu yang diminta owner). Kalau belum ada elemen tambahan, tiap kartu mengikuti lebar baris teks terpanjang dengan padding kiri–kanan sama, bukan menyisakan kolom kosong. Lebar kedua kartu boleh berbeda; masing-masing tetap terpusat. Ruang untuk elemen tambahan hanya disediakan jika elemen itu benar-benar ada.
+- Opsi B seluruhnya sans dinilai jelek dan tidak dipakai lagi. Diganti opsi campuran: sans "KENAPA" → sans merah dominan "YANG DIAM" → serif netral "JUSTRU PALING DITAKUTI". Jangan mengembalikan contoh all-sans lama sebagai opsi yang disetujui.
+- Validasi v27: server `http://localhost:8765/` aktif, tiga contoh slide isi dan tiga uji cover sudah dilihat melalui screenshot. Ukuran heading/body di ketiga slide terukur sama; tidak ada body meluap. Nomor bold 700, glow aktif, ukuran ±99px untuk tiga langkah. Tengah masing-masing kartu berimpit dengan tengah area konten (selisih <0.01px tampilan), padding kiri/kanan sama, teks tetap kiri. Enam contoh diukur aman dari area kanan 120px. Belum dites di HP asli, seluruh kombinasi panel, atau ekspor final. Patokan angka baru masih menunggu penilaian visual owner.
+
+**Koreksi owner 17 Okt 2026 (sembilan anotasi, berlaku pada revisi v26)**
+- Frasa sans yang sama pentingnya dengan kata kunci serif boleh diberi warna aksen, secara manual dan terbatas. Contoh wajib: kutipan "nanti aku bantu" pada uji hook panjang diberi merah. Jangan otomatis mewarnai semua kutipan atau semua baris sans.
+- Variasi sans dominan v25 belum diterima: fokus pesan, ukuran konteks, warna, dan jaraknya membingungkan. Uji beberapa hook, tentukan satu fokus utama, dan gunakan ukuran/kontras sesuai peran. Konteks tidak boleh bersaing tanpa alasan dengan inti hook.
+- Jarak judul variasi mengikuti sistem batas huruf pada contoh "Aturan ukuran judul cover", bukan kotak font biasa. Terapkan juga ke sans→serif pada cover dengan body.
+- Body cover harus lebih kecil dan dekat judul, mengikuti proporsi Kallaway. Kotak frasa dikecilkan 1–2 tingkat dari v25.
+- Pada contoh cover kotak, serif "BATAS YANG JELAS" harus lebih besar/dominan daripada sans di bawahnya dan wajib memiliki glow.
+- Body contoh campuran sans–serif, langkah, dan perbandingan v25 dinilai terlalu besar. Perjelas skala body ringkas vs body baca biasa, bedakan dari subheading/headline, dan kecilkan kotak perbandingan agar tidak memenuhi frame.
+- Setiap mockup baru wajib mewarisi aturan yang sudah diputuskan, termasuk glow serif, safe zone, pemenggalan per makna, dan hierarki. Jangan hanya mengecek contoh lama.
+- Aturan operating system dibaca ulang: `aturan-layout-safe-zone.md`, `aturan-nulis-carousel.md`, `aturan-aset-visual.md`, dan `aturan-slide-cta-carousel.md`. Permintaan owner untuk ukuran body lebih kecil menjadi pengecualian khusus contoh revisi; jangan dianggap mengganti minimum umum seluruh brand.
+
+**Penerapan v26 (17 Okt 2026, ukuran/desain masih menunggu tinjauan owner)**
+- Kutipan sans "nanti aku bantu" mendapat aksen merah dan glow. Pemilihan ini manual untuk frasa tersebut, bukan aturan otomatis seluruh kutipan. Di latar merah aksen sans mengikuti aturan kontras hitam.
+- Tiga uji sans dominan ada di bagian baru "Sans dominan: tiga uji hook": larangan langsung mengiyakan tugas, hook orang diam, dan hook kalimat atasan yang merupakan tanda bahaya. Inti hook memakai Arimo Bold merah; konteks netral. Dua contoh memakai serif netral sebagai konteks, satu seluruhnya sans. Ukuran awal sans inti 12cqw (±130px), dipaskan bila frasa terlalu lebar; konteks sans 6.2–8cqw dan serif 7cqw sebelum fitting. Angka ini batas awal, bukan hasil sama untuk semua hook.
+- Cover body memakai fungsi judul yang sama dengan contoh "Aturan ukuran judul cover" (`title()`/`.kt`), termasuk fitting serif per baris dan jarak 3cqw (±32.4px) dari batas huruf. Body dijadikan satu baris Arimo reguler 3.1cqw (±33.5px), jarak dari huruf terakhir judul 1.5cqw (±16.2px), mengikuti kepadatan cover Kallaway `DdVL9TBjixz_1.mp4`.
+- Cover kotak: "BATAS YANG / JELAS" menjadi fokus serif besar, memakai fitting `.hkl` yang sama dan glow yang sama dengan cover utama. Sans pendukung 5.2cqw (±56px, bisa dipaskan), kotak kecil 3.1cqw (±33.5px), padding 1.2×1.8cqw (±13×19px), jarak kotak 2cqw (±21.6px). Acuan hierarki: `DdQByHQDllF_1.mp4`.
+- Contoh slide isi ringkas: headline ±73px, subheading langkah 5.4cqw (±58px), body 3.3cqw (±35.6px), line-height 1.12. Body serif inline 1.16× body sans. Ini **skala ringkas khusus contoh ini sesuai koreksi owner**, berbeda dari body baca biasa ±48px di bagian lain. Skala dijelaskan pada halaman mockup agar tidak ambigu. Acuan proporsi: `DdSq4qnDuMn_4.jpg` dan `DdiB7w6Dpef_4.jpg`.
+- Kotak perbandingan dibuat selebar 66% kanvas (±713px), padding 2.8×3cqw (±30×32px), jarak antarkotak 3cqw (±32.4px); body reguler ±36px dan label ±56px. Berada dalam safe zone kanan.
+- Glow disatukan lewat token `--type-glow` untuk serif variasi cover/isi, subheading langkah, body serif, dan frasa serif diagram; label hijau memakai pendar hijau. Aturan kapital dan larangan kilau menyapu tetap berlaku.
+- Untuk mockup baru: pakai sistem judul/batas huruf yang sudah ada; jangan membuat jarak dari tinggi kotak font biasa. Periksa skala berdasarkan peran (satu fokus, maksimal tiga tingkat), glow, pecahan frasa, dan safe zone pada hasil visual.
+- Server sempat berhenti; berhasil dijalankan ulang memakai Python lokal `C:/Users/ASUS_M3400Q/AppData/Local/Programs/Python/Python312/python.exe -u -m http.server 8765` dari folder mockup. Python bundled sempat tidak bisa diakses browser; dua percobaan proses tersebut sudah dihentikan. Jangan menjalankan banyak server pada port yang sama.
+- Validasi v26: tiga uji sans, cover body/kotak, tiga slide isi ringkas, dan aksen kutipan sudah dilihat melalui screenshot. Delapan contoh revisi diukur aman dari batas kanan 120px; tiga body tidak meluap. Jarak huruf judul di cover body dan kotak terukur 3% lebar kanvas; jarak body cover 1.5%. Tidak ada glow yang hilang pada judul serif variasi/diagram dan subheading yang diaudit. Kilau menyapu tetap tidak ada. Belum dicek pada HP asli, semua kombinasi pilihan, atau ekspor final/video.
+
+1. **Font sans sudah dipilih: Arimo.** Heading Bold; body reguler/bold sesuai konteks. Ukuran dan jarak belum dikunci.
+2. Ukuran font cover, jarak antarkata, jarak antarbaris, dan proporsi judul masih bisa berubah (klarifikasi owner 16 Okt 2026). Angka v22 di bagian 3 menjadi acuan saat ini; cek ulang terhadap kallaway sesuai arahan owner.
+3. Ide berikutnya: gambar sedikit menimpa bagian bawah judul (seperti kepala menutupi "MACHINE" di kallaway), sebagai variasi.
+4. Kapital frasa serif headline/subheading slide 2+ sudah mengikuti Title Case. Layout dan proporsi judul slide isi masih perlu tinjauan owner; variasi baru v25 belum ACC desain final.
+5. Pilihan owner lain (dunia visual, gaya nomor slide, opsi reels) belum final. Panel "Salin pilihan" di mockup menghasilkan ringkasan pilihan.
+6. Setelah semua dipilih: bangun template carousel resmi (`carousel-style-cloner`). Reels/video dibahas terpisah (`Documents\Asendra\video-studio`).
+7. Validasi v23: server lokal yang sudah aktif di `http://localhost:8765` dipakai untuk melihat revisi. Sudah dicek visual: dua bagian yang ditandai owner, empat diagram, storytelling, listicle gelap/terang, dan marmer. Font Arimo lokal terdeteksi termuat, heading 700/body 400; batas kanan kotak dan teks diagram sudah diukur aman. Belum dicek di HP asli, seluruh kombinasi dunia visual, atau ekspor final. Ditemukan referensi gambar lama `img/B_mugshot_glow.webp` tidak tersedia pada contoh reels teks penuh; belum diperbaiki dalam revisi ini.
+
+## 5. Cara kerja yang diminta owner
+- Bahasa ke owner: Indonesia, ringkas, tanpa jargon.
+- Jangan menimpa file user. Versi baru pakai akhiran `_v2`, `_v3`. Mockup ini sendiri boleh diedit langsung, karena dibuat oleh AI dan selama ini diiterasi di tempat.
+- Jangan mengarang angka, data, atau testimoni.
+- Git: kerja di branch `review/asendra-4-brand`, jangan ke `main`. Commit hanya kalau owner minta.
+- Setiap revisi: cek hasilnya secara visual (screenshot) sebelum melapor. Laporkan apa yang berubah dan apa yang belum dicek.
+- Sebelum mulai mengerjakan, baca file yang diminta, rangkum pemahaman dalam 5 poin, lalu tunggu owner menyatakan rangkuman benar. Rangkuman sesi ini sudah disetujui pada 16 Okt 2026, dengan klarifikasi ukuran font dan jarak cover di atas.
+- Satu pesan owner = satu revisi. Screenshot owner menjadi acuan utama; bandingkan dengan contoh kallaway bila relevan.
+- Sebelum menyatakan revisi mockup selesai, jalankan/pastikan server lokal di folder `Mockup_Feed_auraneuro` aktif (`python -m http.server 8765`), buka `http://localhost:8765`, lalu lihat hasilnya secara visual (screenshot bila bisa). Jangan menyatakan selesai sebelum dilihat.
+- Semua perubahan cukup lokal; artifact Claude tidak perlu diperbarui.
+- Setiap keputusan baru langsung dicatat di handoff ini, termasuk keputusan final, angka ukuran/jarak, dan hal yang masih terbuka. Owner mengizinkan pembaruan langsung pada handoff ini; file lain selain mockup dibuat versi baru bila perlu.
+
+## Revisi v31 — 17 Okt 2026
+- Owner meminta jarak setelah judul di semua reels #2, tambahan jarak ilustrasi–paragraf E, judul sedikit lebih besar, dan komposisi C lebih rendah agar seimbang pada crop feed. Ditambahkan margin setelah judul 3cqw (32.4px pada 1080), margin sebelum body E 2cqw (21.6px), batas serif editorial naik 13→14cqw. Body tetap 3.9cqw, justify dengan baris terakhir kiri, CTA tengah.
+- Komposisi C diturunkan sebagai satu kesatuan: ed-wrap top 23.1% dan figur top55% (keduanya +96px); bukan hanya memusatkan koordinat figur. Dilihat dalam crop 3:4: ruang atas/bawah keseluruhan komposisi lebih seimbang. Belum merupakan persetujuan final owner.
+- Pesan tambahan owner: ilustrasi boleh diperbesar sekitar30% selama tidak berlebihan secara keseluruhan. SVG D–F memakai tinggi130% terpusat dan lebar maksimal area aman (89cqw). E/F membesar30%; D sekitar20% karena ilustrasinya lebar. Dibatasi agar tidak keluar area aman. Galeri dan grid sudah dilihat setelah perubahan; tidak ada tabrakan dengan paragraf/CTA yang terlihat.
+- QA: A–F dilihat di localhost, versi publik v31 juga dilihat. Jarak title-container→konten ilustrasi64.8px; art-box→body E54px. CTA D–F berakhir y≈1449.6 pada1080x1920. Kedua grid tetap6hitam/3merah/3terang. JS inline lolos pemeriksaan sintaks sebelum tambahan CSS ilustrasi. Belum diuji di HP asli atau seluruh kombinasi kontrol.
+- Publikasi Sites berhasil: versi5, commit337640efd11296800a0285efe89c847eaa6eac63, version_id appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_bb9db15eedb48191881cb83a4e0944ec, deployment appgdep_6ad394077a648191a331c1093bbf1f51. URL tetap https://auraneuro-feed-mockup.reybuss.chatgpt.site. Commit/push hanya repositori Sites, bukan Asendra.
+## Koreksi v32 — 17 Okt 2026
+- Owner menilai v31: ilustrasi D/F masih mepet body, E mepet judul, dan CTA perlu diturunkan. Ditambahkan margin-top ilustrasi4cqw (43.2px pada1080). Batas bawah ed-wrap menjadi23.45% sehingga CTA berakhir y1469.8 (turun20px), padding atas CTA2cqw. Minimum art F16.4cqw agar CTA tidak terdorong keluar area aman.
+- Ukuran ilustrasi dipaskan kembali dengan ruang tersisa; pembesaran30% bukan angka wajib bila mengganggu jeda. Aturan terbaru: prioritaskan ruang jelas judul–gambar, body–gambar, gambar–CTA; jangan memaksa skala sampai bersinggungan.
+- D/E/F sudah dilihat di localhost dan hasil publik. Ketiga CTA terukur berakhir y≈1469.8 dalam area aman. Belum diuji pada HP asli dan seluruh kombinasi kontrol.
+- Sites versi6 berhasil dipublikasikan pada URL yang sama. Commit d9831e7ea9dfdd3bc6800e4b453ed9835d71c201; version_id appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_bac5251bedb08191915e770cb351aa5a; deployment appgdep_6ad39549abdc8191b0ec2e3b3b60c765. Hanya repositori Sites di-commit/push.
+## Revisi v33 — aturan ilustrasi lanjutan
+- Owner meminta E/F diperbesar lagi dengan D sebagai batas maksimum, berlaku pula untuk ilustrasi baru. Batas bersama SVG: lebar89cqw (961px), tinggi39.15cqw (423px) pada kanvas1080. Skala harus proporsional dan dipaskan dengan ruang kosong, bukan dipaksa sama lebar/tinggi untuk semua bentuk. Maksimum mengikuti bidang ilustrasi D; teks dan CTA tidak boleh bertabrakan dengannya.
+- E/F mendapat ruang lebih besar dengan judul dimulai y≈284 (top14.8%), sementara D tetap y≈348. CTA tetap berakhir y≈1470. Ilustrasi E/F membesar; batas SVG E≈380px dan F≈314px, keduanya di bawah maksimum D≈423px. Body tetap ukuran semula.
+- Body E diberi margin-top5cqw menggantikan2cqw. Bersama gap3cqw memberi jarak86.4px antar bidang ilustrasi dan body sebelum memperhitungkan perluasan SVG; jarak tepi SVG ke body terukur≈42.6px, plus ruang internal gambar. Memakai ruang huruf/gambar yang terlihat saat evaluasi, bukan hanya kotak CSS.
+- Galeri D–F dan grid feed sudah dilihat lewat browser localhost setelah perubahan. Tidak terlihat tabrakan; E memiliki jarak jelas antara judul–gambar dan gambar–paragraf. Belum diuji HP asli atau semua kombinasi kontrol.- Publikasi v33 berhasil dan sudah dilihat di browser publik: Sites versi7, commit878166352211affc47f1f7744e1a8270cfa210b9, version_id appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_db655c63deec8191aefde9ae5b0ed8fe, deployment appgdep_6ad39744e9448191876d8a8dda176b2c. URL tetap https://auraneuro-feed-mockup.reybuss.chatgpt.site. Commit/push hanya repositori Sites.
+
+## Revisi v34 — margin atas frame feed wajib
+- Owner menegaskan judul reels wajib mengikuti margin atas carousel, terutama E/F v33 yang terlalu dekat ke crop. Audit mengukur E/F hanya44px dari crop, dibanding108px pada carousel. Kesalahan v33: menggeser judul ke atas untuk memperbesar ilustrasi. Jangan ulangi strategi ini.
+- Aturan: minimum jarak judul ke batas atas crop feed3:4 adalah10% lebar kanvas (108px pada1080), sama seperti top7.5% carousel1080x1440. Reels memakai top calc(12.5% + 10cqw): crop mulai y240, judul mulai y348. Token --feed-title-inset:10cqw berlaku untuk editorial; pengecualian E/F yang menaikkan judul dihapus. C kini juga wajib sejajar setelah koreksi owner berikutnya.
+- Prioritas layout: margin crop dan jarak teks dahulu, ukuran ilustrasi mengikuti ruang yang tersisa dengan batas maksimum D. Jangan mencapai ukuran ilustrasi dengan melanggar margin judul, mengecilkan body, atau menabrakkan elemen. Karena ini, E/F dipaskan lebih kecil daripada v33.
+- Audit seluruh contoh/frame reels berjudul di galeri dan kedua grid: tidak ada margin di bawah108px. D/E/F tepat108px; reels#1 sekitar134px; C kini108px. CTA D/E/F berakhir y≈1470. Galeri ilustrasi sudah dilihat di browser localhost; belum diuji di HP asli atau seluruh kombinasi panel.- Koreksi lanjutan owner pada revisi yang sama: judul C terlalu rendah. Override top23.1% dihapus; A–F sekarang seluruhnya berjarak108px dari batas crop. Posisi figur dekoratif C tetap independen pada55% kanvas. Judul tidak boleh digeser untuk menyeimbangkan figur. A–C sudah dilihat berdampingan dan A–F diukur ulang, semuanya108px.- Koreksi terbaru owner: ukuran E/F tidak boleh ikut mengecil ketika hanya judul dikoreksi. State lokal v34 kini mempertahankan tinggi SVG E380px/F314px seperti v33; margin judul A–F108px. CTA D–F dipindah bersama ke y1534 agar ruang gambar dan teks tetap terjaga. Ini melewati safe-zone lama1470, masih di crop feed sampai1680; jangan klaim aman terhadap UI reels tanpa validasi. Owner belum menyetujui perubahan batas ini.
+- Publikasi state final TERBLOKIR auto-review: penolakan menyatakan CTA y1534 melewati batas aman1470. Tidak dibypass. Versi publik masih v33/versi7. Paket v34 awal commitc1e18a0fdfb8718d8e9ce9e1cb93136fd7e31b98 (ilustrasi masih kecil, judul C diperbaiki) sudah tersimpan di repo Sites tetapi belum save/deploy. State lokal terbaru dengan ilustrasi380/314 belum disalin ke Sites karena command ditolak sebelum jalan. Menunggu persetujuan eksplisit owner atas CTA1534 atau perbaikan yang sesuai safe-zone lama. Screenshot lokal auraneuro-v34-local-review.png sudah dibuat. Jangan mempublikasikan paket awal yang keliru.
+
+## Keputusan dokumentasi — 17 Oktober 2026
+- Owner mengunci frekuensi cover50%hitam/25%putih/25%merah, dunia campur, ruang bawah bervariasi, merah#C80A0A, fontArimo+InstrumentSerifItalic, seluruh3gaya nomor sebagai variasi. Ini bukan sekadar status tombol mockup.
+- Reels tetap kondisional. Arahan terbaru: kemungkinan besar tanpa thumbnail tambahan, jadi frame konten nyata harus bekerja di feed. Pisahkan penerapan carousel-studio dan video-studio.
+- Dibuat3berkas baru di root brand: desain.md (aturan lengkap,491baris sekitar6500kata), desain-carousel-studio.md (jalur carousel), desain-video-studio.md (jalur reels). Dokumen induk membedakan final, acuan implementasi, kondisional, rekomendasi, dan pengecualian. Konten utamanya mandiri untuk dipindahkan ke model/perangkat lain; font/aset tetap perlu dibawa untuk reproduksi identik. Tidak mengklaim template studio atau MP4 produksi selesai.
+- Pemeriksaan dokumen: keputusan wajib, tautan panduan studio, satuan dan sumber ukuran diperiksa; tidak ada berkas user ditimpa. Tidak ada commit Asendra.
+- Owner menjawab 'oke' setelah pratinjau CTA1534 dan penjelasan safe-zone. Status penolakan publikasi sebelumnya sudah terselesaikan lewat persetujuan ini. Publikasi v34 sekarang SUKSES: Sites versi8, commit db594ecd69dff9f69b7d2fd4a2a30f7777ee2917, version_id appgprj_6ad349fd1c288191ac89d5217d68384f~appgver_ff0870ffeb288191a0e8e9ee3a79ad9b, deployment appgdep_6ad39e2e512481919f203c1fc2a98042. Sudah dilihat di browser publik. URL tetap https://auraneuro-feed-mockup.reybuss.chatgpt.site . Hanya repositori Sites di-commit/push; dokumen desain lokal tidak diunggah ke situs.

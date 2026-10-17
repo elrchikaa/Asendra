@@ -1,0 +1,1128 @@
+<meta charset="utf-8">
+<title>Mockup Feed auraneuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Instrument+Sans:wght@700&family=Hanken+Grotesk:wght@700;800&family=Albert+Sans:wght@700;800&family=Schibsted+Grotesk:wght@700;800&family=Figtree:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;600;700;800&family=Inter:wght@400;800&family=Instrument+Serif:ital@1&family=Newsreader:ital,opsz,wght@1,6..72,400&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Libre+Caslon+Text:ital@1&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=Tinos:ital@1&family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;700&family=Schibsted+Grotesk:wght@400;800&display=swap">
+<style>
+@font-face{font-family:"Arimo";src:url(fonts/Arimo.ttf) format("truetype");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"K Inter Tight";src:url(fonts/InterTight.ttf) format("truetype");font-weight:100 900}
+@font-face{font-family:"K Heros";src:url(fonts/TeXGyreHeros-Bold.otf) format("opentype");font-weight:700}
+@font-face{font-family:"K Newsreader";src:url(fonts/Newsreader-Italic.ttf) format("truetype");font-style:italic;font-weight:200 800}
+@font-face{font-family:"K Libre Caslon";src:url(fonts/LibreCaslonText-Italic.ttf) format("truetype");font-style:italic;font-weight:400 700}
+@font-face{font-family:"K Tinos";src:url(fonts/Tinos-Italic.ttf) format("truetype");font-style:italic;font-weight:400}
+@font-face{font-family:"K Tinos";src:url(fonts/Tinos-BoldItalic.ttf) format("truetype");font-style:italic;font-weight:700}
+@font-face{font-family:"K Instrument Serif";src:url(fonts/InstrumentSerif-Italic.ttf) format("truetype");font-style:italic;font-weight:400}
+
+/* Layout: panel pilihan, ponsel IG (grid 3:4) + cover besar + reels, perbandingan font, motion, storytelling, slide. Token halaman di :root; token cover di .cv (hitam-merah). Kanvas carousel 1080x1440 (3:4). */
+:root{
+  --bg:#f3f2f6; --surface:#fff; --fg:#17161d; --muted:#5b5868; --line:#dcdae4; --tagbg:#ecebf2; --accent:#8a1010; --accent-soft:#f6e3e3;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; --body:"Source Sans 3","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --cv-sans:"Inter Tight","Arial Narrow",system-ui,sans-serif; --sw:700; --cv-serif:"Instrument Serif",Georgia,serif; --ew:400; --es:1.12;
+  --red:#C80A0A;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f0e11;--surface:#17161a;--fg:#e8e6ec;--muted:#a19ca8;--line:#2c2a31;--tagbg:#211f25;--accent:#ff6b6b;--accent-soft:#3a1717;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f0e11;--surface:#17161a;--fg:#e8e6ec;--muted:#a19ca8;--line:#2c2a31;--tagbg:#211f25;--accent:#ff6b6b;--accent-soft:#3a1717;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:28px 120px;margin:0}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,3rem)} h2{font-size:1.6rem}
+p{margin:0;max-width:72ch}
+.eyebrow,.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.03rem}
+section{display:flex;flex-direction:column;gap:14px}
+.note{font-size:.88rem;color:var(--muted)}
+.controls{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 22px}
+.ctl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:500 .84rem var(--body);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.main{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:28px;align-items:start}
+.phone{border-radius:28px;border:8px solid #1b1a20;background:var(--igbg);color:var(--igfg);overflow:hidden;max-width:400px;width:100%}
+.phone.ig-dark{--igbg:#000;--igfg:#f5f5f5;--igmuted:#a8a8a8;--igline:#262626}
+.phone.ig-light{--igbg:#fff;--igfg:#0c0c0c;--igmuted:#737373;--igline:#dbdbdb}
+.ighead{display:flex;gap:14px;align-items:center;padding:16px 14px 10px}
+.avatar{width:64px;height:64px;border-radius:50%;background:#0b0909;display:grid;place-items:center;flex:none;border:1px solid var(--igline);overflow:hidden}
+.avatar img{width:78%;height:auto}
+.ighead b{font-family:var(--body);font-size:1rem;display:block}
+.ighead small{color:var(--igmuted);font-size:.8rem;display:block;line-height:1.35}
+.igtabs{display:flex;border-top:1px solid var(--igline)}
+.igtabs span{flex:1;text-align:center;font:600 .7rem var(--mono);letter-spacing:.08em;padding:9px 0;color:var(--igmuted)}
+.igtabs span:first-child{color:var(--igfg);border-top:1px solid var(--igfg);margin-top:-1px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;background:#000}
+.tile>.cv{position:absolute}
+.tile>.cv.r34{inset:0;width:100%;height:100%}
+.tile>.cv.r916{width:100%;height:133.333%;top:-16.667%;left:0}
+.ticon{position:absolute;top:5px;right:5px;width:14px;height:14px;z-index:9;filter:drop-shadow(0 0 2px rgba(0,0,0,.6))}
+
+/* ===== kanvas ===== */
+.cv{position:relative;overflow:hidden;container-type:inline-size;background:var(--cbg);color:var(--cink);isolation:isolate;--cacc:var(--red)}
+.cv.r34{aspect-ratio:3/4}.cv.r916{aspect-ratio:9/16}
+.cv.dark{--cbg:#151313;--cglow:#3a2121;--cink:#F4F1EE;--cmute:#958c89;--glowc:rgba(235,30,30,.9)}
+.cv.light{--cbg:#E3E1DE;--cglow:#ffffff;--cink:#151212;--cmute:#5f5856;--glowc:rgba(170,2,2,.0)}
+.cv.red{--cbg:var(--red);--cglow:color-mix(in srgb,var(--red) 60%,#ff5a3c);--cink:#FFF6F3;--cmute:rgba(255,240,236,.75);--cacc:#0d0202;--glowc:rgba(0,0,0,0)}
+.cv .lyr{position:absolute;inset:0;pointer-events:none}
+.cv .glow{background:radial-gradient(60% 40% at 50% 68%,var(--cglow),transparent 72%)}
+.cv.dark .vig{background:radial-gradient(130% 95% at 50% 48%,transparent 55%,rgba(0,0,0,.6))}
+.cv.red .vig{background:radial-gradient(120% 90% at 50% 45%,transparent 45%,rgba(40,0,0,.6))}
+.cv.light .paper{background-image:radial-gradient(rgba(0,0,0,.16) .55px,transparent .7px),linear-gradient(rgba(0,0,0,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.045) 1px,transparent 1px);background-size:2.2cqw 2.2cqw,8.8cqw 8.8cqw,8.8cqw 8.8cqw}
+.cv.light .vig{background:radial-gradient(120% 90% at 50% 45%,transparent 60%,rgba(0,0,0,.08))}
+.cv .grain{inset:0;background:url(img/grain_f.png);background-size:256px 256px;mix-blend-mode:overlay;opacity:.6;z-index:2}
+.cv.light .grain{opacity:.3}.cv.red .grain{opacity:.36}
+/* grain film halus (1 piksel), blend overlay: hampir hilang di hitam pekat, paling terasa di area pendar & abu gelap, ikut berwarna di area merah (seperti kallaway) */
+/* lapisan grain kedua menebalkan grain di area tertentu: gradasi atas-bawah (default), tepi frame, setengah bawah, penuh, di belakang sosok */
+.cv .grain2{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;background:url(img/grain_f.png);background-size:256px 256px;opacity:.9;-webkit-mask-image:linear-gradient(#000 0,transparent 40%,transparent 60%,#000 100%);mask-image:linear-gradient(#000 0,transparent 40%,transparent 60%,#000 100%)}
+.cv .grain2{opacity:.45}
+.cv.light .grain2{opacity:.25}.cv.red .grain2{opacity:.28}
+.cv.g-edge .grain2{-webkit-mask-image:radial-gradient(70% 60% at 50% 50%,transparent 35%,#000 100%);mask-image:radial-gradient(70% 60% at 50% 50%,transparent 35%,#000 100%)}
+.cv.g-half .grain2{-webkit-mask-image:linear-gradient(transparent 42%,#000 68%);mask-image:linear-gradient(transparent 42%,#000 68%)}
+.cv.g-full .grain2{-webkit-mask-image:none;mask-image:none}
+.cv.g-full .grain2{opacity:.35}
+.cv.g-obj .grain2{-webkit-mask-image:radial-gradient(36% 30% at 50% 66%,#000 25%,transparent 100%);mask-image:radial-gradient(36% 30% at 50% 66%,#000 25%,transparent 100%)}
+/* cahaya di belakang sosok, mengikuti kallaway: pendar menempel di kontur sosok (bukan cakram), latar hanya terangkat lebar & lembut, atau lampu merah dari belakang-bawah dengan sosok jadi siluet bertepi merah */
+.cv .halo{z-index:2}
+.cv .fx{transition:none}
+.cv.h-bloom .fx{filter:drop-shadow(0 0 .7cqw rgba(255,255,255,.55)) drop-shadow(0 0 3.2cqw rgba(255,255,255,.22))}
+.cv.h-bloom .halo{background:radial-gradient(60% 42% at 50% 66%,rgba(255,255,255,.07),transparent 78%)}
+.cv.h-bloomred .fx{filter:drop-shadow(0 0 .7cqw color-mix(in srgb,var(--red) 95%,transparent)) drop-shadow(0 0 3.6cqw color-mix(in srgb,var(--red) 55%,transparent))}
+.cv.h-bloomred .halo{background:radial-gradient(60% 42% at 50% 68%,color-mix(in srgb,var(--red) 20%,transparent),transparent 78%)}
+.cv.h-back .fx{filter:brightness(.16) contrast(1.15) drop-shadow(0 0 .5cqw color-mix(in srgb,var(--red) 100%,transparent)) drop-shadow(0 0 2.2cqw color-mix(in srgb,var(--red) 70%,transparent))}
+.cv.h-back .halo{background:radial-gradient(48% 18% at 50% 98%,var(--red),transparent 75%),radial-gradient(58% 44% at 50% 78%,color-mix(in srgb,var(--red) 60%,transparent),transparent 78%)}
+.cv.red.h-bloom .fx{filter:drop-shadow(0 0 .7cqw rgba(255,255,255,.6)) drop-shadow(0 0 3.4cqw rgba(255,235,230,.3))}
+.cv.red.h-bloomred .fx{filter:drop-shadow(0 0 .7cqw rgba(60,0,0,.7)) drop-shadow(0 0 3.4cqw rgba(40,0,0,.5))}
+.cv.red.h-bloomred .halo{background:radial-gradient(60% 42% at 50% 68%,rgba(40,0,0,.25),transparent 78%)}
+.cv.red.h-back .fx{filter:brightness(.12) drop-shadow(0 0 .5cqw rgba(255,210,200,.9)) drop-shadow(0 0 2.4cqw rgba(255,120,100,.6))}
+.cv.red.h-back .halo{background:radial-gradient(42% 16% at 50% 97%,rgba(255,215,205,.75),transparent 72%),radial-gradient(62% 40% at 50% 80%,rgba(255,170,150,.25),transparent 76%)}
+.cv.light .fx{filter:drop-shadow(0 1cqw 2.4cqw rgba(0,0,0,.16))}
+.cv.light .halo{background:none}
+.cv.fullgrain{--cbg:#2a2626}
+.cv.fullgrain .grain{opacity:.8}
+.cv.fullgrain .grain2{-webkit-mask-image:none;mask-image:none;opacity:.6}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-6%,4%)}40%{transform:translate(5%,-3%)}60%{transform:translate(-3%,-6%)}80%{transform:translate(6%,5%)}100%{transform:translate(0,0)}}
+/* logo: tulisan kiri atas, lambang kanan atas */
+.cv .logo{position:absolute;top:4.6%;left:8%;right:8%;display:flex;justify-content:space-between;align-items:center;z-index:9;pointer-events:none}
+.cv .logo .wm{width:22%;height:auto;display:block}
+.cv .logo .em{width:7.2%;height:auto;display:block}
+.cv.r916 .logo{top:14%}
+/* teks */
+.cv .stack{position:absolute;left:11.1%;right:11.1%;top:12.5%;bottom:0;display:flex;flex-direction:column;align-items:center;z-index:3}
+.cv.r916 .stack{top:19.5%;bottom:12.5%}
+.cv .ttl{text-align:center;flex:none}
+.cv .h{font-family:var(--cv-sans);font-weight:var(--sw);font-size:7.4cqw;line-height:1.02;text-transform:uppercase;letter-spacing:-.02em}
+.cv .h em,.cv em.k2{font-family:var(--cv-serif);font-style:italic;font-weight:var(--ew);text-transform:none;color:var(--cacc);letter-spacing:-.01em}
+.cv .h em{display:block;font-size:calc(9.4cqw * var(--es));line-height:.95;margin:.2cqw 0}
+.cv.dark .h em,.cv.dark em.k2,.cv.fullgrain em.k2{text-shadow:0 0 1cqw var(--glowc),0 0 3.5cqw var(--glowc),0 0 8cqw color-mix(in srgb,var(--glowc) 60%,transparent)}
+.cv.red .h em,.cv.red em.k2{color:#0d0202;text-shadow:0 0 1cqw rgba(0,0,0,.5),0 0 4cqw rgba(0,0,0,.45),0 0 10cqw rgba(0,0,0,.35)}
+.cv.red .h{text-shadow:0 0 3cqw rgba(60,0,0,.35)}
+.cv .figwrap{flex:1 1 0;min-height:0;width:100%;display:flex;justify-content:center;align-items:flex-end;margin-top:3.4cqw;position:relative}
+.cv .col{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;position:relative}
+.cv .fimg{flex:1 1 0;min-height:0;height:0;width:100%;object-fit:contain;object-position:50% 100%;display:block}
+.cv.light .fimg{mix-blend-mode:multiply}
+/* dunia visual */
+.cv .museum{background:radial-gradient(42% 32% at 50% 34%,rgba(255,255,255,.10),transparent 72%)}
+.cv.light .museum{background:radial-gradient(42% 32% at 50% 34%,rgba(255,255,255,.8),transparent 72%)}
+.cv .plinth{flex:none;width:60%;height:9cqw;position:relative;margin-top:-.6cqw}
+.cv .plinth .top{position:absolute;left:-4%;right:-4%;top:0;height:2cqw;background:color-mix(in srgb,var(--cink) 34%,var(--cbg));clip-path:polygon(3% 0,97% 0,100% 100%,0 100%)}
+.cv .plinth .face{position:absolute;left:0;right:0;top:2cqw;bottom:0;background:linear-gradient(90deg,color-mix(in srgb,var(--cink) 9%,var(--cbg)),color-mix(in srgb,var(--cink) 20%,var(--cbg)) 50%,color-mix(in srgb,var(--cink) 7%,var(--cbg)))}
+.cv.wL .stack{bottom:-7%}
+.cv.r916.wL .stack{bottom:10%}
+.cv.wL .figwrap{container-type:size}
+.cv .orbw{width:min(100cqw,100cqh);aspect-ratio:1;position:relative}
+.cv .orb{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.cv .orb img{width:124%;margin:-12%;display:block}
+.cv.light .orb img{mix-blend-mode:multiply}
+.cv .rings{position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2.4cqw transparent,0 0 0 2.75cqw color-mix(in srgb,var(--cacc) 70%,transparent),0 0 0 7cqw transparent,0 0 0 7.3cqw color-mix(in srgb,var(--cink) 16%,transparent)}
+.cv.wB .stack{bottom:7%}
+.cv.r916.wB .stack{bottom:15%}
+.cv .photo{height:100%;max-width:78%;aspect-ratio:4/5;background:#ebe6dc;padding:3%;box-shadow:0 1.5cqw 4cqw rgba(0,0,0,.45);transform:rotate(-3deg);position:relative;display:flex;flex-direction:column}
+.cv .photo .pin{flex:1;min-height:0;background:#141212;position:relative;overflow:hidden}
+.cv.light .photo .pin{background:#d9d5cd}
+.cv .photo .pin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.cv .stamp{position:absolute;right:-14%;bottom:20%;transform:rotate(-13deg);border:.6cqw solid var(--red);color:var(--red);font-family:var(--cv-sans);font-weight:800;font-size:5.4cqw;letter-spacing:.06em;padding:.4cqw 2cqw;z-index:3;background:rgba(14,10,10,.82);box-shadow:0 .6cqw 2cqw rgba(0,0,0,.5)}
+.cv.light .stamp{background:rgba(240,236,228,.92)}
+.cv.red .stamp{border-color:#fff;color:#fff;background:#0d0202}
+.cv .splat{display:none}
+.cv.wD.dark .blencong{background:radial-gradient(34% 24% at 50% 44%,rgba(255,150,70,.26),transparent 70%)}
+.cv.wD.light .blencong{background:radial-gradient(55% 45% at 50% 48%,rgba(255,236,200,.85),transparent 75%)}
+.cv.wD .stack{bottom:11%}
+.cv.r916.wD .stack{bottom:21%}
+.cv .gedebog{position:absolute;left:0;right:0;bottom:0;height:14%;z-index:4;background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 .35cqw,transparent .35cqw 1.5cqw),linear-gradient(#4e3622,#251910);box-shadow:inset 0 1cqw 0 rgba(255,255,255,.07),0 -1.2cqw 3cqw rgba(0,0,0,.45)}
+.cv.light .gedebog{background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 .35cqw,transparent .35cqw 1.5cqw),linear-gradient(#a08a6b,#7b6750)}
+.cv.red .gedebog{background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 .35cqw,transparent .35cqw 1.5cqw),linear-gradient(#3a0a05,#1a0402)}
+.cv.r916 .gedebog{bottom:12.5%;height:11%}
+.cv .spot{background:linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,0) 85%);clip-path:polygon(41% 0,59% 0,92% 100%,8% 100%)}
+.cv.light .spot{background:linear-gradient(rgba(255,255,255,.9),rgba(255,255,255,0) 85%)}
+.cv .curtain:before,.cv .curtain:after{content:"";position:absolute;top:0;bottom:0;width:8%;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--red) 70%,#000) 0 1.3cqw,color-mix(in srgb,var(--red) 35%,#000) 1.3cqw 2.8cqw);box-shadow:0 0 3cqw rgba(0,0,0,.6)}
+.cv .curtain:before{left:0}.cv .curtain:after{right:0}
+.cv.light .curtain{opacity:.35}.cv.red .curtain{opacity:.6}
+.cv .ctrl{flex:none;width:44%;height:1.8cqw;border-radius:1cqw;background:color-mix(in srgb,var(--cink) 55%,transparent)}
+.cv .strs{flex:none;width:44%;height:6cqw;position:relative}
+.cv .strs i{position:absolute;top:0;bottom:-4cqw;width:.3cqw;background:var(--cink);opacity:.55}
+/* mata patung (close-up mengintimidasi) */
+.cv .eyes{position:absolute;inset:0;overflow:hidden;z-index:1;-webkit-mask-image:linear-gradient(transparent 0,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 30%,#000 70%,transparent 100%)}
+.cv .eyes img{position:absolute;width:150%;left:-25%;top:-26%;opacity:.95}
+.cv .eyes:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(17,15,15,.94) 72%)}
+.cv.light .eyes img{mix-blend-mode:multiply}
+/* motion */
+.motion-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.motion-grid .cv{border-radius:4px}
+.motion .splat{display:block;position:absolute;right:-18%;bottom:10%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--red) 60%,transparent) 0,transparent 62%);z-index:2;animation:splat 4.5s ease-out infinite;opacity:0}
+.motion.wB .stamp{animation:stampDrop 4.5s cubic-bezier(.2,.8,.3,1) infinite}
+.motion.wB .photo{animation:thud 4.5s ease-out infinite}
+@keyframes stampDrop{0%,14%{opacity:0;transform:translateY(-70%) rotate(-32deg) scale(3)}22%{opacity:1;transform:rotate(-13deg) scale(.9)}26%{transform:rotate(-13deg) scale(1.06)}30%,100%{opacity:1;transform:rotate(-13deg) scale(1)}}
+@keyframes thud{0%,21%{transform:rotate(-3deg)}23%{transform:translateY(.7cqw) rotate(-3.6deg)}26%{transform:translateY(-.3cqw) rotate(-2.7deg)}30%,100%{transform:rotate(-3deg)}}
+@keyframes splat{0%,21%{opacity:0;transform:scale(.2)}24%{opacity:.9;transform:scale(1)}45%,100%{opacity:0;transform:scale(1.25)}}
+.motion.wL .orb img{animation:spin 50s linear infinite}
+.motion.wL .rings{animation:spin 80s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.motion.wD .blencong{animation:flicker 2.4s steps(1) infinite}
+.motion.wD .fimg{animation:sway 5s ease-in-out infinite alternate;transform-origin:50% 100%}
+@keyframes flicker{0%{opacity:1}12%{opacity:.78}17%{opacity:1}43%{opacity:.88}51%{opacity:1}72%{opacity:.7}76%{opacity:.95}}
+@keyframes sway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
+.motion.wE .col{animation:swing 3.2s ease-in-out infinite alternate;transform-origin:50% 0}
+.motion.wE .spot{animation:sweep 6s ease-in-out infinite alternate}
+@keyframes swing{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@keyframes sweep{from{transform:translateX(-4%)}to{transform:translateX(4%)}}
+.motion.wM .fimg{animation:push 7s ease-in-out infinite alternate;transform-origin:50% 100%}
+.motion .sheen{display:none;animation:none}
+.cv:not(.motion) .sheen{display:none}
+@keyframes push{from{transform:scale(1)}to{transform:scale(1.06)}}
+
+.motion.wT .fimg{animation:scan 6s ease-in-out infinite}
+@keyframes scan{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+.motion .h em{animation:breathe 3.5s ease-in-out infinite}
+@keyframes breathe{50%{text-shadow:0 0 1.4cqw var(--glowc),0 0 5cqw var(--glowc),0 0 12cqw var(--glowc)}}
+@media (prefers-reduced-motion: reduce){.cv *{animation:none!important}}
+/* di thumbnail kecil (grid), butir grain ikut mengecil seperti di Instagram */
+/* reels */
+.cv .rlwin{position:absolute;left:0;right:0;top:29.5%;height:41%;border-radius:4cqw;overflow:hidden;background:#141110}
+.cv .rlwin img{position:absolute;left:50%;transform:translateX(-50%);height:118%;bottom:-6%;width:auto;max-width:none;opacity:.9}
+.cv .rlwin:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 8cqw rgba(0,0,0,.85)}
+.cv .rlcap{position:absolute;left:0;right:0;top:48%;text-align:center;font-family:var(--cv-sans);font-weight:700;font-size:5.4cqw;color:#fff;z-index:3;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.cv .ghostfig{position:absolute;left:50%;transform:translateX(-50%);bottom:24%;height:40%;opacity:.2}
+.cv .ghostfig img{height:100%;width:auto}
+.cv .full{position:absolute;left:8%;right:11%;top:21%;z-index:3}
+.cv .full .h{text-align:left;font-size:6.4cqw}
+.cv .full .h em{font-size:calc(8cqw * var(--es))}
+.cv .full p{font-family:var(--cv-sans);font-size:4.1cqw;line-height:1.42;margin-top:4cqw;color:color-mix(in srgb,var(--cink) 85%,transparent);max-width:none}
+.cv .full small{display:block;margin-top:4cqw;font-family:var(--cv-sans);font-weight:600;font-size:3.2cqw;color:var(--cacc)}
+/* slide isi: rata kiri 8%, kanan 11.1% kosong, blok di tengah area aman */
+.cv .blk{position:absolute;left:8%;right:11.1%;top:14%;z-index:4;font-family:var(--cv-sans)}
+.cv .blk.mid{top:12%;bottom:12.5%;display:flex;flex-direction:column;justify-content:center}
+.cv .blk h5{margin:0;font-family:var(--cv-sans);font-weight:var(--sw);font-size:6.8cqw;line-height:1.05;letter-spacing:-.02em}
+.cv .blk h5.hx{font-size:8.4cqw}
+.cv .blk h5 em{font-size:calc(7.6cqw * var(--es));line-height:1}
+.cv .blk h5.hx em{font-size:calc(9.4cqw * var(--es))}
+.cv .blk ul{margin:3.4cqw 0 0;padding-left:5cqw;font-size:4.3cqw;line-height:1.42}
+.cv .blk p{font-size:4.3cqw;line-height:1.45;margin-top:3.4cqw;max-width:none}
+.cv .blk p b{font-weight:800}
+.cv .blk p em{font-style:normal;color:var(--cacc);font-weight:700}
+.cv.dark .blk p em{color:#e23a32}
+.cv .blk .when{font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:var(--cmute);margin-bottom:3cqw;font-weight:600}
+.cv .blk .src{font-size:3cqw;color:var(--cmute);margin-top:3cqw}
+.cv .sfig{position:absolute;left:8%;right:11.1%;bottom:0;height:44%;display:flex;flex-direction:column;z-index:2}
+.cv .sfig .figwrap{margin-top:0}
+.cv.wD .sfig{bottom:11%}
+.cv.wB .sfig{bottom:6%}
+.cv .ghost{position:absolute;inset:-4%;display:flex;justify-content:flex-end;align-items:flex-end;z-index:0;opacity:.32;filter:blur(1.4cqw)}
+.cv .ghost img{height:96%;width:auto;max-width:none;margin-right:-6%}
+.cv.light .ghost{opacity:.42}
+.cv.light .ghost img{mix-blend-mode:multiply}
+.cv .xerox{background-color:#cfcfcd;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,transparent 0 23%,rgba(0,0,0,.06) 23% 23.4%,transparent 23.4% 61%,rgba(0,0,0,.05) 61% 61.6%,transparent 61.6%)}
+.cv .xerox:after{content:"";position:absolute;inset:0;background:url(img/grain_f.png);background-size:256px;mix-blend-mode:multiply;opacity:.6}
+.cv.xr{--cink:#111;--cmute:#3e3c3c;--cbg:#cfcfcd}
+.cv.mb{--cink:#fff;--cmute:rgba(255,255,255,.8)}
+.cv.mb .blk p em{color:#fff;text-decoration:underline;text-underline-offset:.8cqw}
+.cv.mb em.k2{color:#120202;text-shadow:none}
+.cv .marb svg{width:100%;height:100%;display:block}
+.cv .no{margin-bottom:3.4cqw;font-family:var(--cv-sans)}
+.cv .no.rom{font-family:var(--cv-serif);font-style:italic;font-weight:var(--ew);font-size:calc(11cqw * var(--es));line-height:1;color:var(--cacc);display:flex;align-items:center;gap:3cqw}
+.cv.dark .no.rom{text-shadow:0 0 3cqw var(--glowc)}
+.cv .no.rom i{display:block;height:.3cqw;width:12cqw;background:currentColor;opacity:.6}
+.cv .no.lab{font-weight:600;font-size:3.1cqw;letter-spacing:.16em;text-transform:uppercase;color:var(--cmute);display:flex;align-items:center;gap:2.4cqw}
+.cv .no.lab:before{content:"";width:9cqw;height:.3cqw;background:var(--cacc)}
+.cv .no.brk{font-weight:700;font-size:4.6cqw;letter-spacing:.1em;color:var(--cacc)}
+.cv.mb .no.rom,.cv.mb .no.brk{color:#120202;text-shadow:none}
+.cv.mb .no.lab:before{background:#fff}
+.cv .chat{display:flex;flex-direction:column;gap:3cqw}
+.cv .chat .lab{font-weight:600;font-size:3.1cqw;letter-spacing:.09em;text-transform:uppercase;color:var(--cmute)}
+.cv .bub{max-width:84%;padding:2.6cqw 3.4cqw;border-radius:3cqw;font-size:4.3cqw;line-height:1.35}
+.cv .bub.in{background:#fff;color:#151212;border:.3cqw solid rgba(0,0,0,.12);align-self:flex-start}
+.cv .bub.out{background:var(--red);color:#fff;align-self:flex-end}
+.cv .dia{margin-top:5cqw}
+.cv .dia svg{width:100%;height:auto;display:block;overflow:visible}
+.cv .cta small{display:block;font-weight:600;font-size:3.4cqw;letter-spacing:.06em;text-transform:uppercase;color:var(--cmute)}
+.cv .cta .kw{font-weight:var(--sw);font-size:7.4cqw;line-height:1;text-transform:uppercase;margin-top:3cqw}
+.cv .cta .kw em{font-family:var(--cv-serif);font-style:italic;font-weight:var(--ew);font-size:calc(14cqw * var(--es));color:var(--cacc);text-transform:none;display:block}
+.cv.dark .cta .kw em{text-shadow:0 0 1cqw var(--glowc),0 0 4cqw var(--glowc)}
+.rail{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.rail .cv{border-radius:3px}
+.rail figure,.big figure,.reels figure,.motion-grid figure,.fonts figure{margin:0;display:flex;flex-direction:column;gap:4px;min-width:0}
+figcaption{font:500 .74rem var(--mono);color:var(--muted)}
+.big{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.big .cv,.fonts .cv{border-radius:4px}
+.fonts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.zooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.zoombox{height:360px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:#000}
+.zoombox>div{width:1080px}
+.crop{position:absolute;inset:12.5% 0;border:1.5px dashed rgba(255,80,80,.9);z-index:20;pointer-events:none}
+.safe{position:absolute;top:0;bottom:0;right:0;width:11.1%;background:repeating-linear-gradient(45deg,rgba(255,80,80,.18) 0 4px,transparent 4px 8px);border-left:1.5px dashed rgba(255,80,80,.9);z-index:20;pointer-events:none}
+.reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.reels .cv{border-radius:6px}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px}
+table{border-collapse:collapse;width:100%;font-size:.9rem} th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.dock{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:30}
+.dock-in{max-width:1180px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dock-in div{font-size:.9rem;min-width:0}
+.dock button{font:inherit;font-weight:700;background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:9px 16px;cursor:pointer}
+textarea{width:100%;min-height:90px;font:.8rem var(--mono);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px}
+@media (max-width:900px){.main{grid-template-columns:1fr}.phone{margin:0 auto}.rail,.motion-grid,.reels,.fonts,.big{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== v8: grain per area (bagian lain polos), butir halus, tidak menimpa teks ===== */
+.cv .grain{display:none}
+.cv{--gm:linear-gradient(270deg,#000 0,rgba(0,0,0,.55) 25%,transparent 62%)}
+.cv.g-right{--gm:linear-gradient(270deg,#000 0,rgba(0,0,0,.55) 25%,transparent 62%)}
+.cv.g-left{--gm:linear-gradient(90deg,#000 0,rgba(0,0,0,.55) 25%,transparent 62%)}
+.cv.g-top{--gm:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 22%,transparent 58%)}
+.cv.g-bottom{--gm:linear-gradient(0deg,#000 0,rgba(0,0,0,.55) 22%,transparent 58%)}
+.cv.g-corner{--gm:radial-gradient(circle at 0 0,#000,transparent 46%),radial-gradient(circle at 100% 0,#000,transparent 46%),radial-gradient(circle at 0 100%,#000,transparent 46%),radial-gradient(circle at 100% 100%,#000,transparent 46%)}
+.cv.g-full,.cv.fullgrain{--gm:linear-gradient(#000,#000)}
+.cv .grain2{position:absolute;inset:0;z-index:2;pointer-events:none;background:url(img/grain_dk.webp);background-size:384px 384px;mix-blend-mode:screen;opacity:1;-webkit-mask-image:var(--gm);mask-image:var(--gm)}
+.cv.g-full .grain2{opacity:.6}
+.cv.light .grain2{background-image:url(img/grain_lt.webp);mix-blend-mode:multiply;opacity:1}
+.cv.red .grain2{background-image:url(img/grain_hd.webp);background-size:512px 512px;mix-blend-mode:overlay;opacity:1}
+.cv.fullgrain .grain2{opacity:.75}
+/* fotokopi: kertas bersih, grain hanya dari tepi kiri */
+.cv .xerox{background-color:#d9d8d5;background-image:repeating-linear-gradient(90deg,transparent 0 31%,rgba(0,0,0,.035) 31% 31.3%,transparent 31.3% 72%,rgba(0,0,0,.03) 72% 72.4%,transparent 72.4%)}
+.cv .xerox:after{content:"";position:absolute;inset:0;background:url(img/grain_lt.webp);background-size:384px 384px;mix-blend-mode:multiply;opacity:1;-webkit-mask-image:linear-gradient(90deg,#000,rgba(0,0,0,.5) 18%,transparent 48%);mask-image:linear-gradient(90deg,#000,rgba(0,0,0,.5) 18%,transparent 48%);filter:none}
+.cv.xr{--cbg:#d9d8d5}
+/* lampu belakang: sosok jadi siluet padat, tepinya tersorot, cahaya di belakang jelas */
+.cv.h-back .fx{filter:drop-shadow(0 0 .35cqw var(--red)) drop-shadow(0 0 1.4cqw color-mix(in srgb,var(--red) 85%,transparent)) drop-shadow(0 0 4cqw color-mix(in srgb,var(--red) 45%,transparent))}
+.cv.h-back .halo{background:radial-gradient(38% 30% at 50% 64%,color-mix(in srgb,var(--red) 85%,transparent),transparent 72%),radial-gradient(60% 14% at 50% 100%,color-mix(in srgb,var(--red) 70%,transparent),transparent 76%)}
+.cv.red.h-back .fx{filter:drop-shadow(0 0 .35cqw #fff) drop-shadow(0 0 1.6cqw rgba(255,220,210,.8)) drop-shadow(0 0 4cqw rgba(255,200,190,.4))}
+.cv.red.h-back .halo{background:radial-gradient(38% 30% at 50% 64%,rgba(255,225,215,.6),transparent 72%)}
+.cv.light.h-back .fx{filter:drop-shadow(0 1cqw 2.4cqw rgba(0,0,0,.16))}
+.cv.light.h-back .halo{background:none}
+/* berkas rahasia: lembar dokumen berisi foto profil + depan, bisa dibaca */
+.cv.wB .figwrap{align-items:flex-end}
+.cv .doc{position:relative;width:100%;background:#ebe6dc;padding:3.5% 3.5% 10%;box-shadow:0 1.5cqw 4cqw rgba(0,0,0,.5);transform:rotate(-2deg)}
+.cv .doc img{display:block;width:100%;height:auto}
+.cv .doc .stamp{right:-5%;bottom:-7%}
+
+/* ===== v9 ===== */
+/* elemen menempel ke judul: gambar rata atas di ruang sisa, bukan didorong ke bawah */
+.cv .figwrap{align-items:flex-start;margin-top:3cqw}
+.cv.wB .figwrap{align-items:flex-start}
+.cv .col{justify-content:flex-start}
+.cv .fimg{flex:0 1 auto;min-height:0;height:auto;max-height:100%;width:100%;object-fit:contain;object-position:50% 0}
+.cv .sfig .figwrap{align-items:flex-end}.cv .sfig .col{justify-content:flex-end}.cv .sfig .fimg{object-position:50% 100%}
+/* grain per pojok */
+.cv.g-tl{--gm:radial-gradient(120% 90% at 0 0,#000 0,rgba(0,0,0,.5) 25%,transparent 60%)}
+.cv.g-tr{--gm:radial-gradient(120% 90% at 100% 0,#000 0,rgba(0,0,0,.5) 25%,transparent 60%)}
+.cv.g-bl{--gm:radial-gradient(120% 90% at 0 100%,#000 0,rgba(0,0,0,.5) 25%,transparent 60%)}
+.cv.g-br{--gm:radial-gradient(120% 90% at 100% 100%,#000 0,rgba(0,0,0,.5) 25%,transparent 60%)}
+/* grain dikurangi ±50%; penuh dibuat sangat tipis */
+.cv.red .grain2{opacity:.5}
+.cv.g-full .grain2,.cv.fullgrain .grain2{opacity:.28}
+.cv.red.g-full .grain2{opacity:.2}
+/* lampu belakang: sosok tetap putih, cahaya di belakangnya */
+.cv.h-back .fx{filter:drop-shadow(0 0 .5cqw color-mix(in srgb,var(--red) 90%,transparent)) drop-shadow(0 0 2.6cqw color-mix(in srgb,var(--red) 70%,transparent))}
+.cv.h-back .halo{background:radial-gradient(40% 30% at 50% 62%,color-mix(in srgb,var(--red) 80%,transparent),transparent 72%),radial-gradient(60% 14% at 50% 100%,color-mix(in srgb,var(--red) 60%,transparent),transparent 76%)}
+.cv.red.h-back .fx{filter:drop-shadow(0 0 .5cqw rgba(255,255,255,.55)) drop-shadow(0 0 2.6cqw rgba(255,235,230,.3))}
+.cv.red.h-back .halo{background:radial-gradient(40% 30% at 50% 62%,rgba(40,0,0,.6),transparent 72%),radial-gradient(60% 14% at 50% 100%,rgba(30,0,0,.5),transparent 76%)}
+
+/* ===== v10 ===== */
+/* grain dasar super tipis di seluruh latar; area gradasi (grain2) tetap lebih tebal */
+.cv .grain{display:block;inset:0;background:url(img/grain_dk.webp);background-size:384px 384px;mix-blend-mode:screen;opacity:.32;z-index:2;filter:none}
+.cv.light .grain{background-image:url(img/grain_lt.webp);mix-blend-mode:multiply;opacity:.32}
+.cv.red .grain{background-image:url(img/grain_hd.webp);background-size:512px 512px;mix-blend-mode:overlay;opacity:.16}
+.cv.g-full .grain{opacity:0}
+/* isi ruang kosong di bawah elemen */
+.cv.dark{--floorc:color-mix(in srgb,var(--red) 34%,transparent)}
+.cv.red{--floorc:rgba(28,0,0,.5)}
+.cv.light{--floorc:rgba(70,58,55,.16)}
+.cv .floor{display:none;z-index:1}
+.cv.f-grad .floor,.cv.f-both .floor{display:block;background:linear-gradient(0deg,var(--floorc) 0,color-mix(in srgb,var(--floorc) 45%,transparent) 16%,transparent 42%)}
+.cv.f-big .fimg,.cv.f-both .fimg{width:122%;max-width:none;margin-inline:-11%}
+.cv.f-big .doc,.cv.f-both .doc{width:118%;margin-inline:-9%}
+.cv.f-big .photo,.cv.f-both .photo{max-width:96%}
+.cv.f-big .orbw,.cv.f-both .orbw{width:min(122cqw,100cqh)}
+
+/* ===== v11 ===== */
+/* peta langit: lingkaran menembus bawah frame (versi sebelumnya) */
+.cv.wL .figwrap{align-items:flex-end}
+/* gradasi latar terang +70% */
+.cv.light{--floorc:rgba(70,58,55,.27)}
+/* grain latar merah -50% */
+.cv.red .grain{opacity:.08}
+.cv.red .grain2{opacity:.25}
+.cv.red.g-full .grain2{opacity:.1}
+
+/* ===== v12 ===== */
+/* peta langit: lebih besar, mepet ke judul, menembus bawah; variasi posisi tengah/kiri/kanan */
+.cv.wL .figwrap{align-items:flex-start;margin-top:2cqw}
+.cv.wL .figwrap .orbw{width:118cqw;flex:none}
+.cv.wL.o-left .figwrap .orbw{transform:translateX(-26%)}
+.cv.wL.o-right .figwrap .orbw{transform:translateX(26%)}
+/* gradasi latar terang +80% */
+.cv.light{--floorc:rgba(70,58,55,.49)}
+/* grain latar hitam -30% */
+.cv.dark .grain{opacity:.22}
+.cv.dark .grain2{opacity:.7}
+.cv.dark.g-full .grain2,.cv.fullgrain .grain2{opacity:.2}
+/* kata merah di latar terang ikut ber-glow (cover); di slide jadi opsi */
+.cv.light .h em{text-shadow:0 0 .8cqw rgba(200,10,10,.45),0 0 3cqw rgba(200,10,10,.28),0 0 7cqw rgba(200,10,10,.15)}
+.sglow .cv.light em.k2,.sglow .cv.light .blk p em,.sglow .cv.light .cta .kw em,.sglow .cv.light .no.rom{text-shadow:0 0 .8cqw rgba(200,10,10,.45),0 0 3cqw rgba(200,10,10,.28),0 0 7cqw rgba(200,10,10,.15)}
+
+/* ===== v13 ===== */
+/* peta: cincin abu-abu terluar tidak boleh menyentuh judul */
+.cv.wL .figwrap .orbw{margin-top:8.6cqw}
+/* peta condong ke satu sisi: diperbesar supaya sisi lain tetap terisi sampai tepi frame */
+.cv.wL.o-left .figwrap .orbw,.cv.wL.o-right .figwrap .orbw{width:150cqw}
+.cv.wL.o-left .figwrap .orbw{transform:translateX(-6%)}
+.cv.wL.o-right .figwrap .orbw{transform:translateX(6%)}
+
+/* ===== v15 ===== */
+/* latar merah: grain gradasi lebih rapat (butir halus, lebih banyak) dan jangkauan gradasi lebih jauh */
+.cv.red .grain2{background-image:url(img/grain_rd.webp);background-size:384px 384px;mix-blend-mode:normal;opacity:.9}
+.cv.red.g-full .grain2{opacity:.35}
+.cv.red.g-right{--gm:linear-gradient(270deg,#000 0,rgba(0,0,0,.7) 30%,rgba(0,0,0,.3) 60%,transparent 88%)}
+.cv.red.g-left{--gm:linear-gradient(90deg,#000 0,rgba(0,0,0,.7) 30%,rgba(0,0,0,.3) 60%,transparent 88%)}
+.cv.red.g-top{--gm:linear-gradient(180deg,#000 0,rgba(0,0,0,.7) 28%,rgba(0,0,0,.3) 55%,transparent 82%)}
+.cv.red.g-bottom{--gm:linear-gradient(0deg,#000 0,rgba(0,0,0,.7) 28%,rgba(0,0,0,.3) 55%,transparent 82%)}
+.cv.red.g-tl{--gm:radial-gradient(150% 120% at 0 0,#000 0,rgba(0,0,0,.65) 30%,rgba(0,0,0,.25) 58%,transparent 85%)}
+.cv.red.g-tr{--gm:radial-gradient(150% 120% at 100% 0,#000 0,rgba(0,0,0,.65) 30%,rgba(0,0,0,.25) 58%,transparent 85%)}
+.cv.red.g-bl{--gm:radial-gradient(150% 120% at 0 100%,#000 0,rgba(0,0,0,.65) 30%,rgba(0,0,0,.25) 58%,transparent 85%)}
+.cv.red.g-br{--gm:radial-gradient(150% 120% at 100% 100%,#000 0,rgba(0,0,0,.65) 30%,rgba(0,0,0,.25) 58%,transparent 85%)}
+.cv.red.g-corner{--gm:radial-gradient(circle at 0 0,#000,transparent 62%),radial-gradient(circle at 100% 0,#000,transparent 62%),radial-gradient(circle at 0 100%,#000,transparent 62%),radial-gradient(circle at 100% 100%,#000,transparent 62%)}
+
+/* ===== v16 ===== */
+/* grain latar merah & hitam: kekasaran -50% (kepadatan dan jangkauan gradasi tetap) */
+.cv.dark .grain{opacity:.11}
+.cv.dark .grain2{opacity:.35}
+.cv.dark.g-full .grain2,.cv.dark.fullgrain .grain2{opacity:.1}
+.cv.red .grain{opacity:.04}
+.cv.red .grain2{opacity:.45}
+.cv.red.g-full .grain2{opacity:.18}
+
+/* ===== v17 ===== */
+/* marmer merah tua: kata kunci putih bercahaya merah */
+.cv.mbo{--cink:#fff;--cmute:rgba(255,255,255,.8)}
+.cv.mbo em.k2{color:#fff;text-shadow:0 0 .8cqw rgba(200,10,10,.9),0 0 3cqw rgba(200,10,10,.6)}
+.cv.mbo .no.rom,.cv.mbo .no.brk{color:#fff}
+.cv.mbo .blk p em{color:#fff;text-decoration:underline;text-underline-offset:.8cqw}
+
+/* marmer non-merah: urat diredam di area teks supaya tetap terbaca */
+.cv .marb[class*="mk-"]:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 95% 32% at 45% 52%,rgba(8,8,9,.72),rgba(8,8,9,.35) 60%,transparent 100%)}
+.cv .marb.mk-ox:after{background:radial-gradient(ellipse 95% 32% at 45% 52%,rgba(40,4,4,.75),rgba(40,4,4,.35) 60%,transparent 100%)}
+.cv .marb.mk-white:after{background:radial-gradient(ellipse 95% 32% at 45% 52%,rgba(238,236,231,.75),rgba(238,236,231,.35) 60%,transparent 100%)}
+
+/* ===== v18 ===== */
+/* judul ala kallaway: sans kecil rapat di atas, frasa serif kapital besar memenuhi lebar */
+.cv .ttl.kt{width:100%;text-align:center}
+.cv .kt .hs{font-family:var(--cv-sans);font-weight:var(--sw);font-size:5.4cqw;line-height:1.04;text-transform:uppercase;letter-spacing:-.03em;word-spacing:-.05em;color:var(--cink);text-wrap:balance}
+.cv .kt .hs.tl{margin-top:.6cqw}
+.cv .kt .hk{font-family:var(--cv-serif);font-style:italic;font-weight:var(--ew);text-transform:uppercase;color:var(--cacc);line-height:.88;letter-spacing:-.02em;margin:1cqw 0 .2cqw}
+.cv .kt .hki{width:calc(100% / var(--sx,1));margin-left:calc((100% - 100% / var(--sx,1)) / 2);transform:scaleX(var(--sx,1));transform-origin:50% 0;text-wrap:balance;font-size:13cqw}
+.cv.red .kt .hk{color:#0d0202}
+.cv.red .kt .hs{color:#fff}
+/* glow kata italic diredam supaya huruf tetap tajam */
+.cv.dark .h em,.cv.dark em.k2,.cv.fullgrain em.k2,.cv.dark .kt .hk{text-shadow:0 0 .3cqw color-mix(in srgb,var(--red) 45%,transparent),0 0 2.4cqw color-mix(in srgb,var(--red) 30%,transparent),0 0 6.5cqw color-mix(in srgb,var(--red) 16%,transparent)}
+.cv.red .h em,.cv.red em.k2,.cv.red .kt .hk{text-shadow:0 0 2.6cqw rgba(0,0,0,.24),0 0 7cqw rgba(0,0,0,.16)}
+.cv.light .h em,.cv.light .kt .hk{text-shadow:0 0 2.4cqw rgba(200,10,10,.16),0 0 6cqw rgba(200,10,10,.08)}
+.sglow .cv.light em.k2,.sglow .cv.light .blk p em,.sglow .cv.light .cta .kw em,.sglow .cv.light .no.rom{text-shadow:0 0 2.4cqw rgba(200,10,10,.16),0 0 6cqw rgba(200,10,10,.08)}
+.cv.mbo em.k2{text-shadow:0 0 2.4cqw rgba(200,10,10,.4)}
+/* grid kertas latar terang lebih samar */
+.cv.light .paper{background-image:radial-gradient(rgba(0,0,0,.065) .55px,transparent .7px),linear-gradient(rgba(0,0,0,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.018) 1px,transparent 1px)}
+
+.cv .kt .hs{letter-spacing:-.015em;word-spacing:0}
+
+/* ===== v19 ===== */
+/* jarak judul ke batas atas: logo sudah tidak dipakai */
+.cv .stack{top:7.5%}
+/* jarak baris konsisten: kotak teks dipotong ke tinggi huruf kapital, jarak diatur lewat margin tetap */
+.cv .kt .hs{line-height:1.14;text-box:trim-both cap alphabetic}
+.cv .kt .hk{margin:2.4cqw 0 0;line-height:.98}
+.cv .kt .hki{text-box:trim-both cap alphabetic}
+.cv .kt .hs.tl{margin-top:2.4cqw}
+.cv .figwrap,.cv.wL .figwrap{margin-top:4.8cqw}
+.cv .blk h5{line-height:1.12}
+.cv .blk h5 em{font-size:1.16em;line-height:0}
+.cv .blk h5.hx em{font-size:1.12em}
+.cv .blk ul,.cv .blk p{margin-top:3.6cqw}
+/* glow +40% */
+.cv.dark .h em,.cv.dark em.k2,.cv.fullgrain em.k2,.cv.dark .kt .hk{text-shadow:0 0 .3cqw color-mix(in srgb,var(--red) 63%,transparent),0 0 2.4cqw color-mix(in srgb,var(--red) 42%,transparent),0 0 6.5cqw color-mix(in srgb,var(--red) 22%,transparent)}
+.cv.red .h em,.cv.red em.k2,.cv.red .kt .hk{text-shadow:0 0 2.6cqw rgba(0,0,0,.34),0 0 7cqw rgba(0,0,0,.22)}
+.cv.light .h em,.cv.light .kt .hk{text-shadow:0 0 2.4cqw rgba(200,10,10,.22),0 0 6cqw rgba(200,10,10,.11)}
+.sglow .cv.light em.k2,.sglow .cv.light .blk p em,.sglow .cv.light .cta .kw em,.sglow .cv.light .no.rom{text-shadow:0 0 2.4cqw rgba(200,10,10,.22),0 0 6cqw rgba(200,10,10,.11)}
+.cv.mbo em.k2{text-shadow:0 0 2.4cqw rgba(200,10,10,.56)}
+
+/* ===== v20 ===== */
+/* ukuran judul turun 2 tingkat dan menyesuaikan panjang hook */
+.cv .kt .hs{font-size:4.6cqw}
+.cv .kt.sz-m .hs{font-size:4.3cqw}
+.cv .kt.sz-l .hs{font-size:4cqw}
+.cv .kt.sz-xl .hs{font-size:3.7cqw}
+.cv .kt .hk{margin-top:2cqw}.cv .kt .hs.tl{margin-top:2cqw}
+/* glow +15% */
+.cv.dark .h em,.cv.dark em.k2,.cv.fullgrain em.k2,.cv.dark .kt .hk{text-shadow:0 0 .3cqw color-mix(in srgb,var(--red) 72%,transparent),0 0 2.4cqw color-mix(in srgb,var(--red) 48%,transparent),0 0 6.5cqw color-mix(in srgb,var(--red) 25%,transparent)}
+.cv.red .h em,.cv.red em.k2,.cv.red .kt .hk{text-shadow:0 0 2.6cqw rgba(0,0,0,.39),0 0 7cqw rgba(0,0,0,.25)}
+.cv.light .h em,.cv.light .kt .hk{text-shadow:0 0 2.4cqw rgba(200,10,10,.25),0 0 6cqw rgba(200,10,10,.13)}
+.sglow .cv.light em.k2,.sglow .cv.light .blk p em,.sglow .cv.light .cta .kw em,.sglow .cv.light .no.rom{text-shadow:0 0 2.4cqw rgba(200,10,10,.25),0 0 6cqw rgba(200,10,10,.13)}
+.cv.mbo em.k2{text-shadow:0 0 2.4cqw rgba(200,10,10,.64)}
+.sizerule{font-size:14px;line-height:1.6;margin:0 0 14px;padding-left:18px}
+
+/* ===== v21 ===== */
+/* judul ala kallaway (diukur dari 2 contoh): tiap baris serif dipaskan sendiri ke ±70% lebar kanvas, sans ±5–6% lebar, jarak antar baris rapat */
+.cv .kt .hk{margin-top:2.2cqw;line-height:1}
+.cv .kt .hkl{display:block;text-align:center;white-space:nowrap}
+.cv .kt .hkl+.hkl{margin-top:1.4cqw}
+.cv .kt .hkl span{display:inline-block;text-box:trim-both cap alphabetic;line-height:1}
+.cv .kt .hs{font-size:5.8cqw;max-width:92%;margin:0 auto;letter-spacing:-.02em}
+.cv .kt.sz-m .hs{font-size:5.2cqw}
+.cv .kt.sz-l .hs{font-size:4.6cqw}
+.cv .kt.sz-xl .hs{font-size:4.2cqw;max-width:100%}
+.cv .kt .hs.tl{margin-top:2.2cqw}
+/* glow +25%, inti tetap tipis supaya huruf tajam */
+.cv.dark .h em,.cv.dark em.k2,.cv.fullgrain em.k2,.cv.dark .kt .hk{text-shadow:0 0 .3cqw color-mix(in srgb,var(--red) 75%,transparent),0 0 2.6cqw color-mix(in srgb,var(--red) 60%,transparent),0 0 7cqw color-mix(in srgb,var(--red) 32%,transparent)}
+.cv.red .h em,.cv.red em.k2,.cv.red .kt .hk{text-shadow:0 0 2.8cqw rgba(0,0,0,.49),0 0 7.5cqw rgba(0,0,0,.31)}
+.cv.light .h em,.cv.light .kt .hk{text-shadow:0 0 2.6cqw rgba(200,10,10,.31),0 0 6.5cqw rgba(200,10,10,.16)}
+.sglow .cv.light em.k2,.sglow .cv.light .blk p em,.sglow .cv.light .cta .kw em,.sglow .cv.light .no.rom{text-shadow:0 0 2.6cqw rgba(200,10,10,.31),0 0 6.5cqw rgba(200,10,10,.16)}
+.cv.mbo em.k2{text-shadow:0 0 2.6cqw rgba(200,10,10,.8)}
+
+/* ===== v22 ===== */
+/* jarak antar baris judul seragam: semua kotak baris dipotong ke tinggi huruf kapital, lalu diberi jarak tetap 3cqw (±32px) */
+.cv .kt .hs{line-height:1.22;text-box:trim-both cap alphabetic}
+.cv .kt .hk{margin-top:3cqw}
+.cv .kt .hkl{line-height:1;text-box:trim-both cap alphabetic}
+.cv .kt .hkl span{text-box:none;line-height:1}
+.cv .kt .hkl+.hkl{margin-top:3cqw}
+.cv .kt .hs.tl{margin-top:3cqw}
+
+/* ===== v23: font final, baris aman, dan diagram penjelas ===== */
+.cv{--cv-sans:"Arimo",Arial,sans-serif;--sw:700;font-family:"Arimo",Arial,sans-serif}
+.cv .blk p,.cv .blk ul,.cv .bub{font-weight:400}
+.cv .blk p b,.cv .blk p strong{font-weight:700}
+.cv .blk h5 em{line-height:1.12}
+.cv .blk h5.separated{display:flex;flex-direction:column;gap:2cqw}
+.cv .blk h5.separated span,.cv .blk h5.separated em{display:block;line-height:1.12}
+.cv .kt .hs{max-width:100%;line-height:1.12;text-wrap:nowrap}
+.cv .kt .sansline{display:inline-block;white-space:nowrap}
+.cv .kt .hs+.hs{margin-top:3cqw}
+.diagram-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.diagram-grid figure{margin:0;min-width:0}
+/* v24: diagram berupa gambar hubungan, bukan panel paragraf penuh. */
+.cv .diagram-content{position:absolute;left:8%;right:11.2%;top:17%;bottom:20%;z-index:4;text-align:center}
+.cv .diagram-content h5{position:absolute;top:0;left:0;width:100%;font:700 6.4cqw/1.1 "Arimo",Arial,sans-serif;letter-spacing:-.02em;margin:0}
+.cv .diagram-content h5 em{font-family:"K Instrument Serif",serif;font-weight:400;font-size:1.2em;color:var(--red)}
+.cv .diagram-content .diagram{position:absolute;top:24cqw;left:50%;transform:translateX(-50%);width:64cqw;height:42.06cqw}
+.cv .diagram-content p{position:absolute;top:74cqw;left:0;width:100%;font:400 4.45cqw/1.12 "Arimo",Arial,sans-serif;margin:0;max-width:none}
+.cv .diagram-content p strong{font-weight:700;color:var(--red)}
+.diagram svg{display:block;width:100%;height:100%;overflow:visible}
+.diagram svg text{font:400 38px "Arimo",Arial,sans-serif;fill:var(--cink);text-anchor:middle;dominant-baseline:middle}
+.diagram svg text.term{font:italic 44px "K Instrument Serif",serif;fill:#fff}
+.diagram svg text.key{fill:var(--red);font-weight:700}
+.diagram svg text.small{font-size:34px}
+.diagram svg .wire{stroke:#e9e4df;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.diagram svg .soft-wire{stroke:#b9afaa;stroke-width:1.7;stroke-dasharray:4 5;fill:none}
+@media(max-width:600px){.diagram-grid{grid-template-columns:1fr}}
+
+
+/* ===== v25: variasi menurut peran teks dan konteks konten ===== */
+.variation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.variation-grid figure{margin:0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.variation-grid .cv{border-radius:4px}
+.cv .variant-title{width:100%;flex:none;text-align:center}
+.cv .variant-title .sans-main{font:700 9.4cqw/1.06 "Arimo",Arial,sans-serif;letter-spacing:-.035em;text-transform:uppercase;margin:0}
+.cv .variant-title .sans-main strong{color:var(--red)}
+.cv .variant-title .sans-main{display:flex;flex-direction:column;align-items:center;gap:3cqw}
+.cv .variant-title .cover-line{display:block;white-space:nowrap;line-height:1.12;text-box:trim-both cap alphabetic}
+.cv .variant-title .serif-support{font:italic 6cqw/1.1 "K Instrument Serif",serif;text-transform:uppercase;color:var(--red);margin-top:3cqw}
+.cv .variant-title .sans-lead{font:700 5.2cqw/1.1 "Arimo",Arial,sans-serif;text-transform:uppercase}
+.cv .variant-title .serif-main{font:italic 17cqw/1 "K Instrument Serif",serif;text-transform:uppercase;color:var(--red);margin:3cqw 0 0;text-shadow:0 0 2.6cqw rgba(200,10,10,.5)}
+.cv .cover-body{font:400 4.45cqw/1.12 "Arimo",Arial,sans-serif;margin:3cqw 0 0;max-width:none}
+.cv .cover-body strong{color:var(--red);font-weight:700}
+.cv .phrase-box{display:inline-block;align-self:center;max-width:100%;width:fit-content;font:400 3.8cqw/1.1 "Arimo",Arial,sans-serif;border:.22cqw dashed var(--red);border-radius:1.2cqw;padding:1.5cqw 2.2cqw;margin:3cqw auto 0;background:rgba(25,20,20,.6)}
+.cv .variant-title.box-title .serif-support{margin:0 0 3cqw;font-size:8cqw}
+.cv .variant-title.box-title .sans-main{font-size:7.7cqw}
+.cv .variation-inner{position:absolute;left:8%;right:11.2%;top:19%;bottom:20%;z-index:4;display:flex;flex-direction:column;justify-content:center;gap:8cqw;font:400 4.45cqw/1.12 "Arimo",Arial,sans-serif}
+.cv .variation-inner h5{font:700 6.8cqw/1.1 "Arimo",Arial,sans-serif;letter-spacing:-.02em;margin:0}
+.cv .variation-inner h5 em{font:italic 1.2em/1.12 "K Instrument Serif",serif;color:var(--red)}
+.cv .variation-inner p{font:400 4.45cqw/1.12 "Arimo",Arial,sans-serif;margin:0;max-width:none}
+.cv .variation-inner .body-serif{font:italic 1.24em/1.12 "K Instrument Serif",serif;color:var(--red);text-transform:lowercase}
+.cv .variation-inner .body-pair{display:flex;flex-direction:column;gap:4cqw}
+.cv .variation-inner .tiny-rule{height:.2cqw;background:rgba(244,241,238,.22);width:28%}
+.cv .steps{display:flex;flex-direction:column;gap:7cqw}
+.cv .step{display:grid;grid-template-columns:9cqw 1fr;column-gap:3cqw;align-items:start}
+.cv .step-index{font:700 7cqw/1 "Arimo",Arial,sans-serif;color:var(--red);padding-top:.7cqw}
+.cv .step-label{font:italic 6.2cqw/1.12 "K Instrument Serif",serif;display:block;margin:0 0 1.6cqw}
+.cv .step p{font-size:4.45cqw}
+.cv .compare-pair{display:flex;flex-direction:column;gap:4cqw}
+.cv .compare-card{border:.2cqw solid rgba(244,241,238,.24);border-radius:1.2cqw;background:linear-gradient(115deg,rgba(255,255,255,.035),rgba(0,0,0,.25));padding:4cqw;position:relative}
+.cv .compare-card .compare-label{display:flex;align-items:center;gap:2cqw;font:italic 6cqw/1.12 "K Instrument Serif",serif;margin-bottom:2.5cqw;color:var(--red)}
+.cv .compare-card.good .compare-label{color:#76dd91}
+.cv .compare-card .compare-mark{font:700 4.4cqw/1 "Arimo",Arial,sans-serif}
+.cv .compare-card p{font-weight:700}
+@media(max-width:900px){.variation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.variation-grid{grid-template-columns:1fr}}
+
+
+/* v26: satu sistem jarak huruf, hierarki dari referensi, aksen manual. */
+.cv{--type-glow:0 0 .3cqw color-mix(in srgb,var(--red) 75%,transparent),0 0 2.6cqw color-mix(in srgb,var(--red) 60%,transparent),0 0 7cqw color-mix(in srgb,var(--red) 32%,transparent)}
+.cv .title-accent{color:var(--red);text-shadow:var(--type-glow)}
+.cv.red .title-accent{color:#0d0202;text-shadow:0 0 2.8cqw rgba(0,0,0,.49),0 0 7.5cqw rgba(0,0,0,.31)}
+.cv .variant-title .serif-support,.cv .variant-title .serif-main,.cv .variation-inner h5 em,.cv .step-label,.cv .compare-label .serif-label,.cv .body-serif{ text-shadow:var(--type-glow)}
+.cv .compare-card.good .serif-label{text-shadow:0 0 2.6cqw rgba(118,221,145,.28)}
+.cv.dark .diagram-content h5 em,.cv.dark .diagram svg text.term{text-shadow:var(--type-glow)}
+.cv .variant-title{display:flex;flex-direction:column;align-items:center;gap:0}
+.cv .variant-title .cover-body{font-size:3.1cqw;line-height:1.12;text-box:trim-both cap alphabetic;margin:1.5cqw 0 0;white-space:nowrap}
+.cv .variant-title .cover-body strong{color:inherit;font-weight:400}
+.cv .variant-title .phrase-box{font-size:3.1cqw;line-height:1.12;text-box:trim-both cap alphabetic;margin-top:2cqw;padding:1.2cqw 1.8cqw}
+.cv .variant-title.box-title .kt{display:flex;flex-direction:column;gap:3cqw}
+.cv .variant-title.box-title .hk{margin:0}
+.cv .variant-title.box-title .hs{margin:0;font-size:5.2cqw}
+.cv .sans-focus-title{width:100%;text-align:center;display:flex;flex-direction:column;gap:3cqw;flex:none}
+.cv .sans-focus-title .sf-line{font:700 10.4cqw/1.12 "Arimo",Arial,sans-serif;letter-spacing:-.025em;text-box:trim-both cap alphabetic;white-space:nowrap;margin:0}
+.cv .sans-focus-title .sf-line span{display:inline-block;white-space:nowrap}
+.cv .sans-focus-title .sf-lead{font-size:6.2cqw}
+.cv .sans-focus-title .sf-key{font-size:12cqw;color:var(--red);text-shadow:var(--type-glow)}
+.cv .sans-focus-title .sf-context{font:italic 7cqw/1.12 "K Instrument Serif",serif;color:var(--cink);text-transform:uppercase;text-shadow:0 0 2.6cqw rgba(255,255,255,.12)}
+.cv .sans-focus-title.sf-pure .sf-lead{font-size:8cqw}
+.cv .variation-inner{gap:6cqw}
+.cv .variation-inner p,.cv .step p{font-size:3.3cqw;line-height:1.12;font-weight:400}
+.cv .variation-inner .body-serif{font-size:1.16em}
+.cv .variation-inner .body-pair{gap:3cqw}
+.cv .step-label{font-size:5.4cqw;margin-bottom:1.8cqw;line-height:1.12}
+.cv .step-index{font-size:6.8cqw}
+.cv .steps{gap:6cqw}
+.cv .compare-pair{width:66cqw;max-width:100%;gap:3cqw;align-self:flex-start}
+.cv .compare-card{padding:2.8cqw 3cqw}
+.cv .compare-card .compare-label{font-size:5.2cqw;margin-bottom:2cqw}
+.cv .compare-card p{font-size:3.3cqw;font-weight:400}
+#cover-variations{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:560px){#cover-variations{grid-template-columns:1fr}}
+
+/* v27: skala baca tetap; pengecualian komposisi kartu perbandingan. */
+.cv{--body-reading:3.9cqw;--heading-reading:7.2cqw;--subheading-reading:5.6cqw}
+.cv .variation-inner h5{font-size:var(--heading-reading)}
+.cv .variation-inner p,.cv .step p,.cv .compare-card p{font-size:var(--body-reading);line-height:1.12}
+.cv .step-label{font-size:var(--subheading-reading)}
+.cv .step{grid-template-columns:10cqw 1fr;gap:3cqw;align-items:center}
+.cv .step-index{font-size:7.4cqw;font-weight:700;line-height:1;padding:0;align-self:center;text-shadow:var(--type-glow);-webkit-text-stroke:.06cqw currentColor}
+.cv .steps.few-steps .step{grid-template-columns:12cqw 1fr}
+.cv .steps.few-steps .step-index{font-size:9.2cqw}
+.cv .variation-inner.compare-centered{align-items:center;text-align:center}
+.cv .compare-centered h5{width:100%}
+.cv .compare-pair{width:fit-content;max-width:100%;align-self:center;align-items:center}
+.cv .compare-card{width:max-content;max-width:100%;padding:2.8cqw 3cqw;text-align:left}
+.cv .compare-card .compare-label{font-size:var(--subheading-reading)}
+/* v28: diagram sebagai visual cover, bukan panel slide isi yang diperbesar. */
+.explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 20px}
+.explore-grid figure,.reel-family figure{margin:0;min-width:0}
+.explore-grid figcaption,.reel-family figcaption{margin-top:8px;color:var(--muted);font-size:.88rem;line-height:1.4}
+.study-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.study-notes p{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.study-notes b{display:block;color:var(--fg);margin-bottom:6px}
+.cv.diagram-cover .stack{left:8%;right:12%;top:7.5%;bottom:auto}
+.cv.diagram-cover .kt .hs{font-size:6.2cqw}
+.cv.diagram-cover .cover-art{position:absolute;left:10%;right:14%;top:35%;height:43%;z-index:4;display:grid;place-items:center}
+.cv.diagram-cover .cover-art svg{width:100%;height:100%;overflow:visible}
+.cv .cover-art svg text{font-family:"Arimo",Arial,sans-serif;fill:var(--cink);font-size:44px;font-weight:700;text-anchor:middle;dominant-baseline:middle}
+.cv .cover-art svg .small-label{font-size:34px;font-weight:400}
+.cv .cover-art svg .wire{fill:none;stroke:var(--cink);stroke-opacity:.48;stroke-width:2}
+.cv .cover-art svg .node{fill:var(--cbg);stroke:var(--cink);stroke-opacity:.34;stroke-width:1.5}
+.cv .cover-art svg .accent-line{fill:none;stroke:var(--diagram-accent,var(--red));stroke-width:4;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--diagram-accent,var(--red)) 55%,transparent))}
+.cv .cover-art svg .accent-fill{fill:var(--diagram-accent,var(--red))}
+.cv .cover-art svg .accent-text{fill:var(--diagram-accent,var(--red));filter:drop-shadow(0 0 9px color-mix(in srgb,var(--diagram-accent,var(--red)) 40%,transparent))}
+.cv .cover-art svg .white-on-accent{fill:#fff}
+.cv .cover-art svg .serif-node{font-family:"K Instrument Serif",serif;font-style:italic;font-weight:400;font-size:56px}
+.cv.diagram-cover .cover-foot{position:absolute;left:8%;right:12%;bottom:12.8%;margin:0;text-align:center;font:400 3.7cqw/1.12 "Arimo",Arial,sans-serif;z-index:4}
+.cv{--feed-title-inset:10cqw}
+.cv .ed-wrap{position:absolute;left:8%;right:12%;top:calc(12.5% + var(--feed-title-inset));bottom:24.5%;z-index:4;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4cqw}
+.cv.editorial-reel .ttl.kt{text-align:center}
+.cv.editorial-reel .kt .hs,.cv.editorial-reel .kt .hkl{text-align:center}
+.cv .ed-wrap .ttl{width:100%}
+.cv.editorial-reel .ed-wrap>.ttl{margin-bottom:3cqw}
+.cv .ed-wrap .kt .hs{font-size:6.4cqw}
+.cv .ed-main{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4cqw}
+.cv .ed-main p{font:400 3.9cqw/1.13 "Arimo",Arial,sans-serif;margin:0;width:100%;max-width:100%;text-align:justify;text-align-last:left;hyphens:none}
+.cv.ed-panel .ed-main{padding:3.2cqw;background:color-mix(in srgb,var(--cbg) 85%,transparent);border:1px solid color-mix(in srgb,var(--cink) 27%,transparent);border-radius:1cqw}
+.cv .ed-back{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:65%;opacity:.075;z-index:2;pointer-events:none}
+.cv .ed-back img{display:block;width:100%}
+.cv.ed-figure .ed-back{top:55%}
+.cv.ed-figure .ed-main strong{color:#F0D66A;text-shadow:0 0 2cqw #F0D66A55}
+.cv .ed-main strong{font-weight:700}
+.cv .ed-main .ed-power{color:var(--red);text-shadow:var(--type-glow)}
+.cv .ed-main .ed-caution{color:#F0D66A;text-shadow:0 0 2cqw #F0D66A55}
+.cv .ed-wrap .ed-rule{width:16cqw;height:1px;background:var(--cink);opacity:.3}
+.cv .ed-cta{font:700 3.6cqw/1.12 "Arimo",Arial,sans-serif;margin:0;padding-top:1cqw;width:100%;text-align:center}
+.cv .ed-main .ed-quote{width:max-content;max-width:100%;padding:3cqw;border:1px solid #ffffff45;border-left:2px solid var(--red);font-weight:700}
+.cv .ed-main .cover-art{width:65cqw;height:26cqw}
+.cv .ed-main .cover-art svg{display:block;width:100%;height:100%}
+.reel-family{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.family-review{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:28px;align-items:start}
+.family-review .grid{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.family-copy{display:flex;flex-direction:column;gap:16px;color:var(--muted)}
+.family-copy h3{color:var(--fg)}
+@media(max-width:760px){.study-notes,.family-review{grid-template-columns:1fr}.reel-family{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.explore-grid,.reel-family{grid-template-columns:1fr}.family-review .grid{max-width:400px;width:100%;margin:auto}}
+/* v30: gambar menjelaskan topik dan mengisi ruang konten yang tersisa. */
+.cv.illustrated-reel .ed-wrap{bottom:20.1%;gap:3cqw}
+.cv.illustrated-reel .ill-art{margin-top:4cqw}
+.cv.illustrated-reel .ed-cta{padding-top:2cqw}
+.cv.illustrated-reel .ed-wrap>.ttl,.cv.illustrated-reel .ed-main,.cv.illustrated-reel .ed-cta{flex:none}
+.cv.illustrated-reel .ill-art{position:relative;min-height:18cqw;flex:1;width:100%;display:grid;place-items:center}
+.cv.illustrated-reel.ill-poster .ill-art{min-height:16.4cqw}
+/* Batas ilustrasi baru mengikuti D: lebar 89cqw, tinggi 39.15cqw; ruang teks tetap didahulukan. */
+.cv.illustrated-reel .ill-art svg{position:absolute;left:-4.5cqw;top:50%;transform:translateY(-50%);display:block;width:calc(100% + 9cqw);max-width:89cqw;height:130%;max-height:39.15cqw;overflow:visible}
+.cv.illustrated-reel.ill-middle .ill-art svg{height:35.15cqw}
+.cv.illustrated-reel.ill-poster .ill-art svg{height:29.03cqw}
+.cv.illustrated-reel .ill-art .ink{fill:var(--cink)}
+.cv.illustrated-reel .ill-art .outline{fill:none;stroke:var(--cink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cv.illustrated-reel .ill-art .outline,.cv.illustrated-reel .ill-art .ink{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--cink) 35%,transparent))}
+.cv.illustrated-reel .ill-art .soft{opacity:.35}
+.cv.illustrated-reel .ill-art .focus{stroke:var(--cacc);fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--cacc) 45%,transparent))}
+.cv.illustrated-reel .ill-art .focus-fill{fill:var(--cacc)}
+.cv.illustrated-reel .ill-art text{fill:var(--cink);font:700 42px "Arimo",Arial,sans-serif;text-anchor:middle;dominant-baseline:middle}
+.cv.illustrated-reel.ill-middle .ill-art{order:2}
+.cv.illustrated-reel.ill-middle .ed-main{order:3}
+.cv.illustrated-reel.ill-middle .ed-main{margin-top:5cqw}
+.cv.illustrated-reel .ed-cta{order:4}
+.cv.illustrated-reel.ill-poster .ill-art{background:radial-gradient(ellipse at center,color-mix(in srgb,var(--cacc) 9%,transparent),transparent 65%)}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">auraneuro · mockup feed v34 · hitam-merah #C80A0A · 17 Okt 2026</span>
+  <h1>Mockup feed</h1>
+  <p class="lede">Carousel dan cover reels di grid profil, palet hitam-merah. Ganti dunia visual, font, pola cover, cara cover reels, dan gaya nomor di panel bawah, lalu salin pilihannya lewat tombol di bawah. Teks di cover adalah contoh, belum naskah final.</p>
+</header>
+
+<div class="controls" role="group" aria-label="Pilihan mockup">
+  <div class="ctl"><span class="k">Dunia visual</span><div class="seg" data-key="world"><button data-v="X">Campur</button><button data-v="M">Marmer Klasik</button><button data-v="T">Atlas Tubuh</button><button data-v="L">Peta Langit</button><button data-v="B">Berkas Rahasia</button><button data-v="D">Wayang &amp; Blencong</button><button data-v="E">Panggung &amp; Tali</button></div></div>
+  <div class="ctl"><span class="k">Font pilihan</span><div class="seg" data-key="font"><button data-v="s4">Arimo Bold + Instrument Serif</button></div></div>
+  <div class="ctl"><span class="k">Merah</span><div class="seg" data-key="red"><button data-v="#AA0202">#AA0202</button><button data-v="#C80A0A">#C80A0A (usulan)</button><button data-v="#D01010">#D01010</button></div></div>
+  <div class="ctl"><span class="k">Pola cover</span><div class="seg" data-key="pat"><button data-v="k">Hitam 50% · merah 25% · terang 25%</button><button data-v="dark">Gelap semua</button><button data-v="dr">Gelap + merah</button><button data-v="drl">Gelap + merah + terang</button><button data-v="dl">Gelap + terang</button></div></div>
+  <div class="ctl"><span class="k">Reels format #2 (teks diam)</span><div class="seg" data-key="r4"><button data-v="cover">Opsi 1: detik 0 = layout cover</button><button data-v="full">Opsi 2: teks penuh</button></div></div>
+  <div class="ctl"><span class="k">Visual reels #2 teks penuh</span><div class="seg" data-key="r4visual"><button data-v="classic">Paragraf klasik</button><button data-v="illustrated">Dengan ilustrasi topik</button></div></div>
+  <div class="ctl"><span class="k">Reels jendela klip</span><div class="seg" data-key="r1"><button data-v="cover">Pakai cover PNG</button><button data-v="none">Tanpa cover (frame pertama)</button></div></div>
+  <div class="ctl"><span class="k">Ruang kosong di bawah elemen</span><div class="seg" data-key="fill"><button data-v="mix">Bervariasi antar postingan</button><button data-v="grad">Gradasi warna</button><button data-v="big">Perbesar elemen</button><button data-v="both">Gradasi + perbesar</button><button data-v="none">Polos</button></div></div>
+  <div class="ctl"><span class="k">Glow kata merah di slide terang</span><div class="seg" data-key="sglow"><button data-v="on">Pakai glow</button><button data-v="off">Tanpa glow</button></div></div>
+  <div class="ctl"><span class="k">Gaya nomor slide</span><div class="seg" data-key="num"><button data-v="rom">Romawi serif</button><button data-v="lab">Label arsip</button><button data-v="brk">Kurung</button></div></div>
+  <div class="ctl"><span class="k">Tampilan Instagram</span><div class="seg" data-key="ig"><button data-v="dark">Mode gelap</button><button data-v="light">Mode terang</button></div></div>
+</div>
+
+<section id="feed-study">
+  <h2>Dari feed Kallaway: satu keluarga visual</h2>
+  <p class="lede">Pengamatan dari empat screenshot yang kamu kirim. Ini acuan tampilan, bukan bukti performa. Semua kalimat baru di bawah hanya contoh desain.</p>
+  <div class="study-notes">
+    <p><b>Judul → visual → penjelas</b>Sans tebal memberi konteks; serif miring menekan frasa inti. Diagram menjadi satu gambar utama dengan sedikit label, bukan kumpulan kotak berisi paragraf.</p>
+    <p><b>Warna punya tugas</b>Hitam, putih, dan merah menyatukan feed. Hijau membedakan respons; kuning menandai jeda keputusan; oranye menyorot satu tahap. Cukup satu warna tambahan per frame.</p>
+    <p><b>Reels tetap terasa serumpun</b>Di referensi, judul dan grafis menjaga identitas meski frame bawah berisi pembicara. Untuk reels teks auraneuro, pakai judul yang sama, isi ringkas, lalu CTA; diagram kecil hanya bila membantu.</p>
+  </div>
+</section>
+<section id="diagram-cover-study">
+  <h2>Cover carousel: diagram sebagai visual utama</h2>
+  <p class="lede">Empat pilihan komposisi. Feed memakai tiga diagram dari 12 postingan (25%, di bawah batas 30%); pilihan D disimpan di sini. Label cukup pendek untuk dibaca sekilas; uraian lengkap masuk slide berikutnya. Warna tambahan masih usulan.</p>
+  <div class="explore-grid" id="diagram-covers"></div>
+</section>
+<section id="reel-study">
+  <h2>Reels teks penuh: sekeluarga dengan carousel</h2>
+  <p class="lede">Varian A–C tetap disimpan: paragraf terbuka, panel, dan figur samar. Figur C sekarang berada di tengah potongan feed. Ketiganya memakai teks yang sama agar tampilannya bisa dibandingkan. Varian baru dengan ilustrasi topik ada di bawah; ini frame mockup, belum video.</p>
+  <p class="note">Sumber teks: <a href="https://www.instagram.com/auraneuroo/reel/DX-zkzgSxM5/" target="_blank" rel="noopener">Brand “bermusuhan” justru dicintai · @auraneuroo</a>. Garis putus-putus = potongan grid 3:4.</p>
+  <div class="reel-family" id="reel-family"></div>
+</section>
+<section id="illustrated-study">
+  <h2>Reels #2: ilustrasi yang menjelaskan topik</h2>
+  <p class="lede">Dari dua referensi The Brain Lab: judul memberi konteks, ilustrasi memperlihatkan hubungan, dan paragraf menerangkan makna. Di sini identitas auraneuro tetap: Arimo + Instrument Serif, glow, hitam–merah–putih, paragraf rata kanan–kiri, CTA di tengah.</p>
+  <p class="note">Acuan: <a href="https://www.instagram.com/reel/DdJVMbuN0Id/" target="_blank" rel="noopener">arah perhatian</a> dan <a href="https://www.instagram.com/reel/DdOoD6aNQfS/" target="_blank" rel="noopener">batas toleransi</a>. Gambar baru merupakan metafora topik, bukan hasil ukur atau data ilmiah.</p>
+  <div class="reel-family" id="illustrated-reels"></div>
+  <p class="note">D menaruh ilustrasi di bawah paragraf. E menaruh visual di antara judul dan paragraf. F menggunakan objek dan alur pada bidang cahaya tipis. Teks lengkap tetap ada. Ganti “Visual reels #2 teks penuh” untuk membandingkan dengan varian klasik di feed.</p>
+</section>
+<section>
+  <h2>Uji berdampingan di feed</h2>
+  <div class="family-review"><div class="grid" id="family-grid"></div><div class="family-copy">
+    <h3>Carousel figur, diagram, reels #1, dan reels #2</h3>
+    <p>Judul memakai Arimo Bold + Instrument Serif dengan glow yang sama. Diagram mengambil posisi visual figur. Reels #2 mempertahankan model akun auraneuro: judul, paragraf lengkap, lalu “Cek caption!”, seluruh teks tampil bersamaan.</p>
+    <p>Warna latar contoh tetap 50% gelap, 25% merah, 25% terang. Kuning, hijau, dan oranye hanya muncul pada bagian diagram yang perlu dibedakan; judul utama tetap mengikuti warna auraneuro.</p>
+    <p>Porsi diagram dibatasi: 3 dari 12 postingan (25%, tidak melewati 30%). Empat carousel figur, dua reels #1, dan tiga reels #2 tetap hadir. Pilihan diagram D hanya ada di galeri terpisah.</p>
+    <p>Rekomendasi reels #2: satu paragraf sekitar 45–65 kata seperti tiga contoh akun yang ditinjau, body ±42px, judul lebih ringkas daripada cover bergambar. Teks tetap diam; gerakan latar dibuat pelan saat produksi video. Durasi menyesuaikan waktu baca, bukan otomatis meniru durasi lama.</p>
+    <p>Ruang penting reels ditempatkan pada y≈348–1470 dari kanvas 1080×1920, agar judul, isi, dan CTA tetap masuk potongan feed serta aman dari caption. Simulasi grid di kiri memakai frame isi langsung.</p>
+  </div></div>
+</section>
+<div class="main">
+  <div class="phone" id="phone">
+    <div class="ighead"><div class="avatar"><img src="img/logo_emblem_white.png" alt="Logo auraneuro"></div><div><b>auraneuroo</b><small>Control Domination · psikologi pengaruh yang etis</small><small>mockup, angka profil tidak ditampilkan</small></div></div>
+    <div class="igtabs"><span>POSTINGAN</span><span>REELS</span><span>TAG</span></div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px;min-width:0">
+    <section>
+      <h2>Cover penuh: gelap, merah, terang</h2>
+      <p class="note">Kanvas 1080×1440 (3:4). Arsiran merah = 120px kanan yang dikosongkan untuk penanda 1/10 Instagram.</p>
+      <div class="big" id="big"></div>
+    </section>
+    <section>
+      <h2>Detail grain ukuran asli</h2>
+      <p class="note">Potongan cover di ukuran 1080 piksel penuh, seperti saat dibuka di HP. Geser di dalam kotak untuk melihat bagian lain. Di grid, butirnya ikut mengecil.</p>
+      <div class="zooms" id="zooms"></div>
+    </section>
+    <section>
+      <h2>Reels: frame asli dan potongan grid</h2>
+      <p class="note">Reels 9:16 di grid terpotong 240px atas dan bawah (garis putus-putus). Logo, judul, dan sosok disusun di dalam area itu.</p>
+      <div class="reels" id="reels"></div>
+    </section>
+  </div>
+</div>
+
+<section>
+  <h2>Variasi grain dan cahaya</h2>
+  <p class="lede">Seluruh latar kena grain super tipis; satu area (pojok, sisi, atau keempat ujung) diberi grain lebih tebal yang menipis bertahap. Variasi penuh dibuat sangat tipis. Butirnya halus dan selalu di belakang teks dan sosok. Di grid, tiap cover memakai variasi berbeda secara bergilir.</p>
+  <span class="k">Grain per area: satu bagian kena grain lalu menipis, bagian lain polos</span><div class="rail" id="gvar"></div>
+  <span class="k">Cahaya di belakang sosok (pola kallaway)</span><div class="rail" id="hvar"></div>
+</section>
+
+<section>
+  <h2>Ruang kosong di bawah elemen pendek</h2>
+  <p class="lede">Elemen lebar (otak, dokumen) menyisakan ruang di bawahnya. Gradasi dipakai sebagai variasi: bawaan panel "Bervariasi" memberi gradasi di sebagian cover saja supaya feed tidak monoton. Slide 2 dan seterusnya tidak diberi gradasi.</p>
+  <div class="rail" id="fillcmp" style="grid-template-columns:repeat(4,minmax(0,1fr))"></div>
+</section>
+
+<section>
+  <h2>Aturan ukuran judul cover</h2>
+  <p class="lede">Seperti kallaway, ukuran judul tidak sama di semua cover. Patokannya panjang hook (jumlah huruf seluruh judul). Frasa serif selalu dicoba muat 1 baris dulu; kalau hasilnya terlalu kecil, dipecah jadi 2 baris yang lebih besar. Kutipan dalam tanda petik selalu utuh di satu jenis huruf.</p>
+  <ul class="sizerule">
+    <li><b>Frasa serif:</b> tiap baris dipaskan sendiri ke ±70% lebar kanvas (sama seperti IDEA / MACHINE dan TOP 1% / AUTHORITY di kallaway), jadi baris pendek tampil lebih besar. Frasa &gt;11 huruf dipecah jadi 2 baris seimbang.</li>
+    <li><b>Pendek (≤34 huruf):</b> sans 63px, serif maks 280px.</li>
+    <li><b>Sedang (35–50):</b> sans 56px, serif maks 205px.</li>
+    <li><b>Panjang (51–66):</b> sans 50px, serif maks 150px.</li>
+    <li><b>Sangat panjang (&gt;66):</b> sans 45px, serif maks 120px. Lebih dari ini, potong hook-nya.</li>
+    <li><b>Jarak:</b> judul mulai ±108px dari atas; antarbaris judul ±32px; judul ke gambar ±52px. Ukuran dan jarak masih bisa direvisi.</li>
+  </ul>
+  <div class="rail" id="sizerail" style="grid-template-columns:repeat(4,minmax(0,1fr))"></div>
+</section>
+
+<section>
+  <h2>Sans dominan: tiga uji hook</h2>
+  <p class="lede">Frasa inti menjadi fokus lewat ukuran dan satu aksen merah. Konteks tetap netral, dengan jarak antarbatas huruf yang sama seperti contoh aturan judul cover. Tiga hook ini adalah contoh uji tampilan.</p>
+  <div class="variation-grid" id="sans-tests"></div>
+</section>
+
+<section>
+  <h2>Variasi cover sesuai hook</h2>
+  <p class="lede">Body cover menempel dekat judul dan lebih kecil. Pada cover berkotak, serif menjadi fokus utama; kotak kecil hanya memberi konteks. Teks berikut contoh untuk menilai desain.</p>
+  <div class="variation-grid" id="cover-variations"></div>
+</section>
+<section>
+  <h2>Variasi teks dan perbandingan slide isi</h2>
+  <p class="lede">Skala baca contoh ini (kanvas 1080): judul ±78px, subheading ±60px, body ±42px. Ukuran mengikuti peran, bukan jumlah ruang kosong; kalau teks padat, pecah slide alih-alih mengecilkan body. Nomor untuk 1–4 langkah ±99px, tebal dan berpendar. Perbandingan dipusatkan; teks di dalam kotak tetap rata kiri.</p>
+  <div class="variation-grid" id="text-variations"></div>
+</section>
+
+<section>
+  <h2>Font pilihan: Arimo</h2>
+  <p class="lede">Heading memakai Arimo Bold. Isi memakai Arimo reguler, dengan huruf tebal untuk penekanan sesuai konteks. Kata kunci serif tetap Instrument Serif Italic. Potongan Kallaway di bawah menjadi acuan visual.</p>
+  <img src="img/ref_kallaway_judul.jpg" alt="Potongan judul cover kallaway" style="width:100%;max-width:720px;display:block;margin:0 0 16px;border-radius:6px">
+  <div class="fonts" id="fonts"></div>
+</section>
+
+<section>
+  <h2>Format storytelling: pembahasan kritis</h2>
+  <p class="lede">Untuk topik gelap dan padat. Alurnya: cover provokatif → adegan → eskalasi → pola terbongkar → nama mekanismenya → siapa yang jadi target → kebenaran yang tidak enak → cara menangkis → kalimat penutup → CTA. Selingan slide gelap, grain penuh, merah dominan, dan terang menjaga ritme saat digeser.</p>
+  <div class="rail" id="story"></div>
+</section>
+
+<section>
+  <h2>Diagram penjelas untuk slide isi</h2>
+  <p class="lede">Diagram dipakai untuk memperjelas hubungan atau urutan: dua hal yang bergabung, cabang, siklus, atau sebab–respons. Judul memberi konteks, gambar menjelaskan, kalimat bawah memberi makna. Contoh isi berikut belum naskah final.</p>
+  <div class="diagram-grid" id="diagrams"></div>
+</section>
+
+<section>
+  <h2>Motion cover: animasi lapisan</h2>
+  <p class="lede">Gerak tanpa AI video: lapisan gambar digerakkan dengan kode, nanti dirender jadi MP4 4–5 detik lewat HyperFrames. Kilauan cahaya yang menyapu cover sudah dihapus. Gerak lain tetap dipakai. Gerakan yang mengubah bentuk tubuh tetap butuh Higgsfield/Kling.</p>
+  <div class="motion-grid" id="motion"></div>
+</section>
+
+<section>
+  <h2>Slide isi: format listicle</h2>
+  <p class="lede" id="railnote"></p>
+  <span class="k">Versi gelap</span><div class="rail" id="railD"></div>
+  <span class="k">Versi terang</span><div class="rail" id="railL"></div>
+</section>
+
+<section>
+  <h2>Variasi tekstur marmer</h2>
+  <p class="lede">Selain marmer merah, marmer bisa dipakai di warna lain sebagai variasi slide isi. Tetap dalam palet hitam-merah: hitam berurat putih, hitam berurat merah, putih berurat abu, dan merah tua.</p>
+  <div class="rail" id="marbrail" style="grid-template-columns:repeat(5,minmax(0,1fr))"></div>
+</section>
+
+<section>
+  <h2>Catatan</h2>
+  <ul class="tight note">
+    <li><b>Merah usulan #C80A0A</b> (dihitung): di latar hitam 3,2:1 (lolos batas 3:1 untuk teks besar; #AA0202 cuma 2,5:1), teks putih di atasnya 6:1, di latar terang 4,6:1. Masih merah murni, tidak bergeser ke oranye seperti #E63A2E. #D01010 sedikit lebih terang (3,4:1).</li>
+    <li>Ukuran huruf diperkecil sesuai permintaan: judul cover 80px, judul slide 73–91px, teks isi 46px. Ini sedikit di bawah minimum di <code>aturan-layout-safe-zone.md</code> (judul 96px, isi 48px); perlu dicek di layar HP.</li>
+    <li>Tanpa nama dan logo akun di carousel (keputusan owner 16 Okt 2026).</li>
+    <li>Gambar: domain publik / CC0 (The Met Open Access, Wikimedia Commons). Sumber di <code>06_Automation_Kit/aset_mockup/KREDIT.md</code>.</li>
+  </ul>
+</section>
+</div>
+
+<div class="dock"><div class="dock-in"><div id="dock-txt"></div><button type="button" id="copy">Salin pilihan</button></div><textarea id="out" aria-label="Teks pilihan" hidden readonly></textarea></div>
+
+<script>
+(function(){
+  var S={world:'X',font:'s4',red:'#C80A0A',pat:'k',r4:'full',r4visual:'illustrated',r1:'cover',num:'rom',fill:'mix',sglow:'on',ig:'dark'};
+  try{var sv=JSON.parse(localStorage.getItem('aura-feed8')||'{}');for(var k in sv)if(k in S)S[k]=sv[k]}catch(e){}
+  S.font='s4'; // Pilihan final owner; abaikan pilihan font lama yang tersimpan.
+  var FONTS={
+    s1:{n:'A · Inter Tight 800 + Instrument Serif',note:'Huruf rapat, sedikit lebih tebal dari kallaway.',sans:'"K Inter Tight"',sw:800,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s2:{n:'B · Inter Tight 700 + Instrument Serif',note:'Sama, tapi lebih ramping.',sans:'"K Inter Tight"',sw:700,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s3:{n:'C · TeX Gyre Heros Bold + Instrument Serif',note:'Klon gratis Helvetica, bentuk huruf paling mirip Helvetica Now.',sans:'"K Heros"',sw:700,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s4:{n:'D · Arimo Bold + Instrument Serif',note:'Mirip Arial/Helvetica, sedikit lebih lebar.',sans:'"Arimo"',sw:700,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s5:{n:'E · Schibsted Grotesk 800 + Instrument Serif',note:'Grotesk tegas, huruf R dan G mirip kallaway.',sans:'"Schibsted Grotesk"',sw:800,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s6:{n:'F · Hanken Grotesk 800 + Instrument Serif',note:'Bulat dan padat.',sans:'"Hanken Grotesk"',sw:800,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s7:{n:'G · Albert Sans 800 + Instrument Serif',note:'Geometris, tebal merata.',sans:'"Albert Sans"',sw:800,serif:'"K Instrument Serif"',ew:400,es:1,sx:1},
+    s8:{n:'H · Instrument Sans 700 + Instrument Serif',note:'Satu keluarga dengan Instrument Serif, sedikit sempit.',sans:'"Instrument Sans"',sw:700,serif:'"K Instrument Serif"',ew:400,es:1,sx:1}};
+  var NAMES={world:{X:'Campur (berganti dunia)',M:'Marmer Klasik',T:'Atlas Tubuh',L:'Peta Langit',B:'Berkas Rahasia',D:'Wayang & Blencong',E:'Panggung & Tali'},pat:{k:'Hitam 50% · merah 25% · terang 25%',dark:'Gelap semua',dr:'Gelap + merah',drl:'Gelap + merah + terang',dl:'Gelap + terang'},r4:{cover:'Opsi 1 (detik 0 = layout cover)',full:'Opsi 2 (teks penuh)'},r1:{cover:'Pakai cover PNG',none:'Tanpa cover'},num:{rom:'Romawi serif',lab:'Label arsip',brk:'Kurung'},fill:{mix:'Bervariasi antar postingan',grad:'Gradasi warna',big:'Perbesar elemen',both:'Gradasi + perbesar',none:'Polos'},sglow:{on:'Pakai glow',off:'Tanpa glow'},ig:{dark:'IG gelap',light:'IG terang'}};
+  NAMES.r4visual={classic:'Paragraf klasik',illustrated:'Dengan ilustrasi topik'};
+  var FIG={M:['A_patung1','A_patung3','A_patung1','A_patung3'],T:['T_otak','T_tangan','T_mata','A_anatomi'],L:['A_bintang','L_bintang2','A_bintang','L_bintang2'],B:['B_tabelcrop','B_mugshot','B_tabel','B_mugshot'],D:['D_wayang1','D_wayang2','D_wayang1','D_wayang2'],E:['E_topeng3','E_topeng1','E_topeng2','E_topeng3']};
+  var MIX=['M','B','L','D','T','E','B','E','M','L','D','T'];
+  function worldAt(i){return S.world==='X'?MIX[i%MIX.length]:S.world}
+  var POSTS=[
+    ['c','5 tanda kamu lagi dijadiin','tumbal','rapat'],
+    ['r4','Brand “bermusuhan” justru','dicintai.',''],
+    ['c','Cara','baca ruangan','dalam 5 detik'],
+    ['r1','Rp99.000 itu','bohong','ke otakmu'],
+    ['c','Kalimat','"aku cuma bercanda"','itu senjata'],
+    ['c','Orang baik di kantor','dikorbankan','duluan'],
+    ['c','Tatapan 3 detik yang bikin orang','segan',''],
+    ['r1','Orang yang bilang','"aku jujur orangnya"',''],
+    ['r4','Apple jual','identitas,','bukan tech.'],
+    ['c','Kenapa yang naik jabatan bukan yang','paling rajin',''],
+    ['r4','Produk gratis hasilkan','lebih banyak','uang.'],
+    ['c','Atasanmu tahu kamu','takut','menolak']];
+  function img(n,mode){if(n==='B_mugshot')return 'img/B_mugshot.webp';return 'img/'+n+'_'+(mode==='dark'?'glow':'ink')+'.webp'}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function pad(n){return String(n).padStart(2,'0')}
+  function logo(mode){return ''}
+  function nq(x){return esc(x).replace(/"[^"]*"/g,function(m){return '<span'+(m.toLowerCase()==='"nanti aku bantu"'?' class="title-accent"':'')+' style="white-space:nowrap">'+m+'</span>'})}
+  function sansLines(text,tail){var breaks={'3 kalimat atasan yang terdengar pujian':['3 kalimat atasan','yang terdengar pujian'],'Kalau rekan kerjamu bilang "nanti aku bantu" tapi tidak pernah muncul,':['Kalau rekan kerjamu bilang','"nanti aku bantu"','tapi tidak pernah muncul,']};return (breaks[text]||[text]).map(function(line,i){return '<div class="hs'+(tail&&i===0?' tl':'')+'"><span class="sansline">'+nq(line)+'</span></div>'}).join('')}
+  function title(p){var lead=p[1],kw=p[2],tail=(p[3]||'').trim(),q=function(x){return (x.match(/"/g)||[]).length%2};
+    if(q(lead)){var j=lead.lastIndexOf('"');kw=lead.slice(j)+' '+kw;lead=lead.slice(0,j).trim()}
+    if(q(tail)){var k=tail.indexOf('"')+1;kw=kw+' '+tail.slice(0,k);tail=tail.slice(k).trim()}
+    var n=(lead+' '+kw+' '+tail).length,sz=n<=34?'sz-s':n<=50?'sz-m':n<=66?'sz-l':'sz-xl';if(tail&&tail.split(/\s+/).length===1){kw=kw+' '+tail;tail=''}return '<div class="ttl kt '+sz+'">'+sansLines(lead,false)+'<div class="hk">'+splitKw(kw).map(function(l){return '<div class="hkl"><span>'+esc(l)+'</span></div>'}).join('')+'</div>'+(tail?sansLines(tail,true):'')+'</div>'}
+  function splitKw(kw){var w=kw.trim().split(/\s+/);if(w.length<2||kw.length<=11)return [kw];var best=1,bd=1e9;for(var i=1;i<w.length;i++){var a=w.slice(0,i).join(' ').length,b=w.slice(i).join(' ').length,d=Math.abs(a-b);if(d<bd){bd=d;best=i}}return [w.slice(0,best).join(' '),w.slice(best).join(' ')]}
+  function fitSans(){document.querySelectorAll('.kt .sansline').forEach(function(sp){var hs=sp.parentElement,cv=sp.closest('.cv');hs.style.fontSize='';var max=parseFloat(getComputedStyle(hs).fontSize);var available=hs.clientWidth;var width=sp.getBoundingClientRect().width;if(width>available&&width>0)hs.style.fontSize=(max*available/width)+'px';})}
+  function fitTitles(){centerStepNumbers();fitSans();fitVariantTitles();fitSansTests();[].forEach.call(document.querySelectorAll('.kt .hkl span'),function(sp){var cv=sp.closest('.cv'),W=cv?cv.clientWidth:0;if(!W)return;var t=sp.closest('.kt'),MX=t.classList.contains('sz-xl')?11:t.classList.contains('sz-l')?14:t.classList.contains('sz-m')?19:26;if(cv.classList.contains('diagram-cover'))MX=14;if(cv.classList.contains('editorial-reel'))MX=14;var L=sp.parentNode;L.style.fontSize='10cqw';var w=sp.getBoundingClientRect().width;if(!w)return;var f=10*(.70*W)/w;L.style.fontSize=Math.max(7,Math.min(MX,f))+'cqw'})}
+  function fimg(f,mode){return '<img class="fimg fx" src="'+img(f,mode)+'" alt="">'}
+  function figure(w,mode,f,extra){
+    var m=mode==='light'?'light':'dark', back=/h-back/.test(extra||'')&&mode!=='light';
+    function fi(){return fimg(f,m)}
+    if(w==='M') return '<div class="col">'+fi()+'<div class="plinth"><div class="top"></div><div class="face"></div></div></div>';
+    if(w==='T'||w==='D') return '<div class="col">'+fi()+'</div>';
+    if(w==='L') return '<div class="orbw fx"><div class="rings"></div><div class="orb"><img src="'+img(f,m)+'" alt=""></div></div>';
+    if(w==='B') return f==='B_mugshot'?'<div class="doc fx"><img src="img/B_mugshot.webp" alt=""><div class="splat"></div><div class="stamp">RAHASIA</div></div>':'<div class="photo fx"><div class="pin"><img src="'+img(f,m)+'" alt=""></div><div class="splat"></div><div class="stamp">RAHASIA</div></div>';
+    if(w==='E') return '<div class="col"><div class="ctrl"></div><div class="strs"><i style="left:6%"></i><i style="left:50%"></i><i style="left:94%"></i></div>'+fi()+'</div>';
+    return '';
+  }
+  function bg(w){if(w==='M')return '<div class="lyr museum"></div>';if(w==='D')return '<div class="lyr blencong"></div>';if(w==='E')return '<div class="lyr spot"></div><div class="lyr curtain"></div>';return ''}
+  function fg(w){return w==='D'?'<div class="gedebog"></div>':''}
+  function base(mode,ratio,extra,w){return '<div class="cv '+ratio+' '+mode+' w'+w+' '+(extra||'')+'"><div class="lyr glow"></div><div class="lyr floor"></div>'+(mode==='light'?'<div class="lyr paper"></div>':'')}
+  function close(gr){return '<div class="lyr vig"></div><div class="lyr grain"></div>'+(gr?'<div class="grain2"></div>':'')+'</div>'}
+  var GV=['tr','top','bl','right','corner','tl','bottom','br','left','full'],HV=['bloom','back','bloomred'];
+  function cover(p,i,mode,ratio,extra,w){var f=FIG[w][i%4];extra=extra||'';if(extra.indexOf('g-')<0)extra+=' g-'+GV[i%10];if(w==='L'&&extra.indexOf('o-')<0)extra+=' o-'+['center','left','right'][i%3];if(extra.indexOf('f-')<0)extra+=' f-'+(S.fill==='mix'?['grad','none','both','none'][i%4]:S.fill);if(extra.indexOf('h-')<0)extra+=' h-'+HV[i%3];if((w==='L'||w==='B')&&extra.indexOf('h-back')>=0)extra=extra.replace('h-back','h-bloom');return base(mode,ratio,extra,w)+bg(w)+'<div class="lyr halo"></div>'+logo(mode)+'<div class="stack">'+title(p)+'<div class="figwrap">'+figure(w,mode,f,extra)+'</div></div>'+fg(w)+close(true)}
+  function r1none(p,i,w){var f=FIG[w][i%4];return '<div class="cv r916 dark w'+w+'" style="--cbg:#050505"><div class="rlwin"><img src="'+img(f,'dark')+'" alt=""></div><div class="rlcap">'+esc(p[2].replace(/"/g,''))+'</div></div>'}
+  function r4full(p,i,w,mode){var k=i===8?2:i===10?1:0;return S.r4visual==='classic'?editorialReel(k,p,mode):illustratedReel(k,p,mode)}
+  function artSvg(label,content,view){return '<svg viewBox="'+(view||'0 0 700 620')+'" role="img" aria-label="'+esc(label)+'">'+content+'</svg>'}
+  var COVER_DIAGRAMS=[
+    {name:'A · Cabang keputusan · kuning untuk jeda',mode:'dark',accent:'#F0D66A',hook:['c','Tugas baru masuk?','cek dulu','sebelum bilang iya'],foot:'Tenggat dulu. Baru jawaban.',kind:'branch'},
+    {name:'B · Tangga respons · oranye pada satu tahap',mode:'light',accent:'#FF6B24',hook:['c','Biar jawabanmu','tegas','tanpa naik nada'],foot:'Jeda → tanya → sepakati.',kind:'stairs'},
+    {name:'C · Dua jalur · hijau sebagai pembanding',mode:'dark',accent:'#76DD91',hook:['c','Sama-sama bantu.','beda batas','beda akibat'],foot:'Bantuan tetap ada. Urutannya beda.',kind:'compare'},
+    {name:'D · Hubungan melingkar · putih di atas merah',mode:'red',accent:'#FFFFFF',hook:['c','Tugas terus','numpuk?','putus pola ini'],foot:'Kenali titik saat kamu bisa menyela.',kind:'orbit'}
+  ];
+  function coverDiagramArt(kind){
+    if(kind==='branch')return artSvg('Tugas baru diperiksa tenggatnya, lalu dibandingkan dengan beban saat ini; responsnya atur ulang atau sepakati.',
+      diagramNode('task',190,10,320,90,'Tugas baru')+'<path class="wire" d="M350 100V118"/><path class="accent-line" data-shape="decision" d="M350 118L550 250 350 382 150 250Z"/><text data-decision-label="true" x="350" y="225" style="font-size:38px">Tenggat</text><text data-decision-label="true" x="350" y="279" style="font-size:38px">bentrok?</text><path class="wire" d="M150 250H90V338M90 410V460M550 250H610V338M610 410V460"/><text class="small-label" x="90" y="374">Ya</text><text class="small-label" x="610" y="374">Tidak</text>'+diagramNode('reschedule',0,460,260,100,'Atur ulang')+diagramNode('agree',440,460,260,100,'Sepakati'));
+    if(kind==='stairs')return artSvg('Tiga langkah respons: jeda, tanya tenggat, lalu sepakati urutan; langkah kedua diberi aksen oranye.',
+      '<path class="wire" d="M30 562H220V418H430V274H675"/><rect data-step-box="one" x="30" y="437" width="190" height="125" fill="#22201e"/><rect data-step-box="two" class="accent-fill" x="220" y="293" width="210" height="125"/><rect data-step-box="three" x="430" y="149" width="245" height="125" fill="#22201e"/><text data-step-number="one" class="white-on-accent" x="125" y="495" style="font-size:70px;dominant-baseline:alphabetic">01</text><text data-step-number="two" x="325" y="352" style="font-size:70px;dominant-baseline:alphabetic;fill:#19110e">02</text><text data-step-number="three" class="white-on-accent" x="552.5" y="208" style="font-size:70px;dominant-baseline:alphabetic">03</text><text x="125" y="393">Jeda</text><text x="325" y="206" style="font-size:40px">Tanya</text><text class="small-label" x="325" y="251" style="font-size:32px">tenggat</text><text x="552" y="62" style="font-size:40px">Sepakati</text><text class="small-label" x="552" y="107" style="font-size:32px">urutan</text>');
+    if(kind==='compare')return artSvg('Dua jalur respons: langsung iya menumpuk tugas, sedangkan memberi batas membantu mengatur urutan.',
+      '<text x="175" y="47">Tanpa batas</text><text class="accent-text" x="525" y="47">Dengan batas</text><path class="wire" d="M350 22V540"/>'+diagramNode('yes',25,126,300,100,'Langsung iya')+diagramNode('time',375,126,300,100,'Sebut waktu')+'<path d="M175 226V310M163 298L175 310 187 298" fill="none" stroke="#C80A0A" stroke-width="4"/><path class="accent-line" d="M525 226V310M513 298L525 310 537 298"/><rect x="65" y="370" width="220" height="64" rx="5" fill="#C80A0A"/><rect x="65" y="445" width="220" height="32" rx="5" fill="#C80A0A" opacity=".65"/><rect x="65" y="488" width="220" height="32" rx="5" fill="#C80A0A" opacity=".35"/><text class="small-label white-on-accent" x="175" y="403">Menumpuk</text><rect x="415" y="388" width="220" height="100" rx="8" fill="#14281a" stroke="#76DD91" stroke-width="2"/><text class="accent-text" x="525" y="440" style="font-size:38px">Terurut</text>');
+    return artSvg('Siklus permintaan, langsung iya, beban penuh, dan permintaan kembali; garis putus-putus menunjukkan tempat menyela dengan batas.',
+      '<circle cx="350" cy="304" r="205" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>'+cycleArc(-72,-34)+cycleArc(20,75)+cycleArc(145,195)+diagramNode('request',200,25,300,96,'Permintaan',true)+diagramNode('yes',400,326,290,96,'Langsung iya',true)+diagramNode('load',10,326,290,96,'Beban penuh',true)+'<path d="M350 334L350 464" stroke="#fff" stroke-width="2" stroke-dasharray="6 9"/><text class="serif-node" x="350" y="269">Batas</text>');
+  }
+  function cycleArc(start,end){var a=start*Math.PI/180,b=end*Math.PI/180,p=[350+205*Math.cos(b),304+205*Math.sin(b)],q=[350+205*Math.cos(a),304+205*Math.sin(a)],t=[-Math.sin(b),Math.cos(b)],n=[Math.cos(b),Math.sin(b)];function xy(x,y){return x.toFixed(2)+' '+y.toFixed(2)}return '<path data-cycle-arc="'+start+','+end+'" class="accent-line" d="M'+xy(q[0],q[1])+'A205 205 0 0 1 '+xy(p[0],p[1])+'"/><path class="accent-line" d="M'+xy(p[0]-22*t[0]+10*n[0],p[1]-22*t[1]+10*n[1])+'L'+xy(p[0],p[1])+' '+xy(p[0]-22*t[0]-10*n[0],p[1]-22*t[1]-10*n[1])+'"/>'}
+  function centerStepNumbers(){var c=document.createElement('canvas').getContext('2d');if(!c)return;c.font='700 70px "Arimo"';document.querySelectorAll('[data-step-number]').forEach(function(t){var b=t.closest('svg').querySelector('[data-step-box="'+t.getAttribute('data-step-number')+'"]'),m=c.measureText(t.textContent);t.setAttribute('x',+b.getAttribute('x')+(+b.getAttribute('width'))/2);t.setAttribute('y',+b.getAttribute('y')+(+b.getAttribute('height'))/2+(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2)})}
+  function diagramNode(key,x,y,width,height,label,solid){return '<rect data-box-id="'+key+'" '+(solid?'fill="#830707"':'class="node"')+' x="'+x+'" y="'+y+'" width="'+width+'" height="'+height+'" rx="10"/><text data-in-box="'+key+'" x="'+(x+width/2)+'" y="'+(y+height/2)+'" style="font-size:38px">'+label+'</text>'}
+  function diagramCover(i,mode){var d=COVER_DIAGRAMS[i],m=mode||d.mode,accent=d.accent;if(m==='light'&&d.kind==='branch')accent='#806313';if(m==='light'&&d.kind==='compare')accent='#267744';return base(m,'r34','diagram-cover g-tr','M')+'<div class="stack">'+title(d.hook)+'</div><div class="cover-art" style="--diagram-accent:'+accent+'">'+coverDiagramArt(d.kind)+'</div><p class="cover-foot">'+d.foot+'</p>'+close(true)}
+  function reelContent(i){
+    var items=[
+      {hook:POSTS[1],body:'Seperti Supreme yang membuat kamu ANTRI berjam-jam untuk produk yang SENGAJA dibuat terbatas. Atau Hermes yang butuh “track record pembelian” sebelum kamu diizinkan beli tas tertentu. Mereka bukan menjual produk — mereka menjual <strong>PENOLAKAN.</strong> Dan kamu semakin menginginkannya.'},
+      {hook:POSTS[10],body:'Karena RECIPROCITY: saat seseorang memberimu sesuatu secara cuma-cuma, otakmu secara otomatis merasa berhutang. Dan perasaan itu mendorong pembelian yang JAUH lebih besar dari nilai barang gratis tersebut. Tapi strategi lengkapnya bukan sekedar “kasih gratis” — ada urutan yang harus tepat.'},
+      {hook:POSTS[8],body:'Kamu tidak membeli iPhone karena spesifikasinya terbaik — BUKAN. Kamu membelinya untuk menjadi BAGIAN dari sesuatu yang lebih besar. Ini namanya cult branding — dan Apple menguasainya di level yang hampir tidak bisa ditiru. Kenapa begitu kuat? Rahasianya ada di psikologi kelompok.'}
+    ];
+    return items[i];
+  }
+  function editorialReel(i,p,mode,visual){
+    var item=reelContent(i),variant=visual||'open';
+    return base(mode||'dark','r916','editorial-reel ed-'+variant+' g-tr','M')+(variant==='figure'?'<div class="ed-back"><img src="img/A_patung1_glow.webp" alt=""></div>':'')+'<div class="ed-wrap">'+title(p||item.hook)+'<div class="ed-rule"></div><div class="ed-main"><p>'+item.body+'</p></div><p class="ed-cta">Cek caption!</p></div>'+close(true);
+  }
+  function topicIllustration(i){
+    function person(x,y,scale){return '<g transform="translate('+x+' '+y+') scale('+scale+')"><circle class="ink" cx="0" cy="-26" r="12"/><path class="ink" d="M-13-9Q0-17 13-9L20 25H8L6 68H-5L-8 25H-20Z"/></g>'}
+    var shapes='';
+    if(i===0){
+      shapes='<path class="outline soft" d="M28 306H670"/><path class="outline" d="M430 298V30H625V298M445 296V47H606V296"/><path class="focus" d="M455 160H595"/><circle class="ink" cx="582" cy="173" r="5"/><path class="outline soft" d="M470 70H584V125H470Z"/>'+person(85,190,1.2)+person(175,190,1.2)+person(265,190,1.2)+'<path class="focus" d="M53 240Q171 275 302 240"/><path class="outline" d="M54 220V306M302 220V306"/><circle class="focus-fill" cx="54" cy="220" r="7"/><circle class="focus-fill" cx="302" cy="220" r="7"/>';
+    }else if(i===2){
+      shapes='<circle class="outline soft" cx="350" cy="166" r="144"/><path class="focus" d="M225 104A144 144 0 0 1 475 104"/><rect class="outline" x="265" y="59" width="170" height="226" rx="20"/><path class="outline" d="M313 59V30H388V59M297 250H404"/>'+person(350,151,1.12)+person(160,170,.8)+person(540,170,.8)+'<path class="outline soft" d="M186 181H239M461 181H514"/>';
+    }else{
+      shapes='<rect class="outline" x="65" y="132" width="180" height="153" rx="6"/><rect class="outline" x="50" y="111" width="210" height="42" rx="5"/><path class="focus" d="M155 112V285M153 111Q70 67 116 48Q153 37 155 111Q162 35 200 51Q243 77 157 111"/><path class="focus" d="M294 194H397M378 175L397 194 378 213"/><rect class="outline" x="449" y="54" width="184" height="245" rx="12"/><path class="outline soft" d="M476 202H605M476 224H605M476 246H564"/><text x="541" y="126">Rp</text>';
+    }
+    return artSvg(['Antrean di depan pintu tertutup: metafora akses yang dibatasi.','Hadiah dihubungkan dengan transaksi berikutnya: metafora timbal balik.','Kartu identitas dan orang dalam satu lingkaran: metafora rasa menjadi bagian kelompok.'][i],shapes,'0 0 700 330');
+  }
+  function illustratedReel(i,p,mode){var item=reelContent(i),layout=i===2?'middle':i===1?'poster':'lower';return base(mode||'dark','r916','editorial-reel illustrated-reel ill-'+layout+' g-tr','M')+'<div class="ed-wrap">'+title(p||item.hook)+'<div class="ed-main"><p>'+item.body+'</p></div><div class="ill-art">'+topicIllustration(i)+'</div><p class="ed-cta">Cek caption!</p></div>'+close(true)}
+  function renderExplorations(){
+    document.getElementById('diagram-covers').innerHTML=COVER_DIAGRAMS.map(function(d,i){return '<figure>'+diagramCover(i)+'<figcaption>'+d.name+'</figcaption></figure>'}).join('');
+    document.getElementById('reel-family').innerHTML=['A · Paragraf terbuka · varian lama','B · Paragraf dalam panel tipis','C · Figur samar + penekanan kuning'].map(function(label,i){return '<figure><div style="position:relative">'+editorialReel(0,null,'dark',['open','panel','figure'][i])+'<div class="crop"></div></div><figcaption>'+label+'</figcaption></figure>'}).join('');
+    document.getElementById('illustrated-reels').innerHTML=[['D · Paragraf → antrean dan pintu → CTA',0],['E · Identitas kelompok → paragraf → CTA',2],['F · Paragraf → hadiah dan transaksi → CTA',1]].map(function(x){return '<figure><div style="position:relative">'+illustratedReel(x[1],null,'dark')+'<div class="crop"></div></div><figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+    document.getElementById('family-grid').innerHTML=POSTS.map(function(p,i){return tile(p,i,true)}).join('');
+  }
+  var KSEQ=['dark','red','dark','light','dark','light','dark','red','dark','dark','light','red'];
+  function modeFor(i){var r=Math.floor(i/3),c=i%3,q=(r+c)%3;
+    if(S.pat==='k')return KSEQ[i%12];
+    if(S.pat==='dark')return 'dark';
+    if(S.pat==='dr')return q===1?'red':'dark';
+    if(S.pat==='dl')return (r+c)%2?'light':'dark';
+    return ['dark','red','light'][q];}
+  var ICON={c:'<svg class="ticon" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="2" width="16" height="16" rx="2.5"/><rect x="2" y="6" width="16" height="16" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/></svg>',r:'<svg class="ticon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M9 2.5l3 5.5M15 2.5l3 5.5"/><path d="M10 11.5v6l5-3z" fill="#fff" stroke="none"/></svg>'};
+  function tile(p,i,fullPreview){var m=modeFor(i),t=p[0],w=worldAt(i),h,diagramIndex=({2:0,5:1,9:2})[i];
+    if(t==='c'&&diagramIndex!==undefined) h=diagramCover(diagramIndex,m)+ICON.c;
+    else if(t==='c') h=cover(p,i,m,'r34','',w)+ICON.c;
+    else if(t==='r1') h=(S.r1==='none'?r1none(p,i,w):cover(p,i,m,'r916','',w))+ICON.r;
+    else h=(fullPreview===true||S.r4==='full'?r4full(p,i,w,m):cover(p,i,m,'r916','',w))+ICON.r;
+    return '<div class="tile">'+h+'</div>'}
+  function roman(n){return ['','I','II','III','IV','V','VI','VII','VIII','IX','X'][n]}
+  function numEl(n){if(S.num==='rom')return '<div class="no rom">'+roman(n)+'<i></i></div>';if(S.num==='lab')return '<div class="no lab">Poin '+pad(n)+'</div>';return '<div class="no brk">[ '+pad(n)+' ]</div>'}
+  var MID=0;
+  function marble(k){k=k||'red';if(k!=='red')return '<div class="lyr marb mk-'+k+'"><img src="img/marble_'+k+'.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>';var M={red:['var(--red)','#000',.38,'0.012 0.035'],black:['#0c0c0d','#fff',.1,'0.012 0.035','#fff',.55],white:['#ebe9e5','#1a1a1a',.14,'0.012 0.035','#2a2a2a',.5],ox:['#3a0606','#000',.5,'0.012 0.035','#c80a0a',.45],vred:['#0c0c0d','var(--red)',.18,'0.01 0.03','var(--red)',.85]}[k];MID++;var id='mb'+MID;return '<div class="lyr marb"><svg viewBox="0 0 100 133" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="'+id+'" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="'+M[3]+'" numOctaves="4" seed="'+(3+MID%5)+'"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 1.5"/></filter><filter id="v'+id+'" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.016" numOctaves="5" seed="'+(11+MID%7)+'"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0 0 0 0 0 .2 1 .2 0 0 0 0 0"/></feComponentTransfer></filter></defs><rect width="100" height="133" style="fill:'+M[0]+'"/><rect width="100" height="133" filter="url(#'+id+')" style="fill:'+M[1]+';opacity:'+M[2]+'"/>'+(M[4]?'<rect width="100" height="133" filter="url(#v'+id+')" style="fill:'+M[4]+';opacity:'+M[5]+'"/>':'')+'</svg></div>'}
+  function slide(mode,w,inner,opts){opts=opts||{};return base(mode,'r34',opts.cls||'',w)+(opts.pre||'')+logo(mode)+inner+close(opts.gr)}
+  function listicle(MD){MD=MD||'dark';
+    var p=POSTS[0],w=S.world==='X'?'M':S.world,a=[],f=FIG[w][1],f2=FIG[w][2];
+    a.push(['1 · Cover',cover(p,0,MD,'r34','',w)]);
+    a.push(['2 · Teks atas + gambar menembus bawah',slide(MD,w,'<div class="blk"><h5>Kerjaan "kecil" selalu <em class="k2">nyasar</em> ke kamu</h5><ul><li>Datang jam 4 sore, "bentar kok"</li><li>Jarang ke orang yang tegas</li><li>Makin kamu iya, makin sering</li></ul></div><div class="sfig"><div class="figwrap">'+figure(w,MD,f)+'</div></div>'+fg(w),{pre:bg(w)})]);
+    a.push(['3 · Teks di atas gambar pudar',slide(MD,w,'<div class="blk mid">'+numEl(2)+'<h5>Dia pilih yang paling susah <em class="k2">bilang tidak</em>.</h5><p>Permintaan kecil membuka jalan untuk yang besar. <em>Kenali polanya dulu.</em></p></div>',{pre:'<div class="ghost"><img src="'+img(f2,MD)+'" alt=""></div>'})]);
+    a.push(['4 · Tekstur fotokopi','<div class="cv r34 light xr w'+w+'"><div class="lyr xerox"></div>'+logo('xr')+'<div class="blk mid">'+numEl(3)+'<h5>Jawab pakai jam.</h5><p>"Bisa, habis jam 4." Kamu tetap bantu, tapi kamu yang atur urutannya.</p></div><div class="lyr grain"></div></div>']);
+    a.push(['5 · Tekstur marmer merah','<div class="cv r34 dark mb w'+w+'">'+marble()+logo('red')+'<div class="blk mid">'+numEl(4)+'<h5 style="color:#fff">Dia marah karena kamu <em class="k2">pasang jam</em>?</h5><p>Itu jawabannya. Orang yang menghormatimu akan menyesuaikan.</p></div><div class="lyr grain"></div></div>']);
+    return a.map(function(x){return '<figure>'+x[1]+'<figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+  }
+  function story(){
+    var a=[],T='M';
+    a.push(['1 · Cover merah dominan',cover(['c','Orang paling baik di kantor','dikorbankan','duluan'],0,'red','r34','','M')]);
+    a.push(['2 · Adegan (grain penuh)',slide('dark',T,'<div class="blk mid"><div class="when">Senin, 16.40</div><h5>Rapat hampir selesai. Atasan menoleh ke satu orang.</h5><p>Dia tidak menoleh ke yang paling senior. Dia menoleh ke yang paling sering bilang <em>iya</em>.</p></div>',{cls:'fullgrain'})]);
+    a.push(['3 · Eskalasi (gambar pudar)',slide('dark',T,'<div class="blk mid"><h5>Awalnya cuma <em class="k2">"bentar kok"</em>.</h5><p>Rekap data. Lalu notulen. Lalu presentasi klien yang bukan tugasnya. Tiga bulan kemudian kerjaannya dobel. Gajinya tetap.</p></div>',{pre:'<div class="ghost"><img src="img/A_patung3_glow.webp" alt=""></div>'})]);
+    a.push(['4 · Pola terbongkar (grain penuh + glow)',slide('dark',T,'<div class="blk mid"><h5 class="hx separated"><span>Dia dipilih.</span><em class="k2">Dengan sengaja.</em></h5></div>',{cls:'fullgrain',gr:true})]);
+    a.push(['5 · Nama mekanisme (fotokopi)','<div class="cv r34 light xr wM"><div class="lyr xerox"></div>'+logo('xr')+'<div class="blk mid"><h5>Namanya foot-in-the-door.</h5><p>Permintaan kecil yang disetujui bikin orang lebih susah menolak permintaan berikutnya.</p><div class="src">Freedman &amp; Fraser, 1966</div></div><div class="lyr grain"></div></div>']);
+    a.push(['6 · Siapa targetnya (close-up mata)',slide('dark',T,'<div class="eyes"><img src="img/A_patung1_glow.webp" alt=""></div><div class="blk mid" style="justify-content:flex-end;padding-bottom:4cqw"><h5>Yang dicari: orang yang <em class="k2">paling sulit menolak</em>.</h5><p>Sopan, tidak enakan, takut dicap tidak kooperatif.</p></div>',{gr:true})]);
+    a.push(['7 · Kebenaran yang tidak enak (merah dominan)',slide('red',T,'<div class="blk mid"><h5 class="hx">Kebaikanmu sedang dipakai <em class="k2" style="color:#0d0202">sebagai alat</em>.</h5></div>',{gr:true})]);
+    a.push(['8 · Cara menangkis (terang)',slide('light',T,'<div class="blk mid"><div class="chat"><span class="lab">Kalimat penangkis</span><div class="bub in">Sekalian ini ya, bentar kok.</div><div class="bub out">Bisa. Laporan dulu, jam 4 aku pegang ini. Mana yang prioritas?</div></div></div>')]);
+    a.push(['9 · Kalimat penutup (gelap)',slide('dark',T,'<div class="blk mid"><h5 class="hx">Baik tanpa batas itu <em class="k2">kebocoran</em>.</h5><p>Pasang batasmu sebelum orang lain yang memasangnya untukmu.</p></div>',{gr:true})]);
+    a.push(['10 · CTA',slide('dark',T,'<div class="blk mid cta"><small>Mau 7 kalimat penangkisnya?</small><div class="kw">Komen<em>TUMBAL</em></div><p style="font-size:4.3cqw;margin-top:3cqw">Aku kirim lewat DM. Pakai besok pagi di rapat pertama.</p></div>',{gr:true})]);
+    return a.map(function(x){return '<figure>'+x[1]+'<figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+  }
+  function diagrams(){
+    function graphic(id,body){return '<svg viewBox="0 0 700 460" role="img" aria-label="'+id.label+'"><defs><linearGradient id="'+id.key+'g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#C80A0A"/><stop offset="1" stop-color="#280707"/></linearGradient><marker id="'+id.key+'a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#e9e4df"/></marker></defs>'+body.replace(/GRAD/g,id.key+'g').replace(/ARROW/g,id.key+'a')+'</svg>'}
+    function circle(x,y,label){return '<circle cx="'+x+'" cy="'+y+'" r="84" fill="url(#GRAD)" stroke="#7a2929" stroke-width="1.5"/><text class="term" x="'+x+'" y="'+y+'">'+label+'</text>'}
+    var examples=[
+      ['Hubungan · dua hal membentuk kesepakatan','Batas yang jelas<br>punya <em>dua bagian.</em>',graphic({key:'dg-rel',label:'Waktu dan prioritas dihubungkan ke kesepakatan'},circle(175,110,'Waktu')+circle(525,110,'Prioritas')+'<text x="350" y="110" style="font-size:56px;font-weight:700">+</text><path class="wire" marker-end="url(#ARROW)" d="M175 203V287Q175 309 197 309H248"/><path class="wire" marker-end="url(#ARROW)" d="M525 203V287Q525 309 503 309H452"/>'+circle(350,330,'Sepakat')),'Sebut kapan kamu bisa.<br>Pastikan apa yang <strong>didahulukan.</strong>','Dc489B2DnPa_3'],
+      ['Cabang · hal yang perlu diperjelas','Sebelum menjawab,<br><em>perjelas tugasnya.</em>',graphic({key:'dg-map',label:'Tugas baru bercabang ke tenggat, beban dan prioritas'},'<path class="soft-wire" d="M150 95C150 190 240 165 270 205M550 95C550 190 460 165 430 205M350 300V365"/><rect x="210" y="205" width="280" height="85" rx="9" fill="none" stroke="#e9e4df" stroke-width="2"/><text x="350" y="250" style="font-weight:700">TUGAS BARU</text><text x="150" y="70">Tenggat</text><text x="550" y="70">Beban kerja</text><rect x="247" y="365" width="206" height="58" fill="#C80A0A"/><text x="350" y="396" style="fill:#fff">Prioritas</text>'),'Tanya yang belum jelas.<br>Jangan langsung <strong>mengiyakan.</strong>','DdITdacjqoD_3'],
+      ['Siklus · urutan yang kembali ke awal','Saat situasi berubah,<br><em>bicarakan ulang.</em>',graphic({key:'dg-loop',label:'Jelaskan, dengar dan sepakati membentuk siklus'},circle(350,92,'Jelaskan')+circle(538,335,'Dengar')+circle(162,335,'Sepakati')+'<path class="wire" marker-end="url(#ARROW)" d="M447 105Q548 126 548 235"/><path class="wire" marker-end="url(#ARROW)" d="M443 355Q350 423 257 355"/><path class="wire" marker-end="url(#ARROW)" d="M151 235Q151 125 252 105"/>'),'Batas bukan sekali ucap.<br><strong>Cek lagi</strong> saat kebutuhannya berubah.','Dd5D8unDqaC_5'],
+      ['Sebab–respons · alur tanpa kotak','Dua tenggat bentrok?<br><em>Tanya prioritasnya.</em>',graphic({key:'dg-path',label:'Tugas masuk, waktu berbenturan, lalu tanyakan prioritas'},'<text x="190" y="58">Tugas baru masuk</text><path class="wire" marker-end="url(#ARROW)" d="M304 93L411 192"/><text class="key" x="470" y="236">Tenggat bentrok</text><path class="wire" marker-end="url(#ARROW)" d="M400 272L287 370"/><text x="190" y="414">Tanya prioritas</text>'),'"Kalau ini didahulukan,<br>tugas mana yang <strong>boleh ditunda?</strong>"','DdkwAYXjonm_4']
+    ];
+    return examples.map(function(x){return '<figure>'+slide('dark','M','<div class="diagram-content"><h5>'+x[1]+'</h5><div class="diagram">'+x[2]+'</div><p>'+x[3]+'</p></div>',{gr:true})+'<figcaption>'+x[0]+'<br>Acuan Kallaway: '+x[4]+'</figcaption></figure>'}).join('');
+  }
+  function titleCasePhrase(text){return text.toLocaleLowerCase('id-ID').replace(/\p{L}[\p{L}\p{M}]*/gu,function(word){return word[0].toLocaleUpperCase('id-ID')+word.slice(1)})}
+  function normalizeSerifRoles(){
+    document.querySelectorAll('.steps').forEach(function(g){var count=g.querySelectorAll('.step').length;g.classList.toggle('few-steps',count>=1&&count<=4)});
+    document.querySelectorAll('.cv .blk h5 em.k2,.cv .diagram-content h5 em,.cv .variation-inner h5 em,.cv .step-label,.cv .compare-label .serif-label,.cv .cta .kw em').forEach(function(n){n.textContent=titleCasePhrase(n.textContent)});
+  }
+  function fitVariantTitles(){document.querySelectorAll('.variant-title .sans-main').forEach(function(h){h.style.fontSize='';var lines=Array.from(h.querySelectorAll('.cover-line'));if(!lines.length)return;var width=Math.max.apply(null,lines.map(function(l){return l.getBoundingClientRect().width}));if(width>h.clientWidth)h.style.fontSize=(parseFloat(getComputedStyle(h).fontSize)*h.clientWidth/width)+'px'})}
+  function makeVariationCover(content,i){return base('dark','r34','g-tr h-bloom f-none cover-variant','M')+bg('M')+'<div class="lyr halo"></div><div class="stack">'+content+'<div class="figwrap">'+figure('M','dark',i%2?'A_patung3':'A_patung1','h-bloom')+'</div></div>'+close(true)}
+  function sansTests(){
+    var tests=[
+      ['A · Sans inti merah, konteks serif netral','<div class="sans-focus-title"><div class="sf-line sf-lead"><span>JANGAN LANGSUNG</span></div><div class="sf-line sf-key"><span>BILANG IYA</span></div><div class="sf-line sf-context"><span>SAAT TUGAS BARU MASUK</span></div></div>'],
+      ['B · Fokus sans dengan penutup serif','<div class="sans-focus-title"><div class="sf-line sf-lead"><span>KENAPA</span></div><div class="sf-line sf-key"><span>YANG DIAM</span></div><div class="sf-line sf-context"><span>JUSTRU PALING DITAKUTI</span></div></div>'],
+      ['C · Konteks singkat, kesimpulan dominan','<div class="sans-focus-title"><div class="sf-line sf-lead"><span>3 KALIMAT ATASAN</span></div><div class="sf-line sf-context"><span>TERDENGAR PUJIAN, PADAHAL</span></div><div class="sf-line sf-key"><span>TANDA BAHAYA</span></div></div>']
+    ];return tests.map(function(x,i){return '<figure>'+makeVariationCover(x[1],i)+'<figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+  }
+  function coverVariations(){
+    var bodyTitle=title(['c','Atasanmu tahu kamu','takut','menolak']);
+    var boxTitle='<div class="ttl kt sz-m"><div class="hk"><div class="hkl"><span>BATAS YANG</span></div><div class="hkl"><span>JELAS</span></div></div><div class="hs"><span class="sansline">TETAP BANTU.</span></div><div class="hs"><span class="sansline">TETAP PEGANG KENDALI.</span></div></div>';
+    var titles=[
+      ['Body cover ±33px · dekat judul, satu kalimat','<div class="variant-title">'+bodyTitle+'<p class="cover-body">Mulai dari satu kalimat: "Bisa, setelah jam empat."</p></div>'],
+      ['Serif sebagai fokus · kotak ±33px mengikuti frasa','<div class="variant-title box-title">'+boxTitle+'<div class="phrase-box">SAAT TUGAS TAMBAHAN DATANG</div></div>']
+    ];return titles.map(function(x,i){return '<figure>'+makeVariationCover(x[1],i)+'<figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+  }
+  function fitSansTests(){document.querySelectorAll('.sans-focus-title').forEach(function(t){t.querySelectorAll('.sf-line').forEach(function(line){line.style.fontSize='';var span=line.querySelector('span'),w=span.getBoundingClientRect().width;if(w>line.clientWidth)line.style.fontSize=(parseFloat(getComputedStyle(line).fontSize)*line.clientWidth/w)+'px'})})}
+  function textVariations(){
+    var a=[];
+    a.push(['Body sans + serif lowercase',slide('dark','M','<div class="variation-inner"><h5>Kamu Masih<br><em>Bisa Membantu.</em></h5><div class="body-pair"><p>Bilang <em class="body-serif">boleh bantu</em><br>bukan berarti harus sekarang.</p><div class="tiny-rule"></div><p>Sebut waktunya.<br>Kamu tetap pegang <em class="body-serif">urutannya.</em></p></div></div>',{gr:true})]);
+    a.push(['Subheading serif untuk langkah',slide('dark','M','<div class="variation-inner"><h5>Jawab Dengan<br><em>Batas Yang Jelas.</em></h5><div class="steps"><div class="step"><span class="step-index">01</span><div><span class="step-label">Sebut Waktumu</span><p>"Aku bisa setelah jam empat."</p></div></div><div class="step"><span class="step-index">02</span><div><span class="step-label">Tanya Prioritas</span><p>"Mana yang perlu selesai dulu?"</p></div></div><div class="step"><span class="step-index">03</span><div><span class="step-label">Sepakati Urutannya</span><p>"Berarti laporan ini ditunda?"</p></div></div></div></div>',{gr:true})]);
+    a.push(['Perbandingan dengan aksen merah–hijau',slide('dark','M','<div class="variation-inner compare-centered"><h5>Sama-Sama Bantu.<br><em>Batasnya Berbeda.</em></h5><div class="compare-pair"><div class="compare-card"><div class="compare-label"><span class="compare-mark">×</span><span class="serif-label">Tanpa Batas</span></div><p>"Iya, nanti aku kerjain."</p></div><div class="compare-card good"><div class="compare-label"><span class="compare-mark">✓</span><span class="serif-label">Dengan Batas</span></div><p>"Bisa. Setelah laporan selesai,<br>jam empat aku pegang ini."</p></div></div></div>',{gr:true})]);
+    return a.map(function(x){return '<figure>'+x[1]+'<figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+  }
+  function applyFont(){var F=FONTS[S.font],r=document.documentElement.style;r.setProperty('--cv-sans',F.sans+',"Arial Narrow",system-ui,sans-serif');r.setProperty('--sw',F.sw);r.setProperty('--cv-serif',F.serif+',Georgia,serif');r.setProperty('--ew',F.ew);r.setProperty('--es',F.es);r.setProperty('--sx',F.sx);r.setProperty('--red',S.red)}
+  function render(){setTimeout(fitTitles,0);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitTitles);
+    applyFont();
+    document.getElementById('phone').className='phone ig-'+S.ig;
+    document.getElementById('grid').innerHTML=POSTS.map(tile).join('');
+    var w0=worldAt(0);
+    document.getElementById('big').innerHTML=[['dark','gelap'],['red','merah'],['light','terang']].map(function(m,j){return '<figure><div style="position:relative">'+cover(POSTS[[0,5,11][j]],[0,5,11][j],m[0],'r34','',w0)+'<div class="safe"></div></div><figcaption>Cover '+m[1]+'</figcaption></figure>'}).join('');
+    var rp=POSTS[1],rq=POSTS[3],w1=worldAt(1),w3=worldAt(3);
+    var R=[['Jendela klip, tanpa cover',r1none(rq,3,w3)],['Jendela klip, cover PNG',cover(rq,3,'dark','r916','',w3)],['Format #2 opsi 1 (detik 0)',cover(rp,1,'red','r916','',w1)],['Format #2 opsi 2 (teks penuh)',r4full(rp,1,w1)]];
+    document.getElementById('reels').innerHTML=R.map(function(x){return '<figure><div style="position:relative">'+x[1]+'<div class="crop"></div></div><figcaption>'+x[0]+'</figcaption></figure>'}).join('');
+    var SZ=[['c','Cara','baca ruangan','dalam 5 detik','Pendek'],['c','Kenapa orang sopan','paling sering','dimanfaatkan','Sedang'],['c','3 kalimat atasan yang terdengar pujian','padahal','tanda bahaya','Panjang'],['c','Kalau rekan kerjamu bilang "nanti aku bantu" tapi tidak pernah muncul,','itu bukan lupa','','Sangat panjang']];
+    document.getElementById('sizerail').innerHTML=SZ.map(function(p,j){var n=(p[1]+' '+p[2]+' '+p[3]).trim().length;return '<figure>'+cover(p,j,'dark','r34','g-tr h-bloom f-none','M')+'<figcaption>'+p[4]+' · '+n+' huruf</figcaption></figure>'}).join('');
+    document.getElementById('fonts').innerHTML=['s4'].map(function(k){var F=FONTS[k];return '<figure><div style="--cv-sans:'+F.sans.replace(/"/g,"'")+',sans-serif;--sw:'+F.sw+';--cv-serif:'+F.serif.replace(/"/g,"'")+',serif;--ew:'+F.ew+';--es:'+F.es+';--sx:'+F.sx+'">'+cover(POSTS[5],5,'dark','r34','',worldAt(0)==='X'?'M':'M')+'</div><figcaption><b>'+F.n+'</b><br>'+F.note+'</figcaption></figure>'}).join('');
+    var GN={tl:'Dari kiri atas',tr:'Dari kanan atas',bl:'Dari kiri bawah',br:'Dari kanan bawah',right:'Dari kanan, menipis ke kiri',top:'Dari atas, menipis ke bawah',corner:'Dari keempat ujung',bottom:'Dari bawah, menipis ke atas',left:'Dari kiri, menipis ke kanan',full:'Penuh'},HN={bloom:'Pendar putih menempel di kontur',back:'Lampu merah dari belakang',bloomred:'Pendar merah menempel di kontur',none:'Tanpa pendar'};
+    document.getElementById('gvar').innerHTML=GV.map(function(g,j){var m=['dark','red','dark','light','dark','red','dark','red','light','dark'][j];return '<figure>'+cover(POSTS[0],0,m,'r34','g-'+g+' h-none','M')+'<figcaption>'+GN[g]+' · latar '+({dark:'gelap',red:'merah',light:'terang'})[m]+'</figcaption></figure>'}).join('');
+    document.getElementById('hvar').innerHTML=['bloom','back','bloomred','bloom','back'].map(function(h,j){var m=['dark','dark','dark','red','red'][j];return '<figure>'+cover(POSTS[5],5,m,'r34','h-'+h+' g-right',['M','M','E','M','D'][j])+'<figcaption>'+HN[h]+' · latar '+(m==='red'?'merah':'gelap')+'</figcaption></figure>'}).join('');
+    document.getElementById('zooms').innerHTML=[['dark',0],['red',5]].map(function(z){return '<figure><div class="zoombox"><div>'+cover(POSTS[z[1]],z[1],z[0],'r34','g-right h-bloom','M')+'</div></div><figcaption>Latar '+(z[0]==='red'?'merah':'gelap')+', 100%</figcaption></figure>'}).join('');
+    [].forEach.call(document.querySelectorAll('.zoombox'),function(b){b.scrollTop=380;b.scrollLeft=160});
+    var keep=S.fill, FN={grad:'Gradasi warna',big:'Perbesar elemen',both:'Gradasi + perbesar',none:'Polos'}, out=[];
+    [['dark','T',4],['red','B',1],['light','T',4]].forEach(function(c){['grad','big','both','none'].forEach(function(fv){out.push('<figure>'+cover(POSTS[c[2]],c[2],c[0],'r34','g-tr h-bloom f-'+fv,c[1])+'<figcaption>'+FN[fv]+' · latar '+({dark:'gelap',red:'merah',light:'terang'})[c[0]]+'</figcaption></figure>')})});
+    S.fill=keep;
+    document.getElementById('fillcmp').innerHTML=out.join('');
+    document.getElementById('story').innerHTML=story();
+    document.getElementById('diagrams').innerHTML=diagrams();
+    document.getElementById('cover-variations').innerHTML=coverVariations();
+    document.getElementById('sans-tests').innerHTML=sansTests();
+    document.getElementById('text-variations').innerHTML=textVariations();
+    renderExplorations();
+    var MW=[['B','Cap RAHASIA jatuh',2,'dark'],['L','Peta langit berputar pelan',5,'red'],['D','Blencong berkedip, wayang bergoyang',9,'dark'],['E','Topeng berayun di tali, lampu menyapu',6,'dark'],['M','Dorong pelan',0,'dark'],['T','Plat anatomi berdenyut terang',11,'red']];
+    document.getElementById('motion').innerHTML=MW.map(function(x){return '<figure>'+cover(POSTS[x[2]],x[2],x[3],'r34','motion',x[0])+'<figcaption>'+x[1]+'</figcaption></figure>'}).join('');
+    document.getElementById('railD').innerHTML=listicle('dark');
+    document.getElementById('railL').innerHTML=listicle('light');
+    (function(){var w=S.world==='X'?'M':S.world,T='<h5>Dia marah karena kamu <em class="k2">pasang jam</em>?</h5><p>Itu jawabannya. Orang yang menghormatimu akan menyesuaikan.</p>';
+      var V=[['red','dark mb','red','Marmer merah (yang sudah ada)'],['black','dark','dark','Marmer hitam, urat putih'],['vred','dark','dark','Marmer hitam, urat merah'],['white','light','light','Marmer putih, urat abu'],['ox','dark mbo','dark','Marmer merah tua']];
+      document.getElementById('marbrail').innerHTML=V.map(function(v,i){return '<figure><div class="cv r34 '+v[1]+' w'+w+'">'+marble(v[0])+logo(v[2])+'<div class="blk mid">'+numEl(4)+T+'</div><div class="lyr grain"></div></div><figcaption>'+v[3]+'</figcaption></figure>'}).join('');})();
+
+    normalizeSerifRoles();
+    document.body.classList.toggle('sglow',S.sglow==='on');
+    document.getElementById('railnote').textContent=(S.world==='X'?'Mode campur: contoh slide memakai Marmer Klasik. ':'')+'Format daftar poin untuk topik ringan sampai sedang. Slide isi rata kiri di garis yang sama, kanan 120px kosong.';
+    [].forEach.call(document.querySelectorAll('.seg'),function(g){var k=g.getAttribute('data-key');[].forEach.call(g.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-v')===S[k]?'true':'false')})});
+    document.getElementById('dock-txt').textContent=NAMES.world[S.world]+' · font Arimo Bold + Instrument Serif'+' · merah '+S.red+' · '+NAMES.pat[S.pat]+' · nomor '+NAMES.num[S.num]+' · ruang kosong: '+NAMES.fill[S.fill]+' · visual reels #2: '+NAMES.r4visual[S.r4visual];
+    try{localStorage.setItem('aura-feed8',JSON.stringify(S))}catch(e){}
+  }
+  [].forEach.call(document.querySelectorAll('.seg'),function(g){g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;S[g.getAttribute('data-key')]=b.getAttribute('data-v');render()})});
+  document.getElementById('copy').addEventListener('click',function(){
+    var t='Mockup feed auraneuro:\n- Dunia visual: '+NAMES.world[S.world]+'\n- Font: '+FONTS[S.font].n+'\n- Merah: '+S.red+'\n- Pola cover: '+NAMES.pat[S.pat]+'\n- Reels format #2: '+NAMES.r4[S.r4]+'\n- Visual reels #2: '+NAMES.r4visual[S.r4visual]+'\n- Reels jendela klip: '+NAMES.r1[S.r1]+'\n- Gaya nomor slide: '+NAMES.num[S.num]+'\n- Ruang kosong di bawah elemen: '+NAMES.fill[S.fill]+'\n- Glow kata merah di slide terang: '+NAMES.sglow[S.sglow];
+    var out=document.getElementById('out'),btn=this;
+    function fb(){out.hidden=false;out.value=t;out.focus();out.select();btn.textContent='Teks dipilih, tekan Ctrl+C'}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){btn.textContent='Tersalin';setTimeout(function(){btn.textContent='Salin pilihan'},1800)},fb)}else fb();
+  });
+  window.addEventListener('resize',function(){requestAnimationFrame(fitTitles)});
+  render();
+})();
+</script>
