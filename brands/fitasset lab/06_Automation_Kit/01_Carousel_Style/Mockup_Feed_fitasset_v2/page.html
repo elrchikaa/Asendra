@@ -1,0 +1,106 @@
+<meta charset="utf-8">
+<title>Mockup Feed Fitasset</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kepala laporan → ponsel IG (grid 3:4) + panel detail → sistem, footage reels, bank foto, skema. Gelap duluan, mengikuti mockup auraneuro. */
+:root{--bg:#0f1110;--surface:#171a18;--fg:#e7ebe7;--muted:#9ea69f;--line:#2b302c;--tagbg:#212622;--accent:#c9ef67;--accent-ink:#151719;
+--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;color-scheme:dark}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f2f3f0;--surface:#fff;--fg:#16191a;--muted:#5b6160;--line:#dadfdc;--tagbg:#e9ece9;--accent:#5f7f1c;--accent-ink:#fff;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f2f3f0;--surface:#fff;--fg:#16191a;--muted:#5b6160;--line:#dadfdc;--tagbg:#e9ece9;--accent:#5f7f1c;--accent-ink:#fff;color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 100px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}h1{font-size:clamp(2rem,5vw,3rem)}h2{font-size:1.6rem}h3{font-size:1.2rem}
+p{margin:0;max-width:72ch}.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede,.note{color:var(--muted)}.note{font-size:.88rem}section{display:flex;flex-direction:column;gap:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-family:var(--mono);font-size:.74rem;background:var(--tagbg);border-radius:4px;padding:2px 8px}
+button{font:inherit;cursor:pointer;color:inherit}button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}.seg button{font:500 .84rem var(--body);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.seg button.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.main{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:820px){.main{grid-template-columns:1fr}}
+.phone{border-radius:28px;border:8px solid #1b1d1c;background:#000;color:#f5f5f5;overflow:hidden;max-width:400px;width:100%}
+.ighead{display:flex;gap:14px;align-items:center;padding:16px 14px 10px}
+.avatar{width:64px;height:64px;border-radius:50%;background:#c9ef67;color:#151719;display:grid;place-items:center;flex:none;font:700 30px var(--display)}
+.ighead b{display:block}.ighead small{color:#a8a8a8;font-size:.8rem;display:block;line-height:1.35}
+.igtabs{display:flex;border-top:1px solid #262626}.igtabs span{flex:1;text-align:center;font:600 .7rem var(--mono);letter-spacing:.08em;padding:9px 0;color:#a8a8a8}.igtabs span:first-child{color:#f5f5f5;border-top:1px solid #f5f5f5;margin-top:-1px}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{border:0;background:#111;padding:0;position:relative;aspect-ratio:3/4;overflow:hidden}.tile img{width:100%;height:100%;object-fit:cover;display:block}
+.tile.selected{outline:3px solid #c9ef67;outline-offset:-3px}.tile .ic{position:absolute;right:5px;top:5px;color:#fff;font-size:11px;text-shadow:0 0 3px #000}
+.tile .label{position:absolute;left:0;right:0;bottom:0;padding:4px 6px;background:#000b;color:#fff;font:500 .62rem var(--mono);text-align:left}
+.hide-labels .tile .label{display:none}
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.dhead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.badge{font:500 .72rem var(--mono);padding:3px 9px;border-radius:999px;background:var(--tagbg)}.badge.r{background:var(--accent);color:var(--accent-ink)}
+.viewer{background:#000;border-radius:6px;overflow:hidden;position:relative;width:100%;max-width:440px;margin:0 auto}.viewer img{display:block;width:100%;cursor:zoom-in}
+.viewer.reel{max-width:300px}.viewer.reel img{animation:kb 7s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}@media (prefers-reduced-motion:reduce){.viewer.reel img{animation:none}}
+.play{position:absolute;left:10px;bottom:10px;background:#000b;color:#fff;font:500 .68rem var(--mono);padding:3px 8px;border-radius:10px}
+.nav{display:flex;align-items:center;justify-content:center;gap:16px}.navbtn{width:42px;height:34px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.dots{display:flex;gap:7px}.dot{border:0;width:9px;height:9px;border-radius:50%;background:var(--line);padding:0}.dot.on{background:var(--fg)}
+.box{padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-radius:6px;font-size:.92rem;white-space:pre-line}
+.save{border:1px solid var(--accent);background:transparent;border-radius:6px;padding:9px;color:var(--accent);font-weight:600}.save.saved{background:var(--accent);color:var(--accent-ink)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+thead th{font:500 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--tagbg)}tr:last-child td{border-bottom:0}
+.sys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.sys figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.sys img{width:100%;border-radius:4px;aspect-ratio:3/4;object-fit:cover}.sys figcaption{font-size:.9rem}
+.zoom{position:fixed;inset:0;background:#000e;z-index:5;display:none;align-items:center;justify-content:center;padding:24px}.zoom.open{display:flex}.zoom img{max-width:95vw;max-height:92vh}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px"><span class="k">fitasset lab · mockup feed v2 · 20 Okt 2026</span>
+<h1>Satu kartu, tiga latar</h1>
+<p class="lede">Carousel latar foto + kartu tweet (gaya Hormozi), tweet polos, dan reels dengan kartu yang sama di atas video. Skema masuk ke dalam kartu. Klik tile untuk melihat isi, simpan yang kamu suka, lalu sebutkan pilihannya di chat.</p>
+<div class="chips"><span class="chip">15 postingan</span><span class="chip">9 carousel</span><span class="chip">6 reels (frame + konsep)</span><span class="chip">15 foto Pexels</span><span class="chip">0 kredit AI</span></div>
+<p class="note">Copy, warna, font, dan logo masih sementara. Reels belum berupa video. Ini bukan ACC.</p></header>
+
+<section><div class="seg" id="filters"></div><label class="note"><input type="checkbox" id="labels" checked> Tampilkan label format di grid</label>
+<div class="main"><div class="phone"><div class="ighead"><div class="avatar">f.</div><div><b>fitasset.lab</b><small>Fitasset Lab · aset digital dan sistem untuk bisnis fitness<br>Coach · gym owner · marketer</small></div></div>
+<div class="igtabs"><span>▦ POSTINGAN</span><span>▶ REELS</span></div><div class="feed" id="feed"></div></div>
+<div class="detail"><div class="dhead"><span class="badge" id="type"></span><span class="k" id="num"></span></div>
+<div class="viewer" id="viewer"><img id="large" alt="Pratinjau slide"><span class="play" id="play" hidden>▶ frame reels · video belum dibuat</span></div>
+<div class="nav"><button class="navbtn" id="prev" aria-label="Sebelumnya">←</button><div class="dots" id="dots"></div><button class="navbtn" id="next" aria-label="Berikutnya">→</button></div>
+<h3 id="title"></h3><p class="note" id="note"></p><div class="box" id="meta"></div><div class="box" id="cap" hidden></div>
+<button class="save" id="save"></button><p class="note" id="picked"></p><button class="seg" id="reset" style="border:0;background:none;padding:0;color:var(--muted);text-decoration:underline;align-self:start">Reset pilihan</button></div></div></section>
+
+<section><h2>Sistemnya</h2><p class="note">Satu komponen kartu, tiga mode latar. Template cukup dibuat sekali, isi diganti dari data.</p><div class="sys" id="sys"></div></section>
+
+<section><h2>Footage latar reels</h2><p class="note">Diurut dari yang paling murah. Potongan interview Hormozi/YouTube orang lain tidak dipakai (hak cipta).</p>
+<div class="tbl"><table><thead><tr><th>Kode</th><th>Footage</th><th>Sumber</th><th>Cocok untuk</th></tr></thead><tbody>
+<tr><td><b>V1</b></td><td>B-roll kerja coach: konsultasi, mendampingi latihan, merekam konten</td><td>Pexels / Pixabay · 0 kredit</td><td>Semua topik bisnis coach</td></tr>
+<tr><td><b>V2</b></td><td>Tangan / POV: ketik laptop, scroll chat HP, menulis program</td><td>Stok atau rekam sendiri pakai HP</td><td>Template, check-in, DM, produk digital</td></tr>
+<tr><td><b>V3</b></td><td>Atmosfer loop: gym kosong, lampu, barbell slow motion</td><td>Pexels / Pixabay · paling reusable</td><td>Opini, bold claim</td></tr>
+<tr><td><b>V4</b></td><td>Screen recording produk Fitasset (template, tracker)</td><td>Rekam layar sendiri</td><td>Demo produk, isi paket, lisensi</td></tr>
+<tr><td><b>V5</b></td><td>A-roll founder rekam HP, kartu tetap di bawah</td><td>Rekam sendiri, butuh waktu founder</td><td>Opini personal (kalau style sudah ketemu)</td></tr>
+<tr><td><b>V6</b></td><td>Avatar HeyGen</td><td>Kredit terbatas</td><td>Pilihan terakhir</td></tr></tbody></table></div>
+<p class="note">Struktur reels: bold claim (0–2 dtk) → open loop (2–8 dtk) → "Jawabannya di caption ↓". Kartu ganti per kalimat, tanpa animasi per kata. Audio musik/ambience, tanpa VO. Bank awal: 6 klip V3 + 6 klip V1 + 4 klip V2 + 2 rekaman V4.</p></section>
+
+<section><h2>Skema di dalam kartu</h2><div class="tbl"><table><thead><tr><th>Bentuk</th><th>Data yang diisi</th><th>Contoh topik</th></tr></thead><tbody>
+<tr><td>Alur 4 langkah</td><td>4 label</td><td>Konten → DM → konsultasi → paket</td></tr><tr><td>Sebelum / sesudah</td><td>2 kalimat</td><td>Bedah kalimat offer</td></tr>
+<tr><td>Dua kolom</td><td>3 pasang baris</td><td>Jual sesi vs paket</td></tr><tr><td>Tangga</td><td>3 tingkat</td><td>Mandiri → grup → 1-on-1</td></tr>
+<tr><td>Tumpukan komponen</td><td>4 komponen + fungsi</td><td>Isi paket coaching</td></tr><tr><td>Hub 1 → 3</td><td>1 pusat + 3 cabang</td><td>Satu program, tiga peran</td></tr>
+<tr><td>Slot kalender</td><td>slot terisi / total</td><td>Batas jam kerja</td></tr><tr><td>Hitungan simulasi</td><td>angka × angka</td><td>Omzet ≠ laba</td></tr><tr><td>Checklist</td><td>3–5 butir</td><td>Persiapan konsultasi</td></tr></tbody></table></div>
+<p class="note">Bedah benchmark belum menemukan winner berbentuk skema, jadi skema dipakai di slide tengah, bukan cover.</p></section>
+<p class="note">Kanvas carousel 1080×1440, reels 1080×1920. Foto stok Pexels (lisensi Pexels); talent stok bukan founder atau klien Fitasset. Angka dan contoh berlabel simulasi.</p>
+</div>
+<div class="zoom" id="zoom"><img id="zimg" alt="Slide besar"></div>
+<script>
+const posts=/*DATA*/[];
+let a=0,s=0,f='Semua',picks=[];const K='fitasset-mockup-v2-picks';try{picks=JSON.parse(localStorage.getItem(K)||'[]')}catch(e){}
+const $=x=>document.getElementById(x);const save=()=>{try{localStorage.setItem(K,JSON.stringify(picks))}catch(e){}};
+function grid(){$('feed').innerHTML=posts.map((p,i)=>f!=='Semua'&&p.tag!==f?'':`<button class="tile ${i===a?'selected':''}" data-i="${i}"><img src="${p.slides[0]}" alt="${p.title}"><span class="ic">${p.kind==='reels'?'▶':'▧'}</span><span class="label">${p.tag}</span></button>`).join('');document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{a=+b.dataset.i;s=0;render()})}
+function render(){const p=posts[a],r=p.kind==='reels';$('viewer').className='viewer'+(r?' reel':'');$('play').hidden=!r;$('large').src=p.slides[s];$('type').textContent=p.tag;$('type').className='badge'+(r?' r':'');$('num').textContent=`${r?'frame':'slide'} ${s+1} / ${p.slides.length}`;$('title').textContent=p.title;
+$('note').textContent=r?'':p.note;$('meta').textContent=r?`Footage latar: ${p.note}\nOpsi: ${p.cost}\nAudio: ${p.audio}`:`Input untuk automation: ${p.cost}`;$('cap').hidden=!r;if(r)$('cap').textContent='Caption (jawaban lengkap):\n'+p.caption;
+$('dots').innerHTML=p.slides.map((_,i)=>`<button class="dot ${i===s?'on':''}" data-s="${i}" aria-label="Slide ${i+1}"></button>`).join('');document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{s=+b.dataset.s;render()});
+const on=picks.includes(p.id);$('save').textContent=on?'✓ Masuk pilihanmu':'＋ Simpan format ini';$('save').classList.toggle('saved',on);$('picked').textContent=picks.length?'Pilihan: '+posts.filter(x=>picks.includes(x.id)).map(x=>x.title).join(', '):'Belum ada pilihan. Tersimpan di browser ini saja, sebutkan di chat.';grid()}
+$('prev').onclick=()=>{const n=posts[a].slides.length;s=(s+n-1)%n;render()};$('next').onclick=()=>{s=(s+1)%posts[a].slides.length;render()};
+$('save').onclick=()=>{const id=posts[a].id;picks=picks.includes(id)?picks.filter(x=>x!==id):[...picks,id];save();render()};$('reset').onclick=()=>{picks=[];save();render()};
+$('labels').onchange=e=>document.body.classList.toggle('hide-labels',!e.target.checked);
+const tags=['Semua',...new Set(posts.map(p=>p.tag))];$('filters').innerHTML=tags.map(x=>`<button class="${x==='Semua'?'active':''}" data-f="${x}">${x}</button>`).join('');
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{f=b.dataset.f;document.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('active',x===b));const i=posts.findIndex(p=>f==='Semua'||p.tag===f);a=i<0?0:i;s=0;render()});
+const pick=(id,j)=>posts.find(p=>p.id===id).slides[j];
+$('sys').innerHTML=[['kapasitas',0,'Foto + kartu: latar foto, kartu tetap di ±58% dari atas'],['opini',0,'Tweet polos: latar putih/hitam, tanpa foto'],['paket',1,'Skema: foto mengecil ke atas, kartu membesar'],['r-pricing',0,'Reels: latar video, kartu sama persis']].map(([id,j,t])=>`<figure><img src="${pick(id,j)}" alt="${t}"><figcaption>${t}</figcaption></figure>`).join('');
+$('large').onclick=()=>{$('zimg').src=posts[a].slides[s];$('zoom').classList.add('open')};$('zoom').onclick=()=>$('zoom').classList.remove('open');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('zoom').classList.remove('open');if(e.key==='ArrowRight')$('next').click();if(e.key==='ArrowLeft')$('prev').click()});render();
+</script>

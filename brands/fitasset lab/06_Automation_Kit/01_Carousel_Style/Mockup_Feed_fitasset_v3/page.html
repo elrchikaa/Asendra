@@ -1,0 +1,324 @@
+<meta charset="utf-8">
+<title>Mockup Feed Fitasset</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600;800&family=Arimo:wght@400;700&family=Figtree:wght@400;600;800&family=Archivo:wght@400;600;800&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: kepala → panel pilihan → ponsel IG + slide postingan terpilih → isi semua carousel → reels → bank foto → footage → catatan; dock salin pilihan. Mengikuti format mockup feed auraneuro. Kanvas carousel 1080x1440 (3:4), reels 1080x1920. */
+:root{--bg:#f2f3f0;--surface:#fff;--fg:#16191a;--muted:#5b6160;--line:#dadfdc;--tagbg:#e9ece9;--accent:#4f6b12;--on-accent:#fff;
+--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+--cf:"Inter",Arial,sans-serif;--acc:#c9ef67;--ctop:52%;--ink:#151719}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1110;--surface:#171a18;--fg:#e7ebe7;--muted:#9ea69f;--line:#2b302c;--tagbg:#212622;--accent:#c9ef67;--on-accent:#151719;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1110;--surface:#171a18;--fg:#e7ebe7;--muted:#9ea69f;--line:#2b302c;--tagbg:#212622;--accent:#c9ef67;--on-accent:#151719;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 130px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}h1{font-size:clamp(2rem,5vw,3rem)}h2{font-size:1.6rem}h3{font-size:1.15rem}
+p{margin:0;max-width:72ch}.k,.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lede,.note{color:var(--muted)}.note{font-size:.88rem}section{display:flex;flex-direction:column;gap:14px}
+button{font:inherit;cursor:pointer;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.controls{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 22px}
+.ctl{display:flex;flex-direction:column;gap:6px;min-width:0}.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:500 .84rem var(--body);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.main{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:28px;align-items:start}
+.phone{border-radius:28px;border:8px solid #1b1d1c;background:var(--igbg);color:var(--igfg);overflow:hidden;max-width:400px;width:100%}
+.phone.ig-dark{--igbg:#000;--igfg:#f5f5f5;--igmuted:#a8a8a8;--igline:#262626}.phone.ig-light{--igbg:#fff;--igfg:#0c0c0c;--igmuted:#737373;--igline:#dbdbdb}
+.ighead{display:flex;gap:14px;align-items:center;padding:16px 14px 10px}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--acc);color:#151719;display:grid;place-items:center;flex:none;font:800 30px var(--cf)}
+.ighead b{display:block}.ighead small{color:var(--igmuted);font-size:.8rem;display:block;line-height:1.35}
+.igtabs{display:flex;border-top:1px solid var(--igline)}.igtabs span{flex:1;text-align:center;font:600 .7rem var(--mono);letter-spacing:.08em;padding:9px 0;color:var(--igmuted)}.igtabs span:first-child{color:var(--igfg);border-top:1px solid var(--igfg);margin-top:-1px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;background:#000;border:0;padding:0}
+.tile>.cv{position:absolute;inset:0;width:100%}.tile>.cv.r916{height:133.333%;top:-16.667%}
+.tile.sel:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--acc);z-index:20}
+.ticon{position:absolute;top:6px;right:6px;width:15px;height:15px;z-index:15;fill:#fff;filter:drop-shadow(0 0 2px rgba(0,0,0,.7))}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:8px;overflow-x:auto;padding-bottom:6px}
+.rail.lg{grid-auto-columns:minmax(220px,1fr)}.rail.rl{grid-auto-columns:minmax(150px,200px)}
+.rail figure{margin:0;display:flex;flex-direction:column;gap:4px;min-width:0}.rail .cv{border-radius:4px}
+figcaption{font:500 .72rem var(--mono);color:var(--muted)}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.post.picked{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.phead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.phead>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.pick{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--accent);white-space:nowrap;cursor:pointer}.pick input{width:18px;height:18px;accent-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-family:var(--mono);font-size:.72rem;background:var(--tagbg);border-radius:4px;padding:2px 8px}
+.cap{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:12px;font-size:.9rem;white-space:pre-line}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font:500 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--tagbg)}tr:last-child td{border-bottom:0}
+.bank{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}.bank figure{margin:0;display:flex;flex-direction:column;gap:4px}.bank div{aspect-ratio:3/4;border-radius:4px;background-size:cover;background-position:center}
+ul.tight{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px}
+.dock{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:30}
+.dock-in{max-width:1180px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.dock-in div{font-size:.9rem;min-width:0}
+.dock button{font-weight:700;background:var(--accent);color:var(--on-accent);border:0;border-radius:6px;padding:9px 16px}
+textarea{width:100%;min-height:80px;font:.8rem var(--mono);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px}
+@media (max-width:900px){.main{grid-template-columns:1fr}.phone{margin:0 auto}}
+
+/* ===== kanvas ===== */
+.cv{position:relative;overflow:hidden;container-type:inline-size;background:#0d0f0e;color:#fff;isolation:isolate;font-family:var(--cf);aspect-ratio:3/4;width:100%}
+.cv.r916{aspect-ratio:9/16}
+.cv .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.cv .shade{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55) 62%,rgba(0,0,0,.92))}
+.cv .dim{position:absolute;inset:0;background:rgba(8,10,9,.78)}
+.cv .dimtop{position:absolute;inset:0;background:linear-gradient(rgba(8,10,9,.9) 0,rgba(8,10,9,.55) 34%,rgba(8,10,9,.2) 60%,rgba(8,10,9,.85))}
+.cv.r916.reel .ph{animation:kb 8s ease-in-out infinite alternate}@keyframes kb{to{transform:scale(1.07)}}
+@media (prefers-reduced-motion:reduce){.cv *{animation:none!important}}
+.who{display:flex;align-items:center;gap:2.2cqw}.who i{width:6.4cqw;height:6.4cqw;border-radius:50%;background:var(--acc);color:#151719;display:grid;place-items:center;font:800 3.4cqw var(--cf);font-style:normal;flex:none}
+.who b{display:block;font-size:3cqw;line-height:1.15}.who small{display:block;font-size:2.5cqw;color:#6b706b;line-height:1.2}
+.card{position:absolute;left:13%;right:13%;top:var(--ctop);background:#fff;color:#151719;border-radius:3cqw;padding:4.2cqw 4.4cqw 4.6cqw;z-index:3;display:flex;flex-direction:column;gap:2.6cqw}
+.r916 .card{top:calc(var(--ctop) + 3%)}
+.card p{font-size:4.3cqw;line-height:1.3;margin:0;max-width:none}.card .sw{position:absolute;right:3.4cqw;bottom:3.2cqw;width:5cqw;height:5cqw;border:.4cqw solid #151719;border-radius:50%;display:grid;place-items:center;font-size:2.8cqw}
+.card.hasw{padding-bottom:9cqw}
+/* tweet polos */
+.tw{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:4.4cqw;padding:0 11%}
+.tw.light{background:#fff;color:#151719}.tw.dark{background:#000;color:#f5f5f5}.tw.dark .who small{color:#8b8f8b}
+.tw .who i{width:8cqw;height:8cqw;font-size:4.2cqw}.tw .who b{font-size:3.7cqw}.tw .who small{font-size:3cqw}
+.tw p{font-size:5.6cqw;line-height:1.26;max-width:none;margin:0}.tw p+p{margin-top:-1cqw}
+.tw .num{font:800 20cqw/0.9 var(--cf);color:var(--acc)}.tw.light .num{color:#151719;-webkit-text-stroke:0}
+.tw h4{margin:0;font-size:6.4cqw;line-height:1.15}.tw .sub{font-size:3.9cqw;line-height:1.4;color:#a6aba6}.tw.light .sub{color:#5c615c}
+/* kepala skema */
+.dh{position:absolute;left:8%;right:11%;top:6.5%;z-index:4;display:flex;flex-direction:column;gap:2.4cqw}
+.un{font:600 2.7cqw var(--cf);color:#c9ccc7}.tw .un{position:absolute;left:11%;top:6.5%;color:#8b8f8b}.dh .who b{color:#fff}.dh .who small{color:#b9bdb8}
+.dh h4{margin:0;font-size:6.2cqw;line-height:1.1;letter-spacing:-.02em;text-wrap:balance}.dh h4 em{font-style:normal;color:var(--acc)}
+.db{position:absolute;left:8%;right:11%;top:31%;bottom:7%;z-index:4}
+.foot{position:absolute;left:8%;right:11%;bottom:4%;font-size:2.4cqw;color:#a8ada8;z-index:4}
+.lab{font:700 2.4cqw var(--cf);letter-spacing:.14em;text-transform:uppercase;color:#a8ada8}
+/* corong */
+.fn{display:flex;flex-direction:column;align-items:center;gap:1.6cqw;height:100%}
+.fn div{height:15cqw;display:grid;place-items:center;font-weight:800;font-size:4.2cqw;color:#151719;background:#f1f3ee;clip-path:polygon(0 0,100% 0,94% 100%,6% 100%)}
+.fn div.hi{background:var(--acc)}.fn small{font-size:2.8cqw;color:#cfd3cd;margin-top:1cqw;text-align:center}
+/* garis waktu */
+.tl{position:relative;height:100%;padding-left:9cqw;display:flex;flex-direction:column;justify-content:space-between}
+.tl:before{content:"";position:absolute;left:2.6cqw;top:2cqw;bottom:2cqw;width:.6cqw;background:rgba(255,255,255,.35)}
+.tl div{position:relative}.tl div:before{content:"";position:absolute;left:-8.6cqw;top:.6cqw;width:4.6cqw;height:4.6cqw;border-radius:50%;background:#fff;border:1cqw solid #0d0f0e}.tl div.hi:before{background:var(--acc)}
+.tl b{display:block;font-size:4.6cqw}.tl span{font-size:3.3cqw;color:#c3c7c2}.tl em{font:700 2.5cqw var(--cf);font-style:normal;letter-spacing:.12em;color:var(--acc);text-transform:uppercase}
+/* matriks */
+.mx{position:relative;height:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.6cqw;padding:0 0 6cqw 6cqw}
+.mx>div{background:rgba(255,255,255,.1);border:.3cqw solid rgba(255,255,255,.25);border-radius:2cqw;padding:3cqw;display:flex;flex-direction:column;gap:1.4cqw}
+.mx>div.hi{background:var(--acc);color:#151719;border-color:var(--acc)}.mx b{font-size:3.6cqw}.mx span{font-size:2.9cqw;opacity:.85}
+.mx .ax{position:absolute;font:700 2.4cqw var(--cf);letter-spacing:.1em;text-transform:uppercase;color:#a8ada8;background:none;border:0;padding:0}
+.mx .ax.x{bottom:0;left:6cqw;right:0;text-align:center}.mx .ax.y{left:-14cqw;top:45%;transform:rotate(-90deg);width:30cqw;text-align:center}
+/* kertas */
+.paper{position:absolute;background:#fbfaf6;color:#151719;border-radius:1.4cqw;box-shadow:0 2cqw 6cqw rgba(0,0,0,.5);padding:4.5cqw}
+.cal{left:6%;right:6%;top:24%;bottom:9%;display:flex;flex-direction:column;gap:2cqw}
+.cal .g{flex:1;display:grid;grid-template-columns:repeat(6,1fr);gap:1cqw}.cal .g span{border-radius:1cqw;background:#eceee7;font-size:2.2cqw;display:grid;place-items:center;color:#8c918b}
+.cal .g span.f{background:#151719;color:#fff}.cal .g span.h{background:none;color:#5c615c;font-weight:700;font-size:2.4cqw}
+.cal .t{display:flex;justify-content:space-between;align-items:baseline}.cal .t b{font-size:4.6cqw}.cal .t span{font-size:2.6cqw;color:#6b706b}
+.doc{left:13%;right:9%;top:27%;bottom:8%;transform:rotate(-2.5deg);display:flex;flex-direction:column;gap:2.6cqw}
+.doc .ln{display:flex;flex-direction:column;gap:1cqw}.doc .ln b{font-size:2.9cqw}.doc .ln i{display:block;height:4.2cqw;border-bottom:.3cqw solid #c9ccc4;font:600 4cqw "Caveat",cursive;color:#2a4fa8;font-style:normal}
+.doc mark{background:color-mix(in srgb,var(--acc) 80%,transparent);padding:0 .6cqw}
+.doc .note{position:absolute;right:-6%;top:44%;transform:rotate(5deg);background:var(--acc);color:#151719;font:600 3.6cqw "Caveat",cursive;padding:2cqw 3cqw;border-radius:1cqw;box-shadow:0 1cqw 3cqw rgba(0,0,0,.35);max-width:34cqw;line-height:1.1}
+.clip{left:12%;right:12%;top:27%;bottom:8%;display:flex;flex-direction:column;gap:3.6cqw;padding-top:9cqw}
+.clip:before{content:"";position:absolute;top:-2.6cqw;left:35%;right:35%;height:6cqw;border-radius:1.4cqw;background:#3a3d3b}
+.clip h5{margin:0;font-size:4.4cqw}.clip div{display:flex;gap:3cqw;align-items:center;font-size:3.7cqw}.clip div i{width:5cqw;height:5cqw;border:.5cqw solid #151719;border-radius:1cqw;flex:none;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:3.4cqw}
+.clip div.ok i{background:var(--acc)}
+/* ponsel chat */
+.phn{position:absolute;left:22%;right:22%;top:25%;bottom:-4%;background:#111;border-radius:7cqw 7cqw 0 0;border:1.6cqw solid #2a2d2b;border-bottom:0;padding:9cqw 3.4cqw 0;display:flex;flex-direction:column;gap:2.4cqw;z-index:4}
+.phn .bar{position:absolute;top:2.6cqw;left:0;right:0;text-align:center;font-size:2.4cqw;color:#9aa09a}
+.bub{max-width:86%;padding:2.2cqw 3cqw;border-radius:3cqw;font-size:3.1cqw;line-height:1.3}.bub.in{background:#2a2d2b;align-self:flex-start;border-bottom-left-radius:.8cqw}.bub.out{background:var(--acc);color:#151719;align-self:flex-end;border-bottom-right-radius:.8cqw}
+.sim{position:absolute;right:11%;bottom:4%;z-index:5;font:700 2.3cqw var(--cf);letter-spacing:.12em;background:#000a;padding:1cqw 2cqw;border-radius:1cqw;color:#c9ccc7}
+/* angka besar */
+.stat{position:absolute;left:8%;right:11%;bottom:9%;z-index:4}
+.stat .n{font:800 34cqw/0.82 var(--cf);letter-spacing:-.05em}.stat .n small{font-size:12cqw;color:#c9ccc7;letter-spacing:-.02em}
+.stat p{font-size:4.4cqw;line-height:1.3;max-width:none;margin:3cqw 0 0}.stat em{font-style:normal;background:var(--acc);color:#151719;padding:0 1.2cqw}
+/* tangga */
+.st{height:100%;display:flex;align-items:flex-end;gap:2cqw}
+.st div{flex:1;background:#f1f3ee;color:#151719;border-radius:2cqw 2cqw 0 0;padding:3cqw;display:flex;flex-direction:column;gap:1cqw}
+.st div.hi{background:var(--acc)}.st b{font-size:3.7cqw;line-height:1.1}.st span{font-size:2.7cqw;color:#4c514c}.st em{font:800 5.4cqw var(--cf);font-style:normal;margin-top:auto}
+/* hub */
+.hub{position:relative;height:100%}.hub svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub .c{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:36cqw;height:36cqw;border-radius:50%;background:var(--acc);color:#151719;display:grid;place-items:center;text-align:center;font-weight:800;font-size:4.6cqw;padding:3cqw;line-height:1.1}
+.hub .o{position:absolute;transform:translate(-50%,-50%);background:#fff;color:#151719;border-radius:999px;padding:2cqw 3.6cqw;font-weight:700;font-size:3.4cqw;white-space:nowrap}
+/* anotasi */
+.an{position:absolute;inset:0;z-index:4}.an div{position:absolute;display:flex;align-items:center;gap:1.4cqw}
+.an div:before{content:"";width:3.4cqw;height:3.4cqw;border-radius:50%;background:var(--acc);box-shadow:0 0 0 1.2cqw color-mix(in srgb,var(--acc) 35%,transparent);flex:none}
+.an span{background:#fff;color:#151719;font-weight:700;font-size:3.3cqw;padding:1.4cqw 2.6cqw;border-radius:999px;white-space:nowrap}
+.an div.r{flex-direction:row-reverse}
+/* belah dua */
+.sp{position:absolute;left:0;right:0;height:50%;background-size:cover;background-position:center}.sp.a{top:0;filter:grayscale(1) brightness(.7)}.sp.b{bottom:0}
+.sp span{position:absolute;left:8%;bottom:7%;background:#fff;color:#151719;font-weight:800;font-size:4.6cqw;padding:1.6cqw 3.2cqw;border-radius:1.6cqw}.sp.b span{background:var(--acc)}
+.sp small{position:absolute;left:8%;bottom:calc(7% + 9cqw);font-size:3cqw;color:#fff;text-shadow:0 1px 4px #000}
+.vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:13cqw;height:13cqw;border-radius:50%;background:#151719;color:#fff;display:grid;place-items:center;font-weight:800;font-size:4.4cqw;z-index:5;border:.8cqw solid #fff}
+/* batang */
+.bars{height:100%;display:flex;align-items:flex-end;gap:5cqw;padding-bottom:12cqw;position:relative}
+.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1.6cqw;height:100%}
+.bars i{display:block;background:#f1f3ee;border-radius:1.4cqw 1.4cqw 0 0}.bars div.hi i{background:var(--acc)}
+.bars b{font-size:4.2cqw}.bars span{position:absolute;bottom:3cqw;font-size:3cqw;color:#c3c7c2}
+/* sebelum sesudah */
+.ba{display:flex;flex-direction:column;gap:3cqw}.ba div{border-radius:2.4cqw;padding:3.6cqw 4cqw;font-size:4.2cqw;line-height:1.3}
+.ba .x{background:rgba(255,255,255,.88);color:#7c817b;text-decoration:line-through;text-decoration-color:#d9472f;text-decoration-thickness:.6cqw}.ba .o{background:var(--acc);color:#151719;font-weight:700}
+/* tumpukan */
+.stk{position:relative;height:100%}.stk div{position:absolute;left:8%;width:70%;height:34%;background:#fbfaf6;color:#151719;border-radius:1.6cqw;box-shadow:0 1.4cqw 4cqw rgba(0,0,0,.5);padding:3.4cqw;display:flex;flex-direction:column;gap:1cqw}
+.stk div:nth-child(1){top:0;transform:rotate(-6deg);left:2%}.stk div:nth-child(2){top:18%;transform:rotate(3deg);left:22%}.stk div:nth-child(3){top:38%;transform:rotate(-2deg);left:6%}.stk div:nth-child(4){top:58%;transform:rotate(4deg);left:26%;background:var(--acc)}
+.stk b{font-size:4.2cqw}.stk span{font-size:2.9cqw;color:#5c615c}.stk i{display:block;height:1.2cqw;border-radius:1cqw;background:#e1e3dc;margin-top:1.2cqw}.stk div:nth-child(4) i{background:#151719;opacity:.2}
+.r916 .dh{top:15%}.r916 .db{top:33%;bottom:16%}
+.reeltop{position:absolute;left:6%;right:6%;top:3%;z-index:6;display:flex;gap:1cqw}.reeltop i{flex:1;height:.6cqw;border-radius:1cqw;background:rgba(255,255,255,.35)}.reeltop i.on{background:#fff}
+
+/* ===== v4: safe zone (_operating-system/aturan-layout-safe-zone): kanan 120px, bawah 180px; headline >=96px, isi >=48px, label >=32px; judul + grafik satu blok di tengah ===== */
+.dz{position:absolute;left:8%;right:11.1%;top:10%;bottom:12.5%;z-index:4;display:flex;flex-direction:column;justify-content:center;gap:7cqw}
+.dz h4{margin:0;font-size:8.9cqw;line-height:1.04;letter-spacing:-.03em;text-wrap:balance}.dz h4 em{font-style:normal;color:var(--acc)}
+.dz .db{position:relative;left:auto;right:auto;top:auto;bottom:auto;height:60cqw;flex:none}
+.dz .foot{position:static;font-size:3cqw;margin-top:-3cqw}
+.un.top{position:absolute;left:8%;top:5.5%;z-index:5;font:600 3cqw var(--cf);color:#c9ccc7}.tw .un.top{color:#8b8f8b}
+.dh{top:11%}.dh h4{font-size:8.9cqw;line-height:1.04;letter-spacing:-.03em}
+.who small{font-size:3cqw}.who b{font-size:3.3cqw}
+.lab{font-size:3cqw}.card p{font-size:4.6cqw}
+.fn{gap:1.4cqw}.fn div{height:12cqw;font-size:4.5cqw}.fn small{font-size:3cqw}
+.tl:before{top:3cqw;bottom:3cqw}.tl b{font-size:4.6cqw}.tl span{font-size:3.3cqw}.tl em{font-size:3cqw}
+.mx b{font-size:4.2cqw}.mx span{font-size:3.2cqw}.mx .ax{font-size:3cqw}
+.st b{font-size:4.4cqw}.st span{font-size:3.1cqw}.st em{font-size:5cqw}
+.bars b{font-size:4.6cqw}.bars span{font-size:3.4cqw}
+.ba div{font-size:4.6cqw}.stk b{font-size:4.6cqw}.stk span{font-size:3.1cqw}
+.hub .c{top:38%;width:36cqw;height:36cqw;font-size:4.8cqw}.hub .o{font-size:3.6cqw}
+.cal{bottom:12.5%;top:33%}.cal .g span{font-size:2.6cqw}.cal .g span.h{font-size:3cqw}.cal .t span{font-size:3cqw}
+.doc{bottom:14%;top:36%}.doc .ln b{font-size:3.4cqw}.clip{bottom:13%;top:36%}.clip div{font-size:4.2cqw}
+.bub{font-size:3.4cqw}.phn{top:34%}.sim{bottom:13%;font-size:3cqw}
+.stat{bottom:13.5%}.stat p{font-size:4.6cqw}
+.an span{font-size:3.6cqw}.sp span{font-size:5cqw}.sp small{font-size:3.2cqw}
+.tw .sub{font-size:4.4cqw}.tw .who small{font-size:3.2cqw}
+.r916 .dz{top:15%;bottom:24%}
+.st div{padding:2.6cqw}.st b{font-size:4cqw}.st span{font-size:3cqw}.st em{font-size:4.4cqw}
+.dz .db:has(.tl){height:76cqw}.tl b{font-size:4.8cqw}.tl span{font-size:3.3cqw}
+
+/* ===== v5: perbaikan spacing ===== */
+.sp .lb{position:absolute;left:8%;right:11.1%;bottom:9cqw;display:flex;flex-direction:column;align-items:flex-start;gap:2cqw}
+.sp.b .lb{bottom:calc(25% + 1cqw)}
+.sp .lb span,.sp .lb small{position:static}
+.sp .lb small{font-size:3.2cqw;line-height:1.3;background:rgba(0,0,0,.55);padding:1cqw 2cqw;border-radius:1cqw;text-shadow:none}
+.fn div{height:auto;min-height:11cqw;padding:2.2cqw 10%;line-height:1.15;text-align:center;font-size:4.2cqw}
+.fn small{margin-top:2cqw}
+.stat .n small{margin-left:2.2cqw}
+.dz{gap:5.5cqw}
+.dz .db:has(.tl){height:66cqw}
+.tl{padding-left:10cqw;gap:2.4cqw}.tl div{display:flex;flex-direction:column;gap:.8cqw}.tl b{font-size:4.6cqw;line-height:1.15}.tl span{font-size:3.2cqw;line-height:1.25}.tl em{line-height:1}
+.tl div:before{left:-9.6cqw}
+
+/* ===== v6: hasil QC otomatis ===== */
+.stat p{margin-top:5cqw}
+.cal{left:8%;right:11.1%}
+.sp .lb small{padding:1.4cqw 2.4cqw}
+.stk div{height:22%;padding:2.6cqw 3.4cqw}.stk div:nth-child(1){top:0}.stk div:nth-child(2){top:26%}.stk div:nth-child(3){top:52%}.stk div:nth-child(4){top:78%}
+.stk i{display:none}
+.clip div i{width:6cqw;height:6cqw}
+.tl div{gap:1.6cqw}
+.doc .note{right:3%}.doc .ln{gap:1.8cqw}
+.card .sw{width:6.4cqw;height:6.4cqw}
+.phn{left:20%;right:24%}
+
+/* ===== v7 ===== */
+.stat p{margin-top:7cqw}
+.dz .db:has(.stk){height:74cqw}.stk div{height:21%;transform:none!important;gap:.6cqw}.stk div:nth-child(1){left:0}.stk div:nth-child(2){left:8%}.stk div:nth-child(3){left:16%}.stk div:nth-child(4){left:24%}.stk div{width:76%}
+.sp .lb small{padding:1.8cqw 2.8cqw}
+.clip div i{font-size:3cqw}
+.card .sw{font-size:2.6cqw}
+.cal .t b{font-size:4.6cqw}
+
+/* ===== v8 ===== */
+.phn .bar{font-size:3cqw}.tw .un.top,.un.top{font-size:3cqw}
+.stk div{height:22.5%;padding:2.8cqw 3.6cqw}.stk div:nth-child(2){top:25.8%}.stk div:nth-child(3){top:51.6%}.stk div:nth-child(4){top:77.4%}
+.clip div i{width:6.6cqw;height:6.6cqw}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+<span class="eyebrow">fitasset lab · mockup feed v3 · 20 Okt 2026</span>
+<h1>Mockup feed</h1>
+<p class="lede">Carousel gaya Hormozi (latar foto + kartu tweet), tweet polos, dan reels dengan kartu yang sama di atas video. Isi carousel diselingi skema: corong, kalender, angka besar, foto beranotasi, belah dua, tangga, chat, lembar kerja, dan lainnya. Ganti font, aksen, dan posisi kartu di panel, centang postingan yang kamu suka, lalu salin pilihannya lewat tombol di bawah. Teks masih contoh.</p>
+</header>
+
+<div class="controls" role="group" aria-label="Pilihan mockup">
+<div class="ctl"><span class="k">Font kartu</span><div class="seg" data-key="font"><button data-v="A">A · Inter</button><button data-v="B">B · Arimo (mirip X/Hormozi)</button><button data-v="C">C · Figtree</button><button data-v="D">D · Archivo</button></div></div>
+<div class="ctl"><span class="k">Warna aksen</span><div class="seg" data-key="acc"><button data-v="#c9ef67">Lime</button><button data-v="#ff6a14">Oranye</button><button data-v="#1d9bf0">Biru X</button><button data-v="#ffd23f">Kuning</button></div></div>
+<div class="ctl"><span class="k">Posisi kartu</span><div class="seg" data-key="ctop"><button data-v="40%">Atas</button><button data-v="52%">Tengah</button><button data-v="60%">Bawah (seperti Hormozi)</button></div></div>
+<div class="ctl"><span class="k">Latar tweet polos</span><div class="seg" data-key="tw"><button data-v="mix">Campur</button><button data-v="light">Putih semua</button><button data-v="dark">Hitam semua</button></div></div>
+<div class="ctl"><span class="k">Tampilan Instagram</span><div class="seg" data-key="ig"><button data-v="dark">Mode gelap</button><button data-v="light">Mode terang</button></div></div>
+</div>
+
+<div class="main">
+<div class="phone" id="phone"><div class="ighead"><div class="avatar">f.</div><div><b>fitasset.lab</b><small>Fitasset Lab · aset digital dan sistem untuk bisnis fitness<br>Coach · gym owner · marketer</small></div></div>
+<div class="igtabs"><span>▦ POSTINGAN</span><span>▶ REELS</span><span>TAG</span></div><div class="grid" id="grid"></div></div>
+<div class="side"><span class="k" id="selk"></span><h2 id="selt"></h2><div class="rail lg" id="selr"></div><p class="note" id="seln"></p><div class="cap" id="selc" hidden></div></div>
+</div>
+
+<section><h2>Variasi cover</h2><p class="note">Supaya cover tidak selalu kartu: slide tengah yang paling kuat dinaikkan jadi cover, judulnya diganti hook. Cover tidak memakai @username; slide berikutnya memakai @username kecil di kiri atas.</p><div class="rail" id="covers"></div>
+<div class="tbl"><table><thead><tr><th>Cover</th><th>Kapan dipakai</th><th>Hook di cover</th></tr></thead><tbody>
+<tr><td>Foto + kartu</td><td>Default Hormozi, opini dan pain</td><td>Kalimat di kartu</td></tr>
+<tr><td>Tweet polos</td><td>Opini pendek, listicle</td><td>Kalimat tweet</td></tr>
+<tr><td>Angka besar</td><td>Ada satu angka yang mengejutkan (simulasi diberi label)</td><td>Angka + 1 kalimat</td></tr>
+<tr><td>Belah dua</td><td>Perbandingan dua cara</td><td>Dua label + "vs"</td></tr>
+<tr><td>Corong / alur</td><td>Proses langkah demi langkah</td><td>Judul + 1 tahap disorot</td></tr>
+<tr><td>Bedah kalimat</td><td>Kalimat yang dicoret lalu diperbaiki</td><td>Judul pertanyaan</td></tr>
+<tr><td>Grafik batang</td><td>Angka yang perlu dibandingkan</td><td>Judul pertanyaan</td></tr>
+<tr><td>Kalender / tangga / foto beranotasi</td><td>Kalau visualnya sudah menjawab hook</td><td>Judul di atas skema</td></tr>
+</tbody></table></div><p class="note">Usul porsi feed: ±50% foto + kartu, ±20% tweet polos, ±30% cover skema. Cover skema tetap memakai foto atau latar yang sama supaya grid terlihat satu keluarga.</p></section>
+<section><h2>Isi carousel</h2><p class="note">Semua slide tiap carousel. Slide pertama adalah cover di grid.</p><div id="cars" style="display:flex;flex-direction:column;gap:18px"></div></section>
+<section><h2>Reels</h2><p class="note">Kartu sama dengan carousel, latarnya video (di mockup diwakili foto yang bergerak pelan). Struktur: bold claim → open loop → "jawabannya di caption". Jawaban lengkap ada di caption.</p><div id="reels" style="display:flex;flex-direction:column;gap:18px"></div></section>
+<section><h2>Footage latar reels</h2><div class="tbl"><table><thead><tr><th>Kode</th><th>Footage</th><th>Sumber</th><th>Cocok untuk</th></tr></thead><tbody>
+<tr><td><b>V1</b></td><td>B-roll kerja coach: konsultasi, mendampingi latihan, merekam konten</td><td>Pexels / Pixabay · 0 kredit</td><td>Semua topik bisnis coach</td></tr>
+<tr><td><b>V2</b></td><td>Tangan / POV: ketik laptop, scroll chat HP, menulis program</td><td>Stok, atau rekam sendiri pakai HP</td><td>Template, check-in, DM, produk digital</td></tr>
+<tr><td><b>V3</b></td><td>Atmosfer loop: gym kosong, lampu, barbell slow motion</td><td>Pexels / Pixabay · paling sering dipakai ulang</td><td>Opini, bold claim</td></tr>
+<tr><td><b>V4</b></td><td>Screen recording produk Fitasset (template, tracker)</td><td>Rekam layar sendiri</td><td>Demo produk, isi paket, lisensi</td></tr>
+<tr><td><b>V5</b></td><td>A-roll founder rekam HP, kartu tetap di bawah</td><td>Rekam sendiri, butuh waktu founder</td><td>Opini personal, kalau style sudah ketemu</td></tr>
+<tr><td><b>V6</b></td><td>Avatar HeyGen</td><td>Kredit terbatas</td><td>Pilihan terakhir</td></tr></tbody></table></div>
+<p class="note">Potongan interview Hormozi atau YouTube orang lain tidak dipakai (hak cipta). Bank awal: 6 klip V3 + 6 klip V1 + 4 klip V2 + 2 rekaman V4.</p></section>
+<section><h2>Bank foto</h2><p class="note">15 foto Pexels (lisensi Pexels). Talent stok, bukan founder atau klien Fitasset.</p><div class="bank" id="bank"></div></section>
+<section><h2>Catatan</h2><ul class="tight note">
+<li>Skema belum punya bukti winner di bedah benchmark, jadi dipakai di slide tengah. Cover tetap foto + kartu atau tweet polos.</li>
+<li>Semua skema dirakit dari data (label, angka, urutan), tanpa gambar AI. Angka, chat, dan lembar kerja berlabel simulasi/contoh.</li>
+<li>Logo "f." dan nama Fitasset Lab masih sementara. Font dan aksen dipilih dari panel di atas.</li>
+<li>Pilihan centang tersimpan di browser ini saja. Salin lewat tombol di bawah lalu tempel di chat.</li></ul></section>
+</div>
+<div class="dock"><div class="dock-in"><div id="dsum">Belum ada postingan yang dicentang.</div><button id="copy">Salin pilihan</button></div><textarea id="out" hidden readonly aria-label="Teks pilihan"></textarea></div>
+
+<script>
+const I=/*IMGS*/{};
+const ph=n=>`<div class="ph p-${n}"></div>`;{const st=document.createElement('style');st.textContent=Object.keys(I).map(n=>`.p-${n}{background-image:url(data:image/jpeg;base64,${I[n]})}`).join('');document.head.append(st)}
+const who=()=>`<div class="who"><i>f.</i><div><b>Fitasset Lab</b><small>@fitasset.lab</small></div></div>`;
+let TW='mix';const un=s=>s._i?`<span class="un top">@fitasset.lab</span>`:'';
+const R={
+ kartu:s=>ph(s.p)+'<div class="shade"></div>'+`<div class="card ${s.sw?'hasw':''}">${who()}<p>${s.x}</p>${s.sw?'<span class="sw">→</span>':''}</div>`,
+ tweet:(s,i)=>{const m=TW==='mix'?(s.d?'dark':'light'):TW;return `<div class="tw ${m}">${who()}${s.x.split('\n').map(l=>`<p>${l}</p>`).join('')}</div>`},
+ list:s=>{const m=TW==='mix'?'dark':TW;return `<div class="tw ${m}">${un(s)}<div class="num">${s.n}</div><h4>${s.h}</h4><div class="sub">${s.b}</div></div>`},
+ dg:(s,body,mode='dim')=>ph(s.p)+`<div class="${mode}"></div>${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dz"><h4>${s.h}</h4>`+body+(s.f?`<div class="foot">${s.f}</div>`:'')+'</div>',
+};
+const D={
+ corong:s=>R.dg(s,`<div class="db"><div class="fn">${s.L.map((l,i)=>`<div class="${i===s.hi?'hi':''}" style="width:${100-i*11}%">${l}</div>`).join('')}<small>${s.c}</small></div></div>`),
+ waktu:s=>R.dg(s,`<div class="db"><div class="tl">${s.L.map((l,i)=>`<div class="${i===s.hi?'hi':''}"><em>${l[0]}</em><b>${l[1]}</b><span>${l[2]}</span></div>`).join('')}</div></div>`),
+ matriks:s=>R.dg(s,`<div class="db"><div class="mx">${s.Q.map((q,i)=>`<div class="${i===s.hi?'hi':''}"><b>${q[0]}</b><span>${q[1]}</span></div>`).join('')}<div class="ax x">${s.ax[0]} →</div><div class="ax y">${s.ax[1]} →</div></div></div>`),
+ kalender:s=>{let g='<span class="h"></span>'+['Sen','Sel','Rab','Kam','Jum'].map(d=>`<span class="h">${d}</span>`).join('');['06','08','16','18','20'].forEach((t,r)=>{g+=`<span class="h">${t}.00</span>`;for(let c=0;c<5;c++)g+=(s.e.includes(r*5+c)?'<span></span>':'<span class="f"></span>')});return ph(s.p)+'<div class="dim"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dh"><h4>${s.h}</h4></div><div class="paper cal"><div class="t"><b>Minggu ini</b><span>■ terisi · □ kosong · ilustrasi</span></div><div class="g">${g}</div></div>`},
+ chat:s=>ph(s.p)+'<div class="dimtop"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dh"><h4>${s.h}</h4></div><div class="phn"><div class="bar">Calon klien · simulasi</div>${s.M.map((m,i)=>`<div class="bub ${i%2?'out':'in'}">${m}</div>`).join('')}</div>`,
+ angka:s=>ph(s.p)+'<div class="shade"></div><div class="shade"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="stat"><div class="n">${s.n}<small>${s.u}</small></div><p>${s.x}</p></div>`,
+ tangga:s=>R.dg(s,`<div class="db"><div class="st">${s.L.map((l,i)=>`<div class="${i===2?'hi':''}" style="height:${58+i*21}%"><b>${l[0]}</b><span>${l[1]}</span><em>${l[2]}</em></div>`).join('')}</div></div>`),
+ hub:s=>{const P=[[17,74],[50,97],[81,74],[14,8],[86,8]].slice(0,s.L.length);return R.dg(s,`<div class="db"><div class="hub"><svg viewBox="0 0 100 100" preserveAspectRatio="none">${P.map(p=>`<line x1="50" y1="38" x2="${p[0]}" y2="${p[1]}" stroke="rgba(255,255,255,.55)" stroke-width=".5" stroke-dasharray="1.5 1.2" vector-effect="non-scaling-stroke"/>`).join('')}</svg><div class="c">${s.c}</div>${s.L.map((l,i)=>`<div class="o" style="left:${P[i][0]}%;top:${P[i][1]}%">${l}</div>`).join('')}</div></div>`)},
+ anotasi:s=>ph(s.p)+'<div class="dimtop"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dh"><h4>${s.h}</h4></div><div class="an">${s.A.map(a=>`<div class="${a[3]?'r':''}" style="left:${a[0]}%;top:${a[1]}%"><span>${a[2]}</span></div>`).join('')}</div>`,
+ belah:s=>`<div class="sp a p-${s.a[0]}"><div class="lb"><span>${s.a[1]}</span><small>${s.a[2]}</small></div></div><div class="sp b p-${s.b[0]}"><div class="lb"><span>${s.b[1]}</span><small>${s.b[2]}</small></div></div><div class="vs">vs</div>`,
+ batang:s=>R.dg(s,`<div class="db"><div class="bars">${s.B.map((b,i)=>`<div class="${i===s.hi?'hi':''}"><b>${b[1]}</b><i style="height:${b[2]}%"></i><span>${b[0]}</span></div>`).join('')}</div></div>`),
+ bedah:s=>R.dg(s,`<div class="db"><div class="ba"><span class="lab">Terlalu umum</span><div class="x">${s.a}</div><span class="lab">Lebih jelas</span><div class="o">${s.b}</div></div></div>`),
+ tumpuk:s=>R.dg(s,`<div class="db"><div class="stk">${s.L.map(l=>`<div><b>${l[0]}</b><span>${l[1]}</span><i></i><i style="width:70%"></i></div>`).join('')}</div></div>`),
+ lembar:s=>ph(s.p)+'<div class="dim"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dh"><h4>${s.h}</h4></div><div class="paper doc"><span class="lab" style="color:#6b706b">Check-in mingguan · contoh</span>${s.L.map(l=>`<div class="ln"><b>${l[0]}</b><i>${l[1]}</i></div>`).join('')}<div class="note">${s.n}</div></div>`,
+ cek:s=>ph(s.p)+'<div class="dim"></div>'+`${s._i?'<span class="un top">@fitasset.lab</span>':''}<div class="dh"><h4>${s.h}</h4></div><div class="paper clip"><h5>${s.t}</h5>${s.L.map((l,i)=>`<div class="${i<s.ok?'ok':''}"><i>${i<s.ok?'✓':''}</i>${l}</div>`).join('')}</div>`,
+};
+function slide(s,r916,ri){const k=s.k;const inner=R[k]?R[k](s):D[k](s);return `<div class="cv ${r916?'r916 reel':''}">${inner}${r916?`<div class="reeltop">${Array.from({length:ri[1]},(_,j)=>`<i class="${j<=ri[0]?'on':''}"></i>`).join('')}</div>`:''}</div>`}
+/*POSTS*/
+const S={font:'B',acc:'#c9ef67',ctop:'52%',tw:'mix',ig:'dark'};POSTS.forEach(p=>p.s.forEach((x,j)=>x._i=j));let picks=[],sel=0;
+try{Object.assign(S,JSON.parse(localStorage.getItem('fa4-s')||'{}'));picks=JSON.parse(localStorage.getItem('fa3-p')||'[]')}catch(e){}
+const FONTS={A:'"Inter",Arial,sans-serif',B:'"Arimo",Arial,Helvetica,sans-serif',C:'"Figtree",Arial,sans-serif',D:'"Archivo",Arial,sans-serif'};
+const $=x=>document.getElementById(x);
+const icon=r=>r?'<svg class="ticon" viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm6 5v8l6-4z"/></svg>':'<svg class="ticon" viewBox="0 0 24 24"><path d="M7 2h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM2 7v13a2 2 0 0 0 2 2h13v-2H4V7z"/></svg>';
+function draw(){const st=document.documentElement.style;st.setProperty('--cf',FONTS[S.font]);st.setProperty('--acc',S.acc);st.setProperty('--ctop',S.ctop);TW=S.tw;
+ document.querySelectorAll('.seg').forEach(g=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',S[g.dataset.key]===b.dataset.v)));
+ $('phone').className='phone ig-'+S.ig;
+ $('grid').innerHTML=POSTS.map((p,i)=>`<button class="tile ${i===sel?'sel':''}" data-i="${i}" aria-label="${p.t}">${slide(p.s[0],p.r,[0,p.s.length])}${icon(p.r)}</button>`).join('');
+ document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{sel=+b.dataset.i;draw()});
+ const p=POSTS[sel];$('selk').textContent=(p.r?'Reels':'Carousel')+' · '+p.s.length+(p.r?' frame':' slide');$('selt').textContent=p.t;$('selr').className='rail '+(p.r?'rl':'lg');$('selr').innerHTML=p.s.map((s,j)=>`<figure>${slide(s,p.r,[j,p.s.length])}</figure>`).join('');$('seln').textContent=p.n;$('selc').hidden=!p.r;if(p.r)$('selc').textContent='Caption (jawaban lengkap):\n'+p.c;
+ const row=(p,i)=>`<article class="post ${picks.includes(p.id)?'picked':''}"><div class="phead"><div><span class="k">${p.r?'Reels':'Carousel'} · ${p.f}</span><h3>${p.t}</h3><p class="note">${p.n}</p></div><label class="pick"><input type="checkbox" data-p="${p.id}" ${picks.includes(p.id)?'checked':''}> Aku pilih</label></div><div class="rail ${p.r?'rl':''}">${p.s.map((s,j)=>`<figure>${slide(s,p.r,[j,p.s.length])}<figcaption>${j+1} · ${s.k}</figcaption></figure>`).join('')}</div>${p.r?`<div class="cap">Footage: ${p.v}\nCaption (jawaban lengkap):\n${p.c}</div>`:''}</article>`;
+ const cv=[['kapasitas',0,'Foto + kartu'],['opini',0,'Tweet polos'],['simulasi',0,'Grafik batang'],['paket',0,'Belah dua'],['alur',0,'Corong'],['bedah',0,'Bedah kalimat'],['tangga',0,'Tangga'],['kapasitas',1,'Angka besar']];$('covers').innerHTML=cv.map(([id,j,t])=>{const q=POSTS.find(x=>x.id===id);return q?`<figure>${slide({...q.s[j],_i:0},false,[0,1])}<figcaption>${t}</figcaption></figure>`:''}).join('');
+ $('cars').innerHTML=POSTS.filter(p=>!p.r).map(row).join('');$('reels').innerHTML=POSTS.filter(p=>p.r).map(row).join('');
+ document.querySelectorAll('[data-p]').forEach(c=>c.onchange=()=>{const id=c.dataset.p;picks=c.checked?[...picks,id]:picks.filter(x=>x!==id);save();draw()});
+ $('dsum').textContent=picks.length?`Dipilih ${picks.length}: `+POSTS.filter(p=>picks.includes(p.id)).map(p=>p.t).join(', '):'Belum ada postingan yang dicentang.';
+}
+function save(){try{localStorage.setItem('fa4-s',JSON.stringify(S));localStorage.setItem('fa3-p',JSON.stringify(picks))}catch(e){}}
+document.querySelectorAll('.seg').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{S[g.dataset.key]=b.dataset.v;save();draw()}));
+$('bank').innerHTML=Object.keys(I).map(n=>`<figure><div class="p-${n}"></div><figcaption>${n}</figcaption></figure>`).join('');
+$('copy').onclick=()=>{const t=`Pilihan mockup Fitasset v3\nFont: ${S.font} · Aksen: ${S.acc} · Posisi kartu: ${S.ctop} · Tweet polos: ${S.tw} · IG: ${S.ig}\nPostingan: ${POSTS.filter(p=>picks.includes(p.id)).map(p=>p.t).join(', ')||'-'}`;const o=$('out');o.value=t;const ok=()=>{$('copy').textContent='Tersalin'};const fb=()=>{o.hidden=false;o.select();$('copy').textContent='Salin manual dari kotak'};try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}};
+draw();
+</script>
