@@ -133,3 +133,8 @@ Dikumpulkan dari review mockup v2–v4, 20–21 Okt 2026.
 **Proses**
 18. Cek **seluruh** mockup (semua slide, cover, tile grid) sebelum bilang selesai: QC otomatis `Mockup_Feed_fitasset_v4/qc.js` (`QC()` safe zone, ukuran huruf, tabrakan, jarak tepi · `QCBAL()` keseimbangan kotak · `QCKURVA()` label vs garis kurva) + lihat screenshot semua slide.
 19. Teks layar ikut `writing-rules-v2.md`: tanpa tanda pisah panjang, tanpa pola gema pendek ("X. Klien beli Y.").
+
+**Produksi (catatan owner 21 Okt 2026)**
+20. **Variasi cover dan diagram tidak dipakemkan.** Pilihan cover/skema ditentukan isi konten, bukan dirotasi dari daftar. Kalau konten cocok dengan diagram yang sudah ada (B7–B14, B21, A5), pakai itu. Kalau konten butuh bentuk yang tidak ada di template (mis. siklus, pohon keputusan, venn, peta, timeline bercabang), **buat layout baru** yang sesuai topik. Jangan memaksakan isi ke diagram yang kurang pas.
+21. Layout baru tetap ikut style dasar dan semua aturan §F: safe zone, spacing, judul + skema satu blok di tengah, dan QC `qc.js`. Catat sebagai kandidat layout. Kalau dipakai berulang, usulkan masuk style versi berikutnya (fitasset-lab v2, Mode C).
+22. Porsi cover (±50% kartu, ±20% tweet, ±30% skema) hanya patokan kasar. Isi konten yang menentukan.
